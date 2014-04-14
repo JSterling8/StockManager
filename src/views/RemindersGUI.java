@@ -3,6 +3,7 @@ package views;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class RemindersGUI extends JPanel {
 
 	/**
@@ -11,9 +12,10 @@ public class RemindersGUI extends JPanel {
 	public RemindersGUI() {
 		setLayout(null);
 		
-		JLabel lblTest = new JLabel("TEST 22222");
-		lblTest.setBounds(162, 133, 179, 14);
+		JLabel lblTest = new JLabel("I'm the remindersGUI");
+		lblTest.setBounds(32, 25, 179, 14);
 		add(lblTest);
+		setVisible(true);
 
 	}
 

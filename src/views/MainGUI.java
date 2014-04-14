@@ -1,15 +1,17 @@
 package views;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
-import views.RemindersGUI;;
 
 @SuppressWarnings("serial")
 public class MainGUI extends javax.swing.JFrame {
+	private RemindersGUI remindersGUI;
+	private StockGUI stockGUI;
 	private JFrame frame;
 
 	/**
@@ -51,6 +53,12 @@ public class MainGUI extends javax.swing.JFrame {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnStock = new JButton("Stock");
+		btnStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				stockGUI.setVisible(true);
+				remindersGUI.setVisible(false);
+			}
+		});
 		btnStock.setBounds(10, 11, 67, 21);
 		frame.getContentPane().add(btnStock);
 		
@@ -71,17 +79,24 @@ public class MainGUI extends javax.swing.JFrame {
 		frame.getContentPane().add(btnProfitlossOverview);
 		
 		JButton btnReminders = new JButton("Reminders");
+		btnReminders.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				remindersGUI.setVisible(true);
+				stockGUI.setVisible(false);
+			}
+		});
 		btnReminders.setBounds(581, 10, 89, 23);
 		frame.getContentPane().add(btnReminders);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 38, 665, 225);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		remindersGUI = new RemindersGUI();
+		remindersGUI.setBounds(10, 32, 665, 231);
+		frame.getContentPane().add(remindersGUI);
 		
-		RemindersGUI remindersGUI = new RemindersGUI();
-		remindersGUI.setBounds(1, 227, 664, -229);
-		panel.add(remindersGUI);
+		stockGUI = new StockGUI();
+		stockGUI.setBounds(10, 32, 665, 231);
+		frame.getContentPane().add(stockGUI);
+		
+		
 
 		
 	
