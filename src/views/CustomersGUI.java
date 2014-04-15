@@ -10,6 +10,7 @@ public class CustomersGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public CustomersGUI() {
+		setVisible(false);
 
 	}
 

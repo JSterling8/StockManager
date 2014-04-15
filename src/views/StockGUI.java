@@ -16,6 +16,7 @@ public class StockGUI extends JPanel {
 	public StockGUI() {
 		setLayout(null);
 		this.setBounds(0, 0, 660, 475);
+		setVisible(false);
 		
 		JButton btnSell = new JButton("Sell");
 		btnSell.setFont(new Font("Tahoma", Font.BOLD, 18));

@@ -24,6 +24,7 @@ public class TransactionsGUI extends JPanel {
 		
 		this.setBounds(0, 0, 660, 475);
 		setLayout(null);
+		setVisible(false);
 		
 		JRadioButton rdbtnBuying = new JRadioButton("Buying");
 		rdbtnBuying.setBounds(385, 6, 161, 23);

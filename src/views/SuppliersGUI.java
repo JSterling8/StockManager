@@ -18,6 +18,7 @@ public class SuppliersGUI extends JPanel {
 	public SuppliersGUI() {
 		setLayout(null);
 		this.setBounds(0, 0, 660, 475);
+		setVisible(false);
 		
 		JButton button = new JButton("-");
 		button.setFont(new Font("Tahoma", Font.BOLD, 18));
