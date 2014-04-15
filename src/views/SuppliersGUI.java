@@ -20,15 +20,15 @@ public class SuppliersGUI extends JPanel {
 		this.setBounds(0, 0, 660, 475);
 		setVisible(false);
 		
-		JButton button = new JButton("-");
-		button.setFont(new Font("Tahoma", Font.BOLD, 18));
-		button.setBounds(540, 11, 50, 35);
-		add(button);
+		JButton btnRemove = new JButton("-");
+		btnRemove.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnRemove.setBounds(540, 11, 50, 35);
+		add(btnRemove);
 		
-		JButton button_1 = new JButton("+");
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		button_1.setBounds(600, 11, 50, 35);
-		add(button_1);
+		JButton btnAdd = new JButton("+");
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnAdd.setBounds(600, 11, 50, 35);
+		add(btnAdd);
 		
 		TableModel tableModel = 
 				new DefaultTableModel(
