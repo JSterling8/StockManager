@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +21,15 @@ public class MainGUI extends javax.swing.JFrame {
 	private TransactionsGUI transactionsGUI;
 	private RemindersGUI remindersGUI;
 	
-	private JPanel currentlyActive;
+	private ArrayList<JButton> buttons;
+	private JButton btnStock;
+	private JButton btnSuppliers;
+	private JButton btnCustomers;
+	private JButton btnTransactions;
+	private JButton btnReminders;
+	
+	private JPanel currentlyActivePanel;
+	private JButton currentlyActiveButton;
 
 	/**
 	 * Launch the application.
@@ -66,7 +75,7 @@ public class MainGUI extends javax.swing.JFrame {
 		stockGUI = new StockGUI();
 		stockGUI.setBounds(12, 48, 660, 475);
 		frame.getContentPane().add(stockGUI);
-		currentlyActive = stockGUI;
+		currentlyActivePanel = stockGUI;
 		
 		suppliersGUI = new SuppliersGUI();
 		suppliersGUI.setBounds(12, 48, 660, 475);
@@ -92,67 +101,97 @@ public class MainGUI extends javax.swing.JFrame {
 		subViews.add(transactionsGUI);
 		subViews.add(remindersGUI);
 		
-		JButton btnStock = new JButton("Stock");
+		btnStock = new JButton("Stock");
 		btnStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentlyActive = stockGUI;
+				currentlyActivePanel = stockGUI;
+				currentlyActiveButton = btnStock;
 				showSubView();
+				highlightButton();
 			}
 		});
 		btnStock.setBounds(5, 11, 130, 34);
 		frame.getContentPane().add(btnStock);
 		
-		JButton btnSuppliers = new JButton("Suppliers");
+		btnSuppliers = new JButton("Suppliers");
 		btnSuppliers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentlyActive = suppliersGUI;
+				currentlyActivePanel = suppliersGUI;
+				currentlyActiveButton = btnSuppliers;
 				showSubView();
+				highlightButton();
 			}
 		});
 		btnSuppliers.setBounds(140, 11, 130, 34);
 		frame.getContentPane().add(btnSuppliers);
 		
-		JButton btnCustomers = new JButton("Customers");
+		btnCustomers = new JButton("Customers");
 		btnCustomers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentlyActive = customersGUI;
+				currentlyActivePanel = customersGUI;
+				currentlyActiveButton = btnCustomers;
 				showSubView();
+				highlightButton();
 			}
 		});
 		btnCustomers.setBounds(275, 11, 130, 34);
 		frame.getContentPane().add(btnCustomers);
 		
-		JButton btnTransactions = new JButton("Transactions");
+		btnTransactions = new JButton("Transactions");
 		btnTransactions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentlyActive = transactionsGUI;
+				currentlyActivePanel = transactionsGUI;
+				currentlyActiveButton = btnTransactions;
 				showSubView();
+				highlightButton();
 			}
 		});
 		btnTransactions.setBounds(410, 11, 130, 34);
 		frame.getContentPane().add(btnTransactions);
 		
-		JButton btnReminders = new JButton("Reminders");
+		btnReminders = new JButton("Reminders");
+		btnReminders.setBackground(UIManager.getColor("Button.background"));
 		btnReminders.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentlyActive = remindersGUI;
+				currentlyActivePanel = remindersGUI;
+				currentlyActiveButton = btnReminders;
 				showSubView();
+				highlightButton();
 			}
 		});
+		btnReminders.setSelected(true);
 		btnReminders.setBounds(545, 10, 130, 35);
 		frame.getContentPane().add(btnReminders);
 		
+		buttons = new ArrayList<JButton>();
+
+		buttons.add(btnStock);
+		buttons.add(btnSuppliers);
+		buttons.add(btnCustomers);
+		buttons.add(btnTransactions);
+		buttons.add(btnReminders);
+
 	}
 
 	public void showSubView() {
 		for (int i = 0; i < subViews.size(); i++){
-			if (subViews.get(i) != currentlyActive){
+			if (subViews.get(i) != currentlyActivePanel){
 				subViews.get(i).setVisible(false);
 			}
 			else {
 				subViews.get(i).setVisible(true);
 			}
-			
+		}
+	}
+	
+	public void highlightButton() {
+		for (int i = 0; i < buttons.size(); i++){
+			if (buttons.get(i) != currentlyActiveButton){
+				buttons.get(i).setSelected(false);
+			}
+			else {
+				buttons.get(i).setSelected(true);
+			}
 		}
 	}
 }
