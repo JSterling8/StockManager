@@ -32,7 +32,7 @@ public class SuppliersGUI extends JPanel {
 		
 		TableModel tableModel = 
 				new DefaultTableModel(
-						new String[][] { { "Customer Name", "Phone Number" , "Email Address" }},
+						new String[][] { { "Supplier Name", "Phone Number" , "Email Address" }},
 						new String[] { "Column 1", "Column 2", "Column3" });
 		
 		table = new JTable();
