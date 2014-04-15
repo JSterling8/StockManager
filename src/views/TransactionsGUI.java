@@ -39,12 +39,12 @@ public class TransactionsGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnWeekly.setBounds(6, 41, 100, 35);
+		btnWeekly.setBounds(6, 41, 120, 35);
 		add(btnWeekly);
 		
 		JButton btnMonthly = new JButton("Monthly");
 		btnMonthly.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnMonthly.setBounds(173, 41, 100, 35);
+		btnMonthly.setBounds(182, 41, 120, 35);
 		add(btnMonthly);
 		
 		JButton btnQuarterly = new JButton("Quarterly");
@@ -53,7 +53,7 @@ public class TransactionsGUI extends JPanel {
 			}
 		});
 		btnQuarterly.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnQuarterly.setBounds(385, 41, 100, 35);
+		btnQuarterly.setBounds(358, 41, 120, 35);
 		add(btnQuarterly);
 		
 		JButton btnAnnually = new JButton("Annually");
@@ -62,7 +62,7 @@ public class TransactionsGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAnnually.setBounds(554, 41, 100, 35);
+		btnAnnually.setBounds(534, 41, 120, 35);
 		add(btnAnnually);
 		
 		TableModel tableModel = 
