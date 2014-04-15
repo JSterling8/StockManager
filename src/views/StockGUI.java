@@ -9,7 +9,6 @@ import javax.swing.JTable;
 @SuppressWarnings("serial")
 public class StockGUI extends JPanel {
 	private JTable table;
-	private String name = "Stock";
 
 	/**
 	 * Create the panel.
@@ -36,9 +35,5 @@ public class StockGUI extends JPanel {
 		table = new JTable();
 		table.setBounds(10, 57, 640, 407);
 		add(table);
-	}
-	
-	public String getName(){
-		return name;
 	}
 }

@@ -19,6 +19,8 @@ public class MainGUI extends javax.swing.JFrame {
 	private CustomersGUI customersGUI;
 	private TransactionsGUI transactionsGUI;
 	private RemindersGUI remindersGUI;
+	
+	private JPanel currentlyActive;
 
 	/**
 	 * Launch the application.
@@ -60,46 +62,27 @@ public class MainGUI extends javax.swing.JFrame {
 		frame.setSize(700, 575);
 		frame.setVisible(true);
 		
-		JButton btnStock = new JButton("Stock");
-		btnStock.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showSubView("Stock");
-			}
-		});
-		btnStock.setBounds(5, 11, 130, 34);
-		frame.getContentPane().add(btnStock);
-		
-		JButton btnSuppliers = new JButton("Suppliers");
-		btnSuppliers.setBounds(140, 11, 130, 34);
-		frame.getContentPane().add(btnSuppliers);
-		
-		JButton btnCustomers = new JButton("Customers");
-		btnCustomers.setBounds(275, 11, 130, 34);
-		frame.getContentPane().add(btnCustomers);
-		
-		JButton btnTransactions = new JButton("Transactions");
-		btnTransactions.setBounds(410, 11, 130, 34);
-		frame.getContentPane().add(btnTransactions);
-		
-		JButton btnReminders = new JButton("Reminders");
-		btnReminders.setBounds(545, 10, 130, 35);
-		frame.getContentPane().add(btnReminders);
 		
 		stockGUI = new StockGUI();
 		stockGUI.setBounds(12, 48, 660, 475);
 		frame.getContentPane().add(stockGUI);
+		currentlyActive = stockGUI;
 		
 		suppliersGUI = new SuppliersGUI();
 		suppliersGUI.setBounds(12, 48, 660, 475);
+		frame.getContentPane().add(suppliersGUI);
 
 		customersGUI = new CustomersGUI();
 		customersGUI.setBounds(12, 48, 660, 475);
+		frame.getContentPane().add(customersGUI);
 
 		transactionsGUI = new TransactionsGUI();
 		transactionsGUI.setBounds(12, 48, 660, 475);
+		frame.getContentPane().add(transactionsGUI);
 
 		remindersGUI = new RemindersGUI();
 		remindersGUI.setBounds(12, 48, 660, 475);
+		frame.getContentPane().add(remindersGUI);
 
 		subViews = new ArrayList<JPanel>();
 		
@@ -109,24 +92,67 @@ public class MainGUI extends javax.swing.JFrame {
 		subViews.add(transactionsGUI);
 		subViews.add(remindersGUI);
 		
+		JButton btnStock = new JButton("Stock");
+		btnStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentlyActive = stockGUI;
+				showSubView();
+			}
+		});
+		btnStock.setBounds(5, 11, 130, 34);
+		frame.getContentPane().add(btnStock);
+		
+		JButton btnSuppliers = new JButton("Suppliers");
+		btnSuppliers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentlyActive = suppliersGUI;
+				showSubView();
+			}
+		});
+		btnSuppliers.setBounds(140, 11, 130, 34);
+		frame.getContentPane().add(btnSuppliers);
+		
+		JButton btnCustomers = new JButton("Customers");
+		btnCustomers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentlyActive = customersGUI;
+				showSubView();
+			}
+		});
+		btnCustomers.setBounds(275, 11, 130, 34);
+		frame.getContentPane().add(btnCustomers);
+		
+		JButton btnTransactions = new JButton("Transactions");
+		btnTransactions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentlyActive = transactionsGUI;
+				showSubView();
+			}
+		});
+		btnTransactions.setBounds(410, 11, 130, 34);
+		frame.getContentPane().add(btnTransactions);
+		
+		JButton btnReminders = new JButton("Reminders");
+		btnReminders.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentlyActive = remindersGUI;
+				showSubView();
+			}
+		});
+		btnReminders.setBounds(545, 10, 130, 35);
+		frame.getContentPane().add(btnReminders);
+		
 	}
 
-	public void showSubView(String name) {
-		/*for (int i = 0; i < subViews.size(); i++){
-			if (subViews.get(i).getName().equals(name)){
-				subViews.get(i).setVisible(true);
-			}
-			else {
+	public void showSubView() {
+		for (int i = 0; i < subViews.size(); i++){
+			if (subViews.get(i) != currentlyActive){
 				subViews.get(i).setVisible(false);
 			}
+			else {
+				subViews.get(i).setVisible(true);
+			}
 			
-		}*/
-		
-		if (!subViews.get(0).isVisible()){
-			subViews.get(0).setVisible(true);
-		}
-		else{
-			subViews.get(0).setVisible(false);
 		}
 	}
 }
