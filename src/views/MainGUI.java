@@ -25,7 +25,7 @@ public class MainGUI extends javax.swing.JFrame {
 			public void run() {
 				try {
 					MainGUI window = new MainGUI();
-					window.frame.setSize(700, 200);
+					window.frame.setSize(700, 575);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,6 +49,8 @@ public class MainGUI extends javax.swing.JFrame {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setSize(700, 575);
+		frame.setVisible(true);
 		
 		JButton btnStock = new JButton("Stock");
 		btnStock.setBounds(5, 11, 130, 34);
