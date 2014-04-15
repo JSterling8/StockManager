@@ -14,6 +14,11 @@ import javax.swing.UIManager;
 public class MainGUI extends javax.swing.JFrame {
 	private JFrame frame;
 	private ArrayList<JPanel> subViews;
+	private StockGUI stockGUI;
+	private SuppliersGUI suppliersGUI;
+	private CustomersGUI customersGUI;
+	private TransactionsGUI transactionsGUI;
+	private RemindersGUI remindersGUI;
 
 	/**
 	 * Launch the application.
@@ -80,24 +85,34 @@ public class MainGUI extends javax.swing.JFrame {
 		btnReminders.setBounds(545, 10, 130, 35);
 		frame.getContentPane().add(btnReminders);
 		
-		StockGUI stockGUI = new StockGUI();
-		SuppliersGUI suppliersGUI = new SuppliersGUI();
-		CustomersGUI customersGUI = new CustomersGUI();
-		TransactionsGUI transactionsGUI = new TransactionsGUI();
-		RemindersGUI remindersGUI = new RemindersGUI();
+		stockGUI = new StockGUI();
+		stockGUI.setBounds(12, 48, 660, 475);
+		frame.getContentPane().add(stockGUI);
+		
+		suppliersGUI = new SuppliersGUI();
+		suppliersGUI.setBounds(12, 48, 660, 475);
+
+		customersGUI = new CustomersGUI();
+		customersGUI.setBounds(12, 48, 660, 475);
+
+		transactionsGUI = new TransactionsGUI();
+		transactionsGUI.setBounds(12, 48, 660, 475);
+
+		remindersGUI = new RemindersGUI();
+		remindersGUI.setBounds(12, 48, 660, 475);
 
 		subViews = new ArrayList<JPanel>();
 		
-		subViews.add(new StockGUI());
-		subViews.add(new SuppliersGUI());
-		subViews.add(new CustomersGUI());
-		subViews.add(new TransactionsGUI());
-		subViews.add(new RemindersGUI());
+		subViews.add(stockGUI);
+		subViews.add(suppliersGUI);
+		subViews.add(customersGUI);
+		subViews.add(transactionsGUI);
+		subViews.add(remindersGUI);
 		
 	}
 
 	public void showSubView(String name) {
-		for (int i = 0; i < subViews.size(); i++){
+		/*for (int i = 0; i < subViews.size(); i++){
 			if (subViews.get(i).getName().equals(name)){
 				subViews.get(i).setVisible(true);
 			}
@@ -105,6 +120,13 @@ public class MainGUI extends javax.swing.JFrame {
 				subViews.get(i).setVisible(false);
 			}
 			
+		}*/
+		
+		if (!subViews.get(0).isVisible()){
+			subViews.get(0).setVisible(true);
+		}
+		else{
+			subViews.get(0).setVisible(false);
 		}
 	}
 }
