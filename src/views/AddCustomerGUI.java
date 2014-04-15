@@ -42,7 +42,7 @@ public class AddCustomerGUI extends JFrame {
 	 */
 	public AddCustomerGUI() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 380, 265);
+		setBounds(100, 100, 380, 285);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -97,7 +97,7 @@ public class AddCustomerGUI extends JFrame {
 				
 			}
 		});
-		btnCancel.setBounds(140, 194, 100, 30);
+		btnCancel.setBounds(60, 194, 100, 30);
 		contentPane.add(btnCancel);
 		
 		JButton btnOk = new JButton("Ok");
@@ -110,7 +110,7 @@ public class AddCustomerGUI extends JFrame {
 				
 			}
 		});
-		btnOk.setBounds(240, 194, 100, 30);
+		btnOk.setBounds(220, 194, 100, 30);
 		contentPane.add(btnOk);
 	}
 }
