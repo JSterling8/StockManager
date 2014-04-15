@@ -31,12 +31,14 @@ public class AddStockGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddStockGUI() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setTitle("Add Stock");
+		setBounds(100, 100, 545, 482);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 	}
 
 }

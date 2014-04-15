@@ -40,6 +40,7 @@ public class AddProductGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddProductGUI(AddStockGUI addStockGUI) {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Product");
 		setBounds(100, 100, 450, 135);

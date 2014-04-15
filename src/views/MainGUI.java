@@ -70,7 +70,7 @@ public class MainGUI extends javax.swing.JFrame {
 		frame.getContentPane().setLayout(null);
 		frame.setSize(700, 575);
 		frame.setVisible(true);
-		
+		setResizable(false);
 		
 		stockGUI = new StockGUI();
 		stockGUI.setBounds(12, 48, 660, 475);

@@ -41,6 +41,7 @@ public class AddCompanyGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddCompanyGUI(String companyType) {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 380, 285);
 		contentPane = new JPanel();
