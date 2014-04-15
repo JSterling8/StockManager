@@ -15,7 +15,6 @@ import javax.swing.table.TableModel;
 
 public class TransactionsGUI extends JPanel {
 
-	private String name = "Transactions";
 	private JTable table;
 	
 	/**
@@ -80,7 +79,4 @@ public class TransactionsGUI extends JPanel {
 
 	}
 
-	public String getName() {
-		return name;
-	}
 }
