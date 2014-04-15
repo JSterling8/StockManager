@@ -1,24 +1,26 @@
 package views;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class AddSupplierGUI extends JFrame {
+public class AddCompanyGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfName;
 	private JTextField tfEmail;
 	private JTextField tfPhone;
 	private JTextField tfAddress;
+
 	/**
 	 * Launch the application.
 	 */
@@ -26,7 +28,7 @@ public class AddSupplierGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddSupplierGUI frame = new AddSupplierGUI();
+					AddCompanyGUI frame = new AddCompanyGUI("");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,14 +40,14 @@ public class AddSupplierGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddSupplierGUI() {
+	public AddCompanyGUI(String companyType) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 380, 285);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setTitle("Add Supplier");
+		setTitle("Add " + companyType);
 		
 		JLabel lblName = new JLabel("Name");
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -111,5 +113,4 @@ public class AddSupplierGUI extends JFrame {
 		btnOk.setBounds(220, 194, 100, 30);
 		contentPane.add(btnOk);
 	}
-
 }
