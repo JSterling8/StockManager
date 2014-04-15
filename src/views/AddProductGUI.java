@@ -41,6 +41,7 @@ public class AddProductGUI extends JFrame {
 	 */
 	public AddProductGUI(AddStockGUI addStockGUI) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Add Product");
 		setBounds(100, 100, 450, 135);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,11 +62,11 @@ public class AddProductGUI extends JFrame {
 		btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO Pass the product name back to the AddStockGUI.
+				//TODO Pass the product name to the ConfirmationGUI
 				dispose();
 			}
 		});
-		btnOk.setBounds(324, 57, 100, 30);
+		btnOk.setBounds(314, 57, 100, 30);
 		contentPane.add(btnOk);
 		
 		btnCancel = new JButton("Cancel");
@@ -74,7 +75,7 @@ public class AddProductGUI extends JFrame {
 				dispose();
 			}
 		});
-		btnCancel.setBounds(214, 57, 100, 30);
+		btnCancel.setBounds(179, 57, 100, 30);
 		contentPane.add(btnCancel);
 	}
 }
