@@ -3,14 +3,17 @@ package views;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class MainGUI extends javax.swing.JFrame {
 	private JFrame frame;
+	private ArrayList<JPanel> subViews;
 
 	/**
 	 * Launch the application.
@@ -53,6 +56,11 @@ public class MainGUI extends javax.swing.JFrame {
 		frame.setVisible(true);
 		
 		JButton btnStock = new JButton("Stock");
+		btnStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showSubView("Stock");
+			}
+		});
 		btnStock.setBounds(5, 11, 130, 34);
 		frame.getContentPane().add(btnStock);
 		
@@ -72,9 +80,16 @@ public class MainGUI extends javax.swing.JFrame {
 		btnReminders.setBounds(545, 10, 130, 35);
 		frame.getContentPane().add(btnReminders);
 		
+		subViews = new ArrayList<JPanel>();
 		
+		subViews.add(new StockGUI());
+		subViews.add(new SuppliersGUI());
+		subViews.add(new CustomersGUI());
+		subViews.add(new TransactionsGUI());
+		subViews.add(new RemindersGUI());
+	}
 
+	protected void showSubView(String string) {
 		
-	
 	}
 }
