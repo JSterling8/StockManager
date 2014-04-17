@@ -20,7 +20,8 @@ public class AddCompanyGUI extends JFrame {
 	private JTextField tfEmail;
 	private JTextField tfPhone;
 	private JTextField tfAddress;
-
+	private String companyType;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +42,7 @@ public class AddCompanyGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddCompanyGUI(String companyType) {
+		this.companyType = companyType;
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,25 +74,25 @@ public class AddCompanyGUI extends JFrame {
 		contentPane.add(lblAddress);
 		
 		tfName = new JTextField();
-		tfName.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		tfName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfName.setBounds(140, 9, 200, 35);
 		contentPane.add(tfName);
 		tfName.setColumns(10);
 		
 		tfEmail = new JTextField();
-		tfEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		tfEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfEmail.setBounds(140, 53, 200, 35);
 		contentPane.add(tfEmail);
 		tfEmail.setColumns(10);
 		
 		tfPhone = new JTextField();
-		tfPhone.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		tfPhone.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfPhone.setBounds(140, 100, 200, 35);
 		contentPane.add(tfPhone);
 		tfPhone.setColumns(10);
 		
 		tfAddress = new JTextField();
-		tfAddress.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		tfAddress.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfAddress.setBounds(140, 147, 200, 35);
 		contentPane.add(tfAddress);
 		tfAddress.setColumns(10);
@@ -119,4 +121,25 @@ public class AddCompanyGUI extends JFrame {
 		btnOk.setBounds(220, 194, 100, 30);
 		contentPane.add(btnOk);
 	}
+	
+	public String getCompanyType(){
+		return companyType;
+	}
+	
+	public String getName(){
+		return tfName.getText();
+	}
+	
+	public String getEmail(){
+		return tfEmail.getText();
+	}
+	
+	public String getPhone(){
+		return tfPhone.getText();
+	}
+	
+	public String getAddress(){
+		return tfAddress.getText();
+	}
+	
 }
