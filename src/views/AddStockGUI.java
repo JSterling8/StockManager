@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.NumberFormatter;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AddStockGUI extends JFrame {
 
@@ -145,11 +147,22 @@ public class AddStockGUI extends JFrame {
 		
 		//TODO add action listener
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO Pass info to the confirmation screen.
+				dispose();
+			}
+		});
 		btnSubmit.setBounds(426, 343, 100, 35);
 		contentPane.add(btnSubmit);
 		
 		//TODO add action listener
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancel.setBounds(297, 343, 100, 35);
 		contentPane.add(btnCancel);
 	}
