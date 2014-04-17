@@ -29,8 +29,8 @@ public class AddStockGUI extends JFrame {
 	private JTextField tfPricePerUnit;
 	private JTextField tfRRP;
 	private JTextField tfVAT;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tfTotalPrice;
+	private JTextField tfTotalPricePlusVat;
 
 	/**
 	 * Launch the application.
@@ -229,19 +229,19 @@ public class AddStockGUI extends JFrame {
 		lblTotalPricePlus.setBounds(175, 391, 184, 35);
 		contentPane.add(lblTotalPricePlus);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setEditable(false);
-		textField.setBounds(392, 352, 134, 35);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		tfTotalPrice = new JTextField();
+		tfTotalPrice.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfTotalPrice.setEditable(false);
+		tfTotalPrice.setBounds(392, 352, 134, 35);
+		contentPane.add(tfTotalPrice);
+		tfTotalPrice.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField_1.setEditable(false);
-		textField_1.setBounds(392, 391, 134, 35);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		tfTotalPricePlusVat = new JTextField();
+		tfTotalPricePlusVat.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfTotalPricePlusVat.setEditable(false);
+		tfTotalPricePlusVat.setBounds(392, 391, 134, 35);
+		contentPane.add(tfTotalPricePlusVat);
+		tfTotalPricePlusVat.setColumns(10);
 	}
 
 	/**
@@ -280,5 +280,41 @@ public class AddStockGUI extends JFrame {
 		}
 		
 		return isValid;
+	}
+	
+	public JTable getTable() {
+		
+		return table;
+		
+	}
+	
+	public String getProductName() {
+		
+		return cbProductName.getSelectedItem().toString();
+		
+	}
+	
+	public String getSupplierName() {
+		
+		return cbSupplier.getSelectedItem().toString();
+		
+	}
+	
+	public String getRRP() {
+		
+		return tfRRP.getText();
+		
+	}
+	
+	public String getTotalPrice() {
+		
+		return tfTotalPrice.getText();
+		
+	}
+	
+	public String getTotalPricePlusVat() {
+		
+		return tfTotalPricePlusVat.getText();
+		
 	}
 }

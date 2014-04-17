@@ -11,8 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class ConfirmationGUI extends JFrame {
 
@@ -21,6 +24,7 @@ public class ConfirmationGUI extends JFrame {
 	private AddProductGUI addProductGUI;
 	private RemoveStockGUI removeStockGUI;
 	private SellStockGUI sellStockGUI;
+	private AddStockGUI addStockGUI;
 
 	/**
 	 * Launch the application.
@@ -46,12 +50,93 @@ public class ConfirmationGUI extends JFrame {
 	}
 
 	public ConfirmationGUI(AddStockGUI addStockGUI) {
-		// TODO Auto-generated constructor stub
-		initialize();
+	
+		this.addStockGUI = addStockGUI;
+		
+		setTitle("Confirmation");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 515, 525);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setVisible(true);
+		
+		JLabel lblProductName = new JLabel("Product Name:");
+		lblProductName.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblProductName.setBounds(10, 11, 164, 35);
+		contentPane.add(lblProductName);
+		
+		JLabel lblProductNameResult = new JLabel(addStockGUI.getProductName());
+		lblProductNameResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProductNameResult.setBounds(186, 11, 266, 35);
+		contentPane.add(lblProductNameResult);
+		
+		JLabel lblSupplier = new JLabel("Supplier:");
+		lblSupplier.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSupplier.setBounds(10, 58, 164, 35);
+		contentPane.add(lblSupplier);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 112, 490, 187);
+		contentPane.add(scrollPane);
+		
+		scrollPane.setViewportView(addStockGUI.getTable());
+		
+		JLabel lblTotalPrice = new JLabel("Total Price:");
+		lblTotalPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTotalPrice.setBounds(10, 355, 193, 35);
+		contentPane.add(lblTotalPrice);
+		
+		JLabel lblTotalPricePlusVat = new JLabel("Total Price plus VAT:");
+		lblTotalPricePlusVat.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTotalPricePlusVat.setBounds(10, 402, 193, 35);
+		contentPane.add(lblTotalPricePlusVat);
+		
+		JLabel lblSupplierNameResult = new JLabel(addStockGUI.getSupplierName());
+		lblSupplierNameResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSupplierNameResult.setBounds(186, 58, 266, 35);
+		contentPane.add(lblSupplierNameResult);
+		
+		JLabel lblTotalPriceResult = new JLabel(addStockGUI.getTotalPrice());
+		lblTotalPriceResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTotalPriceResult.setBounds(215, 355, 266, 35);
+		contentPane.add(lblTotalPriceResult);
+		
+		JLabel lblTotalPricePlusVatResult = new JLabel(addStockGUI.getTotalPricePlusVat());
+		lblTotalPricePlusVatResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTotalPricePlusVatResult.setBounds(215, 402, 266, 35);
+		contentPane.add(lblTotalPricePlusVatResult);
+		
+		JButton btnNewButton = new JButton("Edit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				getAddStockGUI().setVisible(true);
+				
+			}
+		});
+		btnNewButton.setBounds(106, 449, 100, 35);
+		contentPane.add(btnNewButton);
+		
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+				getAddStockGUI().dispose();
+				
+			}
+		});
+		btnConfirm.setBounds(312, 449, 100, 35);
+		contentPane.add(btnConfirm);
+		
 	}
 
 	public ConfirmationGUI(SellStockGUI sellStockGUI) {
-this.sellStockGUI = sellStockGUI;
+		
+		this.sellStockGUI = sellStockGUI;
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 749, 328);
@@ -324,6 +409,13 @@ this.removeStockGUI = removeStockGUI;
 	
 	public SellStockGUI getSellStockGUI(){
 		return sellStockGUI;
+	}
+
+	/**
+	 * @return the addStockGUI
+	 */
+	public AddStockGUI getAddStockGUI() {
+		return addStockGUI;
 	}
 }
 
