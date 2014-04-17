@@ -9,6 +9,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SuppliersGUI extends JPanel {
 	private JTable table;
@@ -27,6 +29,11 @@ public class SuppliersGUI extends JPanel {
 		add(btnRemove);
 		
 		JButton btnAdd = new JButton("+");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddCompanyGUI ac = new AddCompanyGUI("Supplier");
+			}
+		});
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAdd.setBounds(600, 11, 50, 35);
 		add(btnAdd);

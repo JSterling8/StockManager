@@ -103,6 +103,7 @@ public class RemoveStockGUI extends JFrame {
 		contentPane.add(tfReason);
 		tfReason.setColumns(10);
 		setResizable(false);
+		setVisible(true);
 	}
 	
 	public String getProductName(){

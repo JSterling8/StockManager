@@ -207,6 +207,8 @@ public class SellStockGUI extends JFrame {
 		btnBrowse.setBounds(548, 386, 157, 35);
 		contentPane.add(btnBrowse);
 		setResizable(false);
+		
+		setVisible(true);
 	}
 	
 	public String getCompanyName(){

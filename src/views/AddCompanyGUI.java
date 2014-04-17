@@ -120,6 +120,8 @@ public class AddCompanyGUI extends JFrame {
 		});
 		btnOk.setBounds(220, 194, 100, 30);
 		contentPane.add(btnOk);
+		
+		setVisible(true);
 	}
 	
 	public String getCompanyType(){
