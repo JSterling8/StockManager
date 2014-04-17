@@ -1,10 +1,13 @@
 package views;
 
+
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -28,6 +31,8 @@ public class SellStockGUI extends JFrame {
 	private JTextField tfTotalAmount;
 	private JTextField tfTotalAmountPlusVat;
 	private JTextField tfProfitLoss;
+	private JComboBox cbCompanyName;
+	private JComboBox cbProduct;
 
 	/**
 	 * Launch the application.
@@ -58,9 +63,10 @@ public class SellStockGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(200, 14, 150, 35);
-		contentPane.add(comboBox);
+		cbCompanyName = new JComboBox();
+		cbCompanyName.setModel(new DefaultComboBoxModel(new String[] {"ACME Corp."}));
+		cbCompanyName.setBounds(200, 14, 150, 35);
+		contentPane.add(cbCompanyName);
 		
 		JLabel lblCompanyName = new JLabel("Company Name");
 		lblCompanyName.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -77,7 +83,7 @@ public class SellStockGUI extends JFrame {
 		lblProcuct.setBounds(10, 106, 150, 35);
 		contentPane.add(lblProcuct);
 		
-		JComboBox cbProduct = new JComboBox();
+		cbProduct = new JComboBox();
 		cbProduct.setBounds(10, 150, 150, 35);
 		contentPane.add(cbProduct);
 		
@@ -201,6 +207,14 @@ public class SellStockGUI extends JFrame {
 		btnBrowse.setBounds(548, 386, 157, 35);
 		contentPane.add(btnBrowse);
 		setResizable(false);
-
 	}
+	
+	public String getCompanyName(){
+		return cbCompanyName.getSelectedItem().toString();
+	}
+	
+	public JTable getTable(){
+		return table;
+	}
+	
 }
