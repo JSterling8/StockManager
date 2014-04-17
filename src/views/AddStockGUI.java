@@ -2,23 +2,23 @@ package views;
 
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.text.NumberFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.NumberFormatter;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AddStockGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JFormattedTextField tfUnits;
+	private JTextField tfUnits;
 
 	/**
 	 * Launch the application.
@@ -91,7 +91,7 @@ public class AddStockGUI extends JFrame {
 		
 		JComboBox cbProductName = new JComboBox();
 		cbProductName.setFont(new Font("Tahoma", Font.BOLD, 18));
-		cbProductName.setBounds(297, 12, 150, 35);
+		cbProductName.setBounds(197, 12, 250, 35);
 		contentPane.add(cbProductName);
 		
 		JButton btnAddProduct = new JButton("+");
@@ -101,7 +101,7 @@ public class AddStockGUI extends JFrame {
 		
 		JComboBox cbSupplier = new JComboBox();
 		cbSupplier.setFont(new Font("Tahoma", Font.BOLD, 18));
-		cbSupplier.setBounds(297, 58, 150, 35);
+		cbSupplier.setBounds(197, 58, 250, 35);
 		contentPane.add(cbSupplier);
 		
 		JButton btnAddSupplier = new JButton("+");
@@ -109,62 +109,94 @@ public class AddStockGUI extends JFrame {
 		btnAddSupplier.setBounds(476, 57, 50, 35);
 		contentPane.add(btnAddSupplier);
 		
-		NumberFormat longFormat = NumberFormat.getIntegerInstance();
-
-		NumberFormatter numberFormatter = new NumberFormatter(longFormat);
-		numberFormatter.setAllowsInvalid(false); //this is the key!!
-		numberFormatter.setMinimum(0l); //Optional
-		
-		// TODO fix this because it doesn't let you delete all of the digits you enter.
-		tfUnits = new JFormattedTextField(numberFormatter);
+		tfUnits = new JTextField();
 		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfUnits.setBounds(297, 106, 229, 35);
+		tfUnits.setBounds(197, 106, 329, 35);
 		contentPane.add(tfUnits);
 		tfUnits.setColumns(10);
+		tfUnits.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                if (((caracter < '0') || (caracter > '9'))
+                        && (caracter != '\b')) {
+                    e.consume();
+                }
+            }
+        });
 		
-		JFormattedTextField tfPricePerUnit = new JFormattedTextField(numberFormatter);
+		JTextField tfPricePerUnit = new JTextField();
 		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfPricePerUnit.setColumns(10);
-		tfPricePerUnit.setBounds(297, 149, 229, 35);
+		tfPricePerUnit.setBounds(197, 149, 329, 35);
 		contentPane.add(tfPricePerUnit);
+		tfPricePerUnit.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                if (((caracter < '0') || (caracter > '9'))
+                        && (caracter != '\b')) {
+                    e.consume();
+                }
+            }
+        });
 		
-		JFormattedTextField tfVAT = new JFormattedTextField(numberFormatter);
+		JTextField tfVAT = new JTextField();
 		tfVAT.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfVAT.setColumns(10);
-		tfVAT.setBounds(297, 195, 229, 35);
+		tfVAT.setBounds(197, 195, 329, 35);
 		contentPane.add(tfVAT);
+		tfVAT.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                if (((caracter < '0') || (caracter > '9'))
+                        && (caracter != '\b')) {
+                    e.consume();
+                }
+            }
+        });
 		
 		JButton btnBrowse = new JButton("Browse");
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBrowse.setBounds(297, 244, 229, 35);
+		btnBrowse.setBounds(197, 244, 329, 35);
 		contentPane.add(btnBrowse);
 		
-		JFormattedTextField tfRRP = new JFormattedTextField(numberFormatter);
+		JTextField tfRRP = new JTextField();
 		tfRRP.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfRRP.setColumns(10);
-		tfRRP.setBounds(297, 297, 229, 35);
+		tfRRP.setBounds(197, 297, 329, 35);
 		contentPane.add(tfRRP);
+		tfRRP.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                if (((caracter < '0') || (caracter > '9'))
+                        && (caracter != '\b')) {
+                    e.consume();
+                }
+            }
+        });
 		
-		//TODO add action listener
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO Pass info to the confirmation screen.
 				ConfirmationGUI cg = new ConfirmationGUI(AddStockGUI.this);
+				cg.setVisible(true);
 				dispose();
 			}
 		});
-		btnSubmit.setBounds(426, 343, 100, 35);
+		btnSubmit.setBounds(396, 351, 100, 35);
 		contentPane.add(btnSubmit);
 		
-		//TODO add action listener
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnCancel.setBounds(297, 343, 100, 35);
+		btnCancel.setBounds(227, 351, 100, 35);
 		contentPane.add(btnCancel);
+	}
+	
+	public void validateInput(){
+		
 	}
 }
