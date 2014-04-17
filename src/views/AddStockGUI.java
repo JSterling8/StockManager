@@ -29,6 +29,8 @@ public class AddStockGUI extends JFrame {
 	private JTextField tfPricePerUnit;
 	private JTextField tfRRP;
 	private JTextField tfVAT;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -53,7 +55,7 @@ public class AddStockGUI extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Stock");
-		setBounds(100, 100, 545, 425);
+		setBounds(100, 100, 545, 534);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -188,7 +190,7 @@ public class AddStockGUI extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnSubmit.setBounds(396, 351, 100, 35);
+		btnSubmit.setBounds(402, 438, 100, 35);
 		contentPane.add(btnSubmit);
 
 		JButton btnCancel = new JButton("Cancel");
@@ -197,7 +199,7 @@ public class AddStockGUI extends JFrame {
 				dispose();
 			}
 		});
-		btnCancel.setBounds(227, 351, 100, 35);
+		btnCancel.setBounds(225, 438, 100, 35);
 		contentPane.add(btnCancel);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -216,6 +218,30 @@ public class AddStockGUI extends JFrame {
 		btnInsert.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnInsert.setBounds(372, 149, 154, 35);
 		contentPane.add(btnInsert);
+		
+		JLabel lblTotalPrice = new JLabel("Total Price");
+		lblTotalPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTotalPrice.setBounds(259, 352, 100, 35);
+		contentPane.add(lblTotalPrice);
+		
+		JLabel lblTotalPricePlus = new JLabel("Total Price plus VAT");
+		lblTotalPricePlus.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTotalPricePlus.setBounds(175, 391, 184, 35);
+		contentPane.add(lblTotalPricePlus);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textField.setEditable(false);
+		textField.setBounds(392, 352, 134, 35);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textField_1.setEditable(false);
+		textField_1.setBounds(392, 391, 134, 35);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
 	}
 
 	/**

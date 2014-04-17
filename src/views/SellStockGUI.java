@@ -25,9 +25,9 @@ public class SellStockGUI extends JFrame {
 	private JTextField tfUnits;
 	private JTextField tfPricePerUnit;
 	private JTextField tfVat;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField tfTotalAmount;
+	private JTextField tfTotalAmountPlusVat;
+	private JTextField tfProfitLoss;
 
 	/**
 	 * Launch the application.
@@ -52,7 +52,7 @@ public class SellStockGUI extends JFrame {
 		
 		setTitle("Sell Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 722, 599);
+		setBounds(100, 100, 722, 650);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -138,36 +138,36 @@ public class SellStockGUI extends JFrame {
 		
 		JLabel lblTotalAmount = new JLabel("Total Amount");
 		lblTotalAmount.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTotalAmount.setBounds(313, 381, 223, 35);
+		lblTotalAmount.setBounds(313, 433, 223, 35);
 		contentPane.add(lblTotalAmount);
 		
 		JLabel lblTotalAmountPlus = new JLabel("Total Amount plus VAT");
 		lblTotalAmountPlus.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTotalAmountPlus.setBounds(313, 424, 223, 35);
+		lblTotalAmountPlus.setBounds(313, 480, 223, 35);
 		contentPane.add(lblTotalAmountPlus);
 		
 		JLabel lblProfitloss = new JLabel("Profit/Loss");
 		lblProfitloss.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblProfitloss.setBounds(313, 471, 223, 35);
+		lblProfitloss.setBounds(313, 527, 223, 35);
 		contentPane.add(lblProfitloss);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setBounds(548, 386, 157, 35);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		tfTotalAmount = new JTextField();
+		tfTotalAmount.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfTotalAmount.setBounds(548, 433, 157, 35);
+		contentPane.add(tfTotalAmount);
+		tfTotalAmount.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField_1.setBounds(548, 429, 157, 35);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		tfTotalAmountPlusVat = new JTextField();
+		tfTotalAmountPlusVat.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfTotalAmountPlusVat.setBounds(548, 480, 157, 35);
+		contentPane.add(tfTotalAmountPlusVat);
+		tfTotalAmountPlusVat.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField_2.setBounds(548, 476, 157, 35);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		tfProfitLoss = new JTextField();
+		tfProfitLoss.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfProfitLoss.setBounds(548, 527, 157, 35);
+		contentPane.add(tfProfitLoss);
+		tfProfitLoss.setColumns(10);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
@@ -177,7 +177,7 @@ public class SellStockGUI extends JFrame {
 				
 			}
 		});
-		btnCancel.setBounds(605, 523, 100, 35);
+		btnCancel.setBounds(605, 574, 100, 35);
 		contentPane.add(btnCancel);
 		
 		JButton btnSubmit = new JButton("Submit");
@@ -188,8 +188,18 @@ public class SellStockGUI extends JFrame {
 				setVisible(false);				
 			}
 		});
-		btnSubmit.setBounds(493, 523, 100, 35);
+		btnSubmit.setBounds(494, 574, 100, 35);
 		contentPane.add(btnSubmit);
+		
+		JLabel lblAttachInvoice = new JLabel("Attach Invoice");
+		lblAttachInvoice.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblAttachInvoice.setBounds(313, 386, 177, 35);
+		contentPane.add(lblAttachInvoice);
+		
+		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnBrowse.setBounds(548, 386, 157, 35);
+		contentPane.add(btnBrowse);
 		setResizable(false);
 
 	}
