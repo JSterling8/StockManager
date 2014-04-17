@@ -41,6 +41,7 @@ public class AddCompanyGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddCompanyGUI(String companyType) {
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 380, 285);
@@ -71,21 +72,25 @@ public class AddCompanyGUI extends JFrame {
 		contentPane.add(lblAddress);
 		
 		tfName = new JTextField();
+		tfName.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		tfName.setBounds(140, 9, 200, 35);
 		contentPane.add(tfName);
 		tfName.setColumns(10);
 		
 		tfEmail = new JTextField();
+		tfEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		tfEmail.setBounds(140, 53, 200, 35);
 		contentPane.add(tfEmail);
 		tfEmail.setColumns(10);
 		
 		tfPhone = new JTextField();
+		tfPhone.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		tfPhone.setBounds(140, 100, 200, 35);
 		contentPane.add(tfPhone);
 		tfPhone.setColumns(10);
 		
 		tfAddress = new JTextField();
+		tfAddress.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		tfAddress.setBounds(140, 147, 200, 35);
 		contentPane.add(tfAddress);
 		tfAddress.setColumns(10);

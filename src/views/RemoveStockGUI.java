@@ -87,6 +87,7 @@ public class RemoveStockGUI extends JFrame {
 		contentPane.add(btnCancel);
 		
 		tfUnits = new JTextField();
+		tfUnits.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		tfUnits.setBounds(138, 36, 213, 35);
 		contentPane.add(tfUnits);
 		tfUnits.setColumns(10);
@@ -102,6 +103,7 @@ public class RemoveStockGUI extends JFrame {
         });
 		
 		tfReason = new JTextField();
+		tfReason.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		tfReason.setBounds(138, 83, 213, 35);
 		contentPane.add(tfReason);
 		tfReason.setColumns(10);
