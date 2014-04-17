@@ -28,20 +28,20 @@ public class CustomersGUI extends JPanel {
 		this.setBounds(0, 0, 660, 475);
 		setVisible(false);
 		
-		JButton button = new JButton("-");
-		button.setFont(new Font("Tahoma", Font.BOLD, 18));
-		button.setBounds(540, 11, 50, 35);
-		add(button);
+		JButton btnRemoveCustomer = new JButton("-");
+		btnRemoveCustomer.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnRemoveCustomer.setBounds(540, 11, 50, 35);
+		add(btnRemoveCustomer);
 		
-		JButton button_1 = new JButton("+");
-		button_1.addActionListener(new ActionListener() {
+		JButton btwAddCustomer = new JButton("+");
+		btwAddCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddCompanyGUI ac = new AddCompanyGUI("Customer");
 			}
 		});
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		button_1.setBounds(600, 11, 50, 35);
-		add(button_1);
+		btwAddCustomer.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btwAddCustomer.setBounds(600, 11, 50, 35);
+		add(btwAddCustomer);
 		
 		TableModel tableModel = 
 				new DefaultTableModel(
