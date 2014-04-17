@@ -64,7 +64,7 @@ public class AddProductGUI extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConfirmationGUI cg = new ConfirmationGUI(AddProductGUI.this);
-				dispose();
+				setVisible(false);
 			}
 		});
 		btnOk.setBounds(314, 57, 100, 30);

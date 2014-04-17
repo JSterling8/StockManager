@@ -185,8 +185,7 @@ public class AddStockGUI extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConfirmationGUI cg = new ConfirmationGUI(AddStockGUI.this);
-				cg.setVisible(true);
-				dispose();
+				setVisible(false);
 			}
 		});
 		btnSubmit.setBounds(396, 351, 100, 35);

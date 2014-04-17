@@ -63,7 +63,7 @@ public class RemoveStockGUI extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConfirmationGUI cg = new ConfirmationGUI(RemoveStockGUI.this);
-				dispose();
+				setVisible(false);
 			}
 		});
 		btnOk.setBounds(138, 138, 100, 30);

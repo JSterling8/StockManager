@@ -185,8 +185,7 @@ public class SellStockGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				ConfirmationGUI conf = new ConfirmationGUI(SellStockGUI.this);
-				dispose();
-				
+				setVisible(false);				
 			}
 		});
 		btnSubmit.setBounds(493, 523, 100, 35);
