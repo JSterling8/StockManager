@@ -43,6 +43,11 @@ public class StockGUI extends JPanel {
 		add(btnRemoveStock);
 		
 		JButton btnAddStock = new JButton("+");
+		btnAddStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddStockGUI as = new AddStockGUI();
+			}
+		});
 		btnAddStock.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAddStock.setBounds(600, 11, 50, 35);
 		add(btnAddStock);

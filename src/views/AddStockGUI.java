@@ -242,6 +242,8 @@ public class AddStockGUI extends JFrame {
 		tfTotalPricePlusVat.setBounds(392, 391, 134, 35);
 		contentPane.add(tfTotalPricePlusVat);
 		tfTotalPricePlusVat.setColumns(10);
+	
+		setVisible(true);
 	}
 
 	/**
