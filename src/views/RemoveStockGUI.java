@@ -19,7 +19,8 @@ public class RemoveStockGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfUnits;
 	private JTextField tfReason;
-
+	private String productName;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -27,7 +28,7 @@ public class RemoveStockGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RemoveStockGUI frame = new RemoveStockGUI();
+					RemoveStockGUI frame = new RemoveStockGUI("Product Name Here");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,8 +40,8 @@ public class RemoveStockGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RemoveStockGUI() {
-		
+	public RemoveStockGUI(String productName) {
+		this.productName = productName;
 		setTitle("Remove Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 210);
@@ -102,5 +103,17 @@ public class RemoveStockGUI extends JFrame {
 		contentPane.add(tfReason);
 		tfReason.setColumns(10);
 		setResizable(false);
+	}
+	
+	public String getProductName(){
+		return productName;
+	}
+	
+	public String getUnits(){
+		return tfUnits.getText();
+	}
+	
+	public String getReason(){
+		return tfReason.getText();
 	}
 }

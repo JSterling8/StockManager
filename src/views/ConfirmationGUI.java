@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 public class ConfirmationGUI extends JFrame {
@@ -17,6 +19,7 @@ public class ConfirmationGUI extends JFrame {
 	private JPanel contentPane;
 	private AddCompanyGUI addCompanyGUI;
 	private AddProductGUI addProductGUI;
+	private RemoveStockGUI removeStockGUI;
 
 	/**
 	 * Launch the application.
@@ -181,8 +184,77 @@ public class ConfirmationGUI extends JFrame {
 	}
 
 	public ConfirmationGUI(RemoveStockGUI removeStockGUI) {
-		// TODO Auto-generated constructor stub
-		initialize();
+this.removeStockGUI = removeStockGUI;
+		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setBounds(100, 100, 361, 319);
+		setTitle("Confirmation");
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setVisible(true);
+		
+		JLabel lblPleaseConfirmThat = new JLabel("Confirm removal of the following: ");
+		lblPleaseConfirmThat.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPleaseConfirmThat.setBounds(10, 11, 364, 35);
+		contentPane.add(lblPleaseConfirmThat);
+		
+		JLabel lProduct = new JLabel("Product");
+		lProduct.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lProduct.setBounds(20, 57, 98, 35);
+		contentPane.add(lProduct);
+		
+		JLabel lUnits = new JLabel("Units");
+		lUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lUnits.setBounds(20, 99, 98, 35);
+		contentPane.add(lUnits);
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getRemoveStockGUI().setVisible(true);
+				dispose();
+			}
+		});
+		btnEdit.setBounds(61, 239, 100, 35);
+		contentPane.add(btnEdit);
+		
+		JButton btnOk = new JButton("Ok");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Save info to database.
+				getRemoveStockGUI().dispose();
+				dispose();
+			}
+		});
+		btnOk.setBounds(222, 239, 100, 35);
+		contentPane.add(btnOk);
+		
+		JLabel lblProduct = new JLabel(removeStockGUI.getProductName());
+		lblProduct.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProduct.setBounds(128, 60, 200, 35);
+		contentPane.add(lblProduct);
+		
+		JLabel lblUnits = new JLabel(removeStockGUI.getUnits());
+		lblUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUnits.setBounds(128, 102, 200, 35);
+		contentPane.add(lblUnits);
+		
+		JLabel lReason = new JLabel("Reason");
+		lReason.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lReason.setBounds(20, 145, 98, 35);
+		contentPane.add(lReason);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(128, 148, 194, 80);
+		contentPane.add(scrollPane);
+		
+		JTextArea tpReason = new JTextArea();
+		tpReason.setLineWrap(true);
+		tpReason.setText(removeStockGUI.getReason());
+		scrollPane.setViewportView(tpReason);
+		tpReason.setEditable(false);
 	}
 
 	private void initialize(){
@@ -201,9 +273,11 @@ public class ConfirmationGUI extends JFrame {
 	}
 	
 	private AddProductGUI getAddProductGUI() {
-		
 		return addProductGUI;
-		
+	}
+	
+	public RemoveStockGUI getRemoveStockGUI(){
+		return removeStockGUI;
 	}
 }
 
