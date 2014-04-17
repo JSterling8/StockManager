@@ -67,25 +67,25 @@ public class ConfirmationGUI extends JFrame {
 		lblPleaseConfirmThat.setBounds(10, 11, 364, 35);
 		contentPane.add(lblPleaseConfirmThat);
 		
-		JLabel label = new JLabel("Name");
-		label.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label.setBounds(20, 57, 98, 35);
-		contentPane.add(label);
+		JLabel lName = new JLabel("Name");
+		lName.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lName.setBounds(20, 57, 98, 35);
+		contentPane.add(lName);
 		
-		JLabel label_1 = new JLabel("Email");
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label_1.setBounds(20, 99, 98, 35);
-		contentPane.add(label_1);
+		JLabel lEmail = new JLabel("Email");
+		lEmail.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lEmail.setBounds(20, 99, 98, 35);
+		contentPane.add(lEmail);
 		
-		JLabel label_2 = new JLabel("Phone");
-		label_2.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label_2.setBounds(20, 146, 98, 35);
-		contentPane.add(label_2);
+		JLabel lPhone = new JLabel("Phone");
+		lPhone.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lPhone.setBounds(20, 146, 98, 35);
+		contentPane.add(lPhone);
 		
-		JLabel label_3 = new JLabel("Address");
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label_3.setBounds(20, 193, 98, 35);
-		contentPane.add(label_3);
+		JLabel lAddress = new JLabel("Address");
+		lAddress.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lAddress.setBounds(20, 193, 98, 35);
+		contentPane.add(lAddress);
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
