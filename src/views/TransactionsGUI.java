@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.JScrollPane;
 
 public class TransactionsGUI extends JPanel {
 
@@ -71,12 +72,15 @@ public class TransactionsGUI extends JPanel {
 						new String[] [] { { "Buy/Sell", "Company", "Amout" , "Invoice" } },
 						new String[] { "Column 1", "Column 2" , "Column 3" , "Column 4"});
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 88, 640, 376);
+		add(scrollPane);
+		
 		table = new JTable();
-		table.setBounds(10, 88, 640, 376);
+		scrollPane.setViewportView(table);
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
-		add(table);
 
 	}
 

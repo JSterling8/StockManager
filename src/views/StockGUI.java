@@ -5,6 +5,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class StockGUI extends JPanel {
@@ -33,8 +34,11 @@ public class StockGUI extends JPanel {
 		button_1.setBounds(600, 11, 50, 35);
 		add(button_1);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 57, 640, 407);
+		add(scrollPane);
+		
 		table = new JTable();
-		table.setBounds(10, 57, 640, 407);
-		add(table);
+		scrollPane.setViewportView(table);
 	}
 }

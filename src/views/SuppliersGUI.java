@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.JScrollPane;
 
 public class SuppliersGUI extends JPanel {
 	private JTable table;
@@ -35,14 +36,17 @@ public class SuppliersGUI extends JPanel {
 						new String[][] { { "Supplier Name", "Phone Number" , "Email Address" }},
 						new String[] { "Column 1", "Column 2", "Column3" });
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 57, 640, 407);
+		add(scrollPane);
+		
 		table = new JTable();
+		scrollPane.setViewportView(table);
 		table.setEnabled(false);
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
-		table.setBounds(10, 57, 640, 407);
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
-		add(table);
 	}
 }
