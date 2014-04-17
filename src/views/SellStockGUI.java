@@ -84,7 +84,7 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(lblProcuct);
 		
 		JComboBox cbProduct = new JComboBox();
-		cbProduct.setBounds(10, 153, 150, 35);
+		cbProduct.setBounds(10, 150, 150, 35);
 		contentPane.add(cbProduct);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -139,7 +139,7 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(btnInsert);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 51, 713, 12);
+		separator.setBounds(10, 81, 713, 12);
 		contentPane.add(separator);
 		
 		JLabel lblTotalAmount = new JLabel("Total Amount");
