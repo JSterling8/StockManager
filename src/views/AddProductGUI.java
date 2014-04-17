@@ -17,7 +17,7 @@ public class AddProductGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfProductName;
-	private JButton btnOk;
+	private JButton btnSubmit;
 	private JButton btnCancel;
 
 	/**
@@ -60,15 +60,15 @@ public class AddProductGUI extends JFrame {
 		contentPane.add(tfProductName);
 		tfProductName.setColumns(10);
 		
-		btnOk = new JButton("OK");
-		btnOk.addActionListener(new ActionListener() {
+		btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConfirmationGUI cg = new ConfirmationGUI(AddProductGUI.this);
 				setVisible(false);
 			}
 		});
-		btnOk.setBounds(314, 57, 100, 30);
-		contentPane.add(btnOk);
+		btnSubmit.setBounds(314, 57, 100, 35);
+		contentPane.add(btnSubmit);
 		
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
@@ -76,7 +76,17 @@ public class AddProductGUI extends JFrame {
 				dispose();
 			}
 		});
-		btnCancel.setBounds(179, 57, 100, 30);
+		btnCancel.setBounds(179, 57, 100, 35);
 		contentPane.add(btnCancel);
+	}
+	
+	/**
+	 * Return product name
+	 */
+	
+	public String getName() {
+		
+		return tfProductName.getText();
+		
 	}
 }

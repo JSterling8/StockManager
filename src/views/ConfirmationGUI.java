@@ -16,6 +16,7 @@ public class ConfirmationGUI extends JFrame {
 
 	private JPanel contentPane;
 	private AddCompanyGUI addCompanyGUI;
+	private AddProductGUI addProductGUI;
 
 	/**
 	 * Launch the application.
@@ -131,7 +132,52 @@ public class ConfirmationGUI extends JFrame {
 
 	public ConfirmationGUI(AddProductGUI addProductGUI) {
 		// TODO Auto-generated constructor stub
-		initialize();
+		
+		this.addProductGUI = addProductGUI;
+		
+		setTitle("Confiration");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 375, 150);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setVisible(true);
+		
+		JLabel lblProductName = new JLabel("Product Name:");
+		lblProductName.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblProductName.setBounds(10, 11, 152, 35);
+		contentPane.add(lblProductName);
+		
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+				getAddProductGUI().dispose();
+				
+			}
+		});
+		btnConfirm.setBounds(58, 58, 100, 35);
+		contentPane.add(btnConfirm);
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				getAddProductGUI().setVisible(true);
+				
+			}
+		});
+		btnEdit.setBounds(216, 58, 100, 35);
+		contentPane.add(btnEdit);
+		
+		JLabel lblProductNameResult = new JLabel(addProductGUI.getName());
+		lblProductNameResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProductNameResult.setBounds(174, 11, 181, 35);
+		contentPane.add(lblProductNameResult);
+		
 	}
 
 	public ConfirmationGUI(RemoveStockGUI removeStockGUI) {
@@ -152,6 +198,12 @@ public class ConfirmationGUI extends JFrame {
 	
 	private AddCompanyGUI getAddCompanyGUI(){
 		return addCompanyGUI;
+	}
+	
+	private AddProductGUI getAddProductGUI() {
+		
+		return addProductGUI;
+		
 	}
 }
 
