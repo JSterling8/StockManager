@@ -31,6 +31,15 @@ public class ConfirmationGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public ConfirmationGUI() {
+		initialize();
+	}
+
+	public ConfirmationGUI(AddStockGUI addStockGUI) {
+		// TODO Auto-generated constructor stub
+		initialize();
+	}
+
+	private void initialize(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -39,5 +48,6 @@ public class ConfirmationGUI extends JFrame {
 		setContentPane(contentPane);
 		setResizable(false);
 	}
-
 }
+
+

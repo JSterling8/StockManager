@@ -150,6 +150,7 @@ public class AddStockGUI extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO Pass info to the confirmation screen.
+				ConfirmationGUI cg = new ConfirmationGUI(AddStockGUI.this);
 				dispose();
 			}
 		});
