@@ -111,7 +111,7 @@ public class AddCompanyGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				// TODO Pass user's input to the confirmation GUI
-				
+				ConfirmationGUI cg = new ConfirmationGUI(AddCompanyGUI.this);
 				dispose();
 				
 			}

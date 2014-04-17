@@ -184,7 +184,6 @@ public class AddStockGUI extends JFrame {
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO Pass info to the confirmation screen.
 				ConfirmationGUI cg = new ConfirmationGUI(AddStockGUI.this);
 				cg.setVisible(true);
 				dispose();
@@ -225,6 +224,7 @@ public class AddStockGUI extends JFrame {
 	 * in order to add to the database.
 	 * 
 	 * @return Returns true if the user has entered all of the required information.
+	 * 			Returns false if the user hasn't entered all of the required information.
 	 */
 	public boolean validateInput(){
 		boolean isValid = true;

@@ -63,7 +63,7 @@ public class AddProductGUI extends JFrame {
 		btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO Pass the product name to the ConfirmationGUI
+				ConfirmationGUI cg = new ConfirmationGUI(AddProductGUI.this);
 				dispose();
 			}
 		});

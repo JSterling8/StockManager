@@ -44,6 +44,21 @@ public class ConfirmationGUI extends JFrame {
 		initialize();
 	}
 
+	public ConfirmationGUI(AddCompanyGUI addCompanyGUI) {
+		// TODO Auto-generated constructor stub
+		initialize();
+	}
+
+	public ConfirmationGUI(AddProductGUI addProductGUI) {
+		// TODO Auto-generated constructor stub
+		initialize();
+	}
+
+	public ConfirmationGUI(RemoveStockGUI removeStockGUI) {
+		// TODO Auto-generated constructor stub
+		initialize();
+	}
+
 	private void initialize(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
