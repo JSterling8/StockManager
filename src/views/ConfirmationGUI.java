@@ -114,29 +114,29 @@ public class ConfirmationGUI extends JFrame {
 
 	public ConfirmationGUI(SellStockGUI sellStockGUI) {
 
-		this.sellStockGUI = sellStockGUI;
-
+this.sellStockGUI = sellStockGUI;
+		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 749, 328);
+		setBounds(100, 100, 750, 325);
 		setTitle("Confirmation");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setVisible(true);
-
+		
 		JLabel lblPleaseConfirmThat = new JLabel("Sell " + sellStockGUI.getCompanyName() + " the following:");
 		lblPleaseConfirmThat.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblPleaseConfirmThat.setBounds(10, 11, 364, 35);
 		contentPane.add(lblPleaseConfirmThat);
-
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 57, 695, 169);
+		scrollPane.setBounds(10, 57, 695, 123);
 		contentPane.add(scrollPane);
-
+		
 		scrollPane.setViewportView(sellStockGUI.getTable());
-
-
+		
+		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -146,7 +146,7 @@ public class ConfirmationGUI extends JFrame {
 		});
 		btnEdit.setBounds(177, 239, 100, 35);
 		contentPane.add(btnEdit);
-
+		
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -157,6 +157,16 @@ public class ConfirmationGUI extends JFrame {
 		});
 		btnOk.setBounds(454, 239, 100, 35);
 		contentPane.add(btnOk);
+		
+		JLabel lblProfitLoss = new JLabel("Profit/Loss:");
+		lblProfitLoss.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProfitLoss.setBounds(359, 191, 365, 35);
+		contentPane.add(lblProfitLoss);
+		
+		JLabel lblTotalAmount = new JLabel("Total Amount:");
+		lblTotalAmount.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTotalAmount.setBounds(10, 191, 339, 37);
+		contentPane.add(lblTotalAmount);
 	}
 
 	public ConfirmationGUI(AddCompanyGUI addCompanyGUI) {
