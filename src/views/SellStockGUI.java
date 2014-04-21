@@ -82,7 +82,7 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(lblProcuct);
 		
 		cbProduct = new JComboBox();
-		cbProduct.setBounds(10, 150, 291, 35);
+		cbProduct.setBounds(10, 147, 291, 35);
 		contentPane.add(cbProduct);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -122,7 +122,7 @@ public class SellStockGUI extends JFrame {
 		
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnInsert.setBounds(605, 151, 100, 35);
+		btnInsert.setBounds(605, 147, 100, 35);
 		contentPane.add(btnInsert);
 		
 		JSeparator separator = new JSeparator();
