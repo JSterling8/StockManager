@@ -81,11 +81,6 @@ public class ConfirmationGUI extends JFrame {
 		lblTotalPriceResult.setBounds(215, 355, 266, 35);
 		contentPane.add(lblTotalPriceResult);
 
-		JLabel lblTotalPricePlusVatResult = new JLabel(addStockGUI.getTotalPricePlusVat());
-		lblTotalPricePlusVatResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTotalPricePlusVatResult.setBounds(215, 402, 266, 35);
-		contentPane.add(lblTotalPricePlusVatResult);
-
 		JButton btnNewButton = new JButton("Edit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

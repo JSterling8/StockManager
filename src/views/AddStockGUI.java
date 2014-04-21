@@ -28,9 +28,7 @@ public class AddStockGUI extends JFrame {
 	private JComboBox cbSupplier;
 	private JTextField tfPricePerUnit;
 	private JTextField tfRRP;
-	private JTextField tfVAT;
 	private JTextField tfTotalPrice;
-	private JTextField tfTotalPricePlusVat;
 
 	/**
 	 * Launch the application.
@@ -55,7 +53,7 @@ public class AddStockGUI extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Stock");
-		setBounds(100, 100, 545, 534);
+		setBounds(100, 100, 545, 485);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,18 +71,13 @@ public class AddStockGUI extends JFrame {
 
 		JLabel lblUnits = new JLabel("Units");
 		lblUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblUnits.setBounds(10, 103, 115, 35);
+		lblUnits.setBounds(10, 104, 115, 35);
 		contentPane.add(lblUnits);
 
 		JLabel lblPricePerUnit = new JLabel("Price/Unit");
 		lblPricePerUnit.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPricePerUnit.setBounds(82, 103, 115, 35);
+		lblPricePerUnit.setBounds(114, 104, 115, 35);
 		contentPane.add(lblPricePerUnit);
-
-		JLabel lblVat = new JLabel("VAT %");
-		lblVat.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblVat.setBounds(197, 103, 115, 35);
-		contentPane.add(lblVat);
 
 		JLabel lblAttachInvoice = new JLabel("Attach Invoice");
 		lblAttachInvoice.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -93,7 +86,7 @@ public class AddStockGUI extends JFrame {
 
 		JLabel lblRecommendedRetailPrice = new JLabel("RRP");
 		lblRecommendedRetailPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblRecommendedRetailPrice.setBounds(281, 103, 115, 35);
+		lblRecommendedRetailPrice.setBounds(241, 104, 115, 35);
 		contentPane.add(lblRecommendedRetailPrice);
 
 		cbProductName = new JComboBox();
@@ -120,7 +113,7 @@ public class AddStockGUI extends JFrame {
 
 		tfUnits = new JTextField();
 		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfUnits.setBounds(10, 149, 50, 35);
+		tfUnits.setBounds(10, 149, 73, 35);
 		contentPane.add(tfUnits);
 		tfUnits.setColumns(10);
 		tfUnits.addKeyListener(new KeyAdapter() {
@@ -136,24 +129,9 @@ public class AddStockGUI extends JFrame {
 		tfPricePerUnit = new JTextField();
 		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfPricePerUnit.setColumns(10);
-		tfPricePerUnit.setBounds(90, 149, 50, 35);
+		tfPricePerUnit.setBounds(114, 149, 73, 35);
 		contentPane.add(tfPricePerUnit);
 		tfPricePerUnit.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char character = e.getKeyChar();
-				if (((character < '0') || (character > '9'))
-						&& (character != '\b') && (character != '.')) {
-					e.consume();
-				}
-			}
-		});
-
-		tfVAT = new JTextField();
-		tfVAT.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfVAT.setColumns(10);
-		tfVAT.setBounds(195, 149, 50, 35);
-		contentPane.add(tfVAT);
-		tfVAT.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char character = e.getKeyChar();
 				if (((character < '0') || (character > '9'))
@@ -171,7 +149,7 @@ public class AddStockGUI extends JFrame {
 		tfRRP = new JTextField();
 		tfRRP.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfRRP.setColumns(10);
-		tfRRP.setBounds(275, 149, 50, 35);
+		tfRRP.setBounds(241, 149, 73, 35);
 		contentPane.add(tfRRP);
 		tfRRP.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -190,7 +168,7 @@ public class AddStockGUI extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnSubmit.setBounds(402, 438, 100, 35);
+		btnSubmit.setBounds(426, 399, 100, 35);
 		contentPane.add(btnSubmit);
 
 		JButton btnCancel = new JButton("Cancel");
@@ -199,7 +177,7 @@ public class AddStockGUI extends JFrame {
 				dispose();
 			}
 		});
-		btnCancel.setBounds(225, 438, 100, 35);
+		btnCancel.setBounds(314, 399, 100, 35);
 		contentPane.add(btnCancel);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -216,7 +194,7 @@ public class AddStockGUI extends JFrame {
 			}
 		});
 		btnInsert.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnInsert.setBounds(372, 149, 154, 35);
+		btnInsert.setBounds(372, 150, 154, 35);
 		contentPane.add(btnInsert);
 		
 		JLabel lblTotalPrice = new JLabel("Total Price");
@@ -224,24 +202,12 @@ public class AddStockGUI extends JFrame {
 		lblTotalPrice.setBounds(259, 352, 100, 35);
 		contentPane.add(lblTotalPrice);
 		
-		JLabel lblTotalPricePlus = new JLabel("Total Price plus VAT");
-		lblTotalPricePlus.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTotalPricePlus.setBounds(175, 391, 184, 35);
-		contentPane.add(lblTotalPricePlus);
-		
 		tfTotalPrice = new JTextField();
 		tfTotalPrice.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfTotalPrice.setEditable(false);
 		tfTotalPrice.setBounds(392, 352, 134, 35);
 		contentPane.add(tfTotalPrice);
 		tfTotalPrice.setColumns(10);
-		
-		tfTotalPricePlusVat = new JTextField();
-		tfTotalPricePlusVat.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfTotalPricePlusVat.setEditable(false);
-		tfTotalPricePlusVat.setBounds(392, 391, 134, 35);
-		contentPane.add(tfTotalPricePlusVat);
-		tfTotalPricePlusVat.setColumns(10);
 	
 		setVisible(true);
 	}
@@ -272,10 +238,7 @@ public class AddStockGUI extends JFrame {
 			JOptionPane.showMessageDialog(new JFrame(), "Please enter a price per unit.");
 			isValid = false;
 		}
-		else if(tfVAT.getText() != null && tfVAT.getText().equals("")){
-			JOptionPane.showMessageDialog(new JFrame(), "Please enter an amount of VAT.");
-			isValid = false;
-		}
+
 		else if(tfRRP.getText() != null && tfRRP.getText().equals("")){
 			JOptionPane.showMessageDialog(new JFrame(), "Please enter a RRP.");
 			isValid = false;
@@ -314,9 +277,4 @@ public class AddStockGUI extends JFrame {
 		
 	}
 	
-	public String getTotalPricePlusVat() {
-		
-		return tfTotalPricePlusVat.getText();
-		
-	}
 }
