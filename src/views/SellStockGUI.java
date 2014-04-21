@@ -34,12 +34,15 @@ public class SellStockGUI extends JFrame {
 	private JComboBox cbCompanyName;
 	private JComboBox cbProduct;
 	private DefaultTableModel tableModel;
+	private double totalAmount;
 
 
 	/**
 	 * Create the frame.
 	 */
 	public SellStockGUI() {
+		
+		totalAmount = 0;
 		
 		setTitle("Sell Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -118,14 +121,19 @@ public class SellStockGUI extends JFrame {
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				double price = 0;
 				if (validateInput()){
-					double price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
+					price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
 					tableModel.addRow(new String[]{
 							(String) cbProduct.getSelectedItem(),
 							tfUnits.getText(),
 							NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
 							NumberFormat.getCurrencyInstance().format(price)});
 				}
+				
+				totalAmount += price;
+				
+				tfTotalAmount.setText(NumberFormat.getCurrencyInstance().format(totalAmount));
 			}
 		});
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 18));
