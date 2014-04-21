@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import controllers.ProductController;
 import controllers.StockController;
 
 @SuppressWarnings("serial")
@@ -21,14 +22,14 @@ public class MainGUI extends javax.swing.JFrame {
 	private CustomersGUI customersGUI;
 	private TransactionsGUI transactionsGUI;
 	private RemindersGUI remindersGUI;
-	
+
 	private ArrayList<JButton> buttons;
 	private JButton btnStock;
 	private JButton btnSuppliers;
 	private JButton btnCustomers;
 	private JButton btnTransactions;
 	private JButton btnReminders;
-	
+
 	private JPanel currentlyActivePanel;
 	private JButton currentlyActiveButton;
 
@@ -52,7 +53,7 @@ public class MainGUI extends javax.swing.JFrame {
 				}
 			}
 		});
-		
+
 	}
 
 	/**
@@ -66,20 +67,21 @@ public class MainGUI extends javax.swing.JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		 StockController sc = new StockController();
-		
+		StockController sc = new StockController();
+		ProductController pc = new ProductController();
+
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setSize(700, 575);
 		frame.setVisible(true);
 		setResizable(false);
-		
+
 		stockGUI = new StockGUI();
 		stockGUI.setBounds(12, 48, 660, 475);
 		frame.getContentPane().add(stockGUI);
 		currentlyActivePanel = stockGUI;
-		
+
 		suppliersGUI = new SuppliersGUI();
 		suppliersGUI.setBounds(12, 48, 660, 475);
 		frame.getContentPane().add(suppliersGUI);
@@ -97,13 +99,13 @@ public class MainGUI extends javax.swing.JFrame {
 		frame.getContentPane().add(remindersGUI);
 
 		subViews = new ArrayList<JPanel>();
-		
+
 		subViews.add(stockGUI);
 		subViews.add(suppliersGUI);
 		subViews.add(customersGUI);
 		subViews.add(transactionsGUI);
 		subViews.add(remindersGUI);
-		
+
 		btnStock = new JButton("Stock");
 		btnStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -115,7 +117,7 @@ public class MainGUI extends javax.swing.JFrame {
 		});
 		btnStock.setBounds(5, 11, 130, 34);
 		frame.getContentPane().add(btnStock);
-		
+
 		btnSuppliers = new JButton("Suppliers");
 		btnSuppliers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,7 +129,7 @@ public class MainGUI extends javax.swing.JFrame {
 		});
 		btnSuppliers.setBounds(140, 11, 130, 34);
 		frame.getContentPane().add(btnSuppliers);
-		
+
 		btnCustomers = new JButton("Customers");
 		btnCustomers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,7 +141,7 @@ public class MainGUI extends javax.swing.JFrame {
 		});
 		btnCustomers.setBounds(275, 11, 130, 34);
 		frame.getContentPane().add(btnCustomers);
-		
+
 		btnTransactions = new JButton("Transactions");
 		btnTransactions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -151,7 +153,7 @@ public class MainGUI extends javax.swing.JFrame {
 		});
 		btnTransactions.setBounds(410, 11, 130, 34);
 		frame.getContentPane().add(btnTransactions);
-		
+
 		btnReminders = new JButton("Reminders");
 		btnReminders.setBackground(UIManager.getColor("Button.background"));
 		btnReminders.addActionListener(new ActionListener() {
@@ -165,7 +167,7 @@ public class MainGUI extends javax.swing.JFrame {
 		btnReminders.setSelected(true);
 		btnReminders.setBounds(545, 10, 130, 35);
 		frame.getContentPane().add(btnReminders);
-		
+
 		buttons = new ArrayList<JButton>();
 
 		buttons.add(btnStock);
@@ -186,7 +188,7 @@ public class MainGUI extends javax.swing.JFrame {
 			}
 		}
 	}
-	
+
 	public void highlightButton() {
 		for (int i = 0; i < buttons.size(); i++){
 			if (buttons.get(i) != currentlyActiveButton){
