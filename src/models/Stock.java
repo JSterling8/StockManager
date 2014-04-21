@@ -9,13 +9,14 @@ public class Stock {
 	private double rrp;
 	private long id;
 	
-	public Stock(String productName, Supplier supplier, double quantity, double price, double rrp) {
+	public Stock(String productName, Supplier supplier, double quantity, double price, double rrp, long id) {
 		
 		this.productName = productName;
 		this.supplier = supplier;
 		this.quantity = quantity;
 		this.price = price;
 		this.rrp = rrp;
+		this.id = id;
 	}
 
 	/**
@@ -63,6 +64,10 @@ public class Stock {
 	
 	public void removeProduct(double amount) {
 		this.quantity = quantity - amount;
+	}
+
+	public long getId() {
+		return id;
 	}
 	
 

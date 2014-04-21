@@ -3,6 +3,7 @@ package views;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -74,10 +75,10 @@ public class StockGUI extends JPanel {
 	public void loadStock(){
 		stock = new ArrayList<Stock>();
 		//TODO the id for the supplier is set to -5,-2.  Should be positive in actual implementation.
-		stock.add(new Stock("prod1", new Supplier("Supp1", -2), 1.1, 2.2, 4));
-		stock.add(new Stock("prod2", new Supplier("Supp2", -3), 1.1, 2.2, 5));
-		stock.add(new Stock("prod3", new Supplier("Supp3", -4), 1.1, 2.2, 6));
-		stock.add(new Stock("prod4", new Supplier("Supp4", -5), 1.1, 2.2, 7));
+		stock.add(new Stock("prod1", new Supplier("Supp1", -2), 1.1, 2.2, 4, 0));
+		stock.add(new Stock("prod2", new Supplier("Supp2", -3), 1.1, 2.2, 5, 1));
+		stock.add(new Stock("prod3", new Supplier("Supp3", -4), 1.1, 2.2, 6, 2));
+		stock.add(new Stock("prod4", new Supplier("Supp4", -5), 1.1, 2.2, 7, 3));
 
 		
 		tableModel = 
@@ -102,6 +103,30 @@ public class StockGUI extends JPanel {
 							"" + stockToAdd.getQuantity(),
 							"" + stockToAdd.getPrice()} );
 	}
+	
+	public void removeStock(ArrayList<Stock> stocksToRemove){
+		for (int i = 0; i < stock.size(); i++){
+			for (int j = 0; j < stocksToRemove.size(); j++){
+				// If the id of the stock to remove matches the current stock being examined in the loop.
+				if (stock.get(i).getId() == stocksToRemove.get(j).getId()){
+					// Get that stock then remove a specified quantity from it.
+					stock.get(i).removeProduct(stocksToRemove.get(j).getQuantity());
+					// Set the value of the quantity field in the table to the new value.
+					DecimalFormat df = new DecimalFormat("#################0.00");
+					tableModel.setValueAt(df.format(stock.get(i).getQuantity()), i, 2);
+					
+					// If there is no stock left, remove it from the table and from the ArrayList of Stock.
+					if (stock.get(i).getQuantity() == 0){
+						stock.remove(i);
+						tableModel.removeRow(i);
+					}
+				}
+				
+			}
+		}
+	}
+	
+
 	
 	public JTable getTable(){
 		return table;

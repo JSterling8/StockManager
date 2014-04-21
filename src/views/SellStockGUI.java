@@ -37,6 +37,7 @@ public class SellStockGUI extends JFrame {
 	private double totalAmount;
 	private ArrayList<Double> purchasePrices;
 	private double profit;
+	private ArrayList<Integer> idList;
 	
 
 	/**
@@ -44,6 +45,7 @@ public class SellStockGUI extends JFrame {
 	 */
 	public SellStockGUI(StockGUI stockGUI) {
 		this.stockGUI =  stockGUI;
+		idList = new ArrayList<Integer>();
 		setTitle("Sell Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 722, 600);
@@ -131,6 +133,7 @@ public class SellStockGUI extends JFrame {
 				// TODO Add checks so you can't sell more than you have.
 				if(validateInput()){
 					addToTable();
+					idList.add(cbProduct.getSelectedIndex());
 					getPurchasePrices().add(getStockGUI().getStock().get(cbProduct.getSelectedIndex()).getPrice());
 					calculatePrice();
 					calculateProfit();
@@ -180,7 +183,7 @@ public class SellStockGUI extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				ConfirmationGUI conf = new ConfirmationGUI(SellStockGUI.this);
+				ConfirmationGUI conf = new ConfirmationGUI(SellStockGUI.this, getStockGUI(), idList);
 				setVisible(false);				
 			}
 		});
