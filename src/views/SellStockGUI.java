@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -29,11 +30,12 @@ public class SellStockGUI extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField tfUnits;
-	private JTextField tfVat;
+	private JTextField tfPricePerUnit;
 	private JTextField tfTotalAmount;
 	private JTextField tfProfitLoss;
 	private JComboBox cbCompanyName;
 	private JComboBox cbProduct;
+	private DefaultTableModel tableModel;
 
 
 	/**
@@ -82,7 +84,7 @@ public class SellStockGUI extends JFrame {
 		scrollPane.setBounds(10, 200, 695, 198);
 		contentPane.add(scrollPane);
 		
-		TableModel tableModel = 
+		tableModel = 
 				new DefaultTableModel( new String[] { "Product Name", 
 													"Units", 
 													"Price Per Unit", 
@@ -109,13 +111,25 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(tfUnits);
 		tfUnits.setColumns(10);
 		
-		tfVat = new JTextField();
-		tfVat.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfVat.setBounds(459, 147, 134, 35);
-		contentPane.add(tfVat);
-		tfVat.setColumns(10);
+		tfPricePerUnit = new JTextField();
+		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfPricePerUnit.setBounds(459, 147, 134, 35);
+		contentPane.add(tfPricePerUnit);
+		tfPricePerUnit.setColumns(10);
 		
 		JButton btnInsert = new JButton("Insert");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (validateInput()){
+					double price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
+					tableModel.addRow(new String[]{
+							(String) cbProduct.getSelectedItem(),
+							tfUnits.getText(),
+							tfPricePerUnit.getText(),
+							"" + price});
+				}
+			}
+		});
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnInsert.setBounds(605, 147, 100, 35);
 		contentPane.add(btnInsert);
@@ -180,6 +194,30 @@ public class SellStockGUI extends JFrame {
 		setResizable(false);
 		
 		setVisible(true);
+	}
+	
+	public boolean validateInput(){
+		boolean isValid = true;
+		
+		if (cbCompanyName.getSelectedIndex() == -1){
+			JOptionPane.showMessageDialog(new JFrame(), "Please select a product name.");
+			isValid = false;
+		}
+		else if (cbProduct.getSelectedIndex() == -1){
+			JOptionPane.showMessageDialog(new JFrame(), "Please select a supplier name.");
+			isValid = false;
+		}
+		else if(tfUnits.getText() != null && tfUnits.getText().equals("")){
+			JOptionPane.showMessageDialog(new JFrame(), "Please enter a number of units.");
+			isValid = false;
+		}
+		else if(tfPricePerUnit.getText() != null && tfPricePerUnit.getText().equals("")){
+			JOptionPane.showMessageDialog(new JFrame(), "Please enter a price per unit.");
+			isValid = false;
+		}
+
+		
+		return isValid;
 	}
 	
 	public String getCompanyName(){
