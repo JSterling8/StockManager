@@ -93,13 +93,16 @@ public class ConfirmationGUI extends JFrame {
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String productName = lblProductNameResult.getText();
-				Supplier supplier = new Supplier(lblSupplierNameResult.getText());
-				double quantity = Double.parseDouble((String) getModel().getValueAt(0, 2));
-				double price = Double.parseDouble((String) getModel().getValueAt(0, 3));
-				Stock stock = new Stock(productName, supplier, quantity, price);
+				Stock stock = null;
 				
-				getStockGUI().addStock(stock);
+				for(int i = 0; i < getModel().getRowCount(); i++){
+					String productName = (String) getModel().getValueAt(i, 0);
+					Supplier supplier = new Supplier((String) getModel().getValueAt(i, 1));
+					double quantity = Double.parseDouble((String) getModel().getValueAt(i, 2));
+					double price = Double.parseDouble((String) getModel().getValueAt(i, 3));
+					stock = new Stock(productName, supplier, quantity, price);
+					getStockGUI().addStock(stock);
+				}
 				getAddStockGUI().dispose();
 				dispose();
 
@@ -109,7 +112,7 @@ public class ConfirmationGUI extends JFrame {
 		contentPane.add(btnConfirm);
 
 	}
-	
+
 	public TableModel getModel(){
 		return addStockGUI.getTable().getModel();
 	}
