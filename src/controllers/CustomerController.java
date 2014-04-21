@@ -10,11 +10,11 @@ public class CustomerController {
 	public CustomerController(){
 		customerList = new ArrayList<Customer>();
 		
+		customerList.add(new Customer("Customer 0"));
 		customerList.add(new Customer("Customer 1"));
 		customerList.add(new Customer("Customer 2"));
 		customerList.add(new Customer("Customer 3"));
 		customerList.add(new Customer("Customer 4"));
-		customerList.add(new Customer("Customer 5"));
 	}
 	
 	
