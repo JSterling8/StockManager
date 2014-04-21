@@ -122,10 +122,10 @@ public class SellStockGUI extends JFrame {
 		btnInsert.setBounds(605, 146, 100, 35);
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// TODO Add checks so you can't sell more than you have.
 				if(validateInput()){
-					// TODO placeholder.
 					addToTable();
-					// calculatePrice();
+					calculatePrice();
 				}
 			}
 		});
@@ -142,7 +142,7 @@ public class SellStockGUI extends JFrame {
 
 		JLabel lblProfitloss = new JLabel("Profit/Loss");
 		lblProfitloss.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblProfitloss.setBounds(317, 479, 223, 35);
+		lblProfitloss.setBounds(313, 479, 223, 35);
 		contentPane.add(lblProfitloss);
 
 		tfTotalAmount = new JTextField();
@@ -228,6 +228,17 @@ public class SellStockGUI extends JFrame {
 				tfPricePerUnit.getText(),
 				"" + totalPrice
 		});
+	}
+	
+	public void calculatePrice() {
+		// TODO Auto-generated method stub
+		double totalPrice = 0;
+		
+		for (int i = 0; i < getTable().getRowCount(); i++){
+			totalPrice += Double.parseDouble((String)getTable().getModel().getValueAt(i, 4));
+		}
+		
+		tfTotalAmount.setText("" + totalPrice);
 	}
 
 	public String getCompanyName(){
