@@ -100,7 +100,8 @@ public class ConfirmationGUI extends JFrame {
 					Supplier supplier = new Supplier((String) getModel().getValueAt(i, 1));
 					double quantity = Double.parseDouble((String) getModel().getValueAt(i, 2));
 					double price = Double.parseDouble((String) getModel().getValueAt(i, 3));
-					stock = new Stock(productName, supplier, quantity, price);
+					double rrp = Double.parseDouble((String) getModel().getValueAt(i, 4));
+					stock = new Stock(productName, supplier, quantity, price, rrp);
 					getStockGUI().addStock(stock);
 				}
 				getAddStockGUI().dispose();

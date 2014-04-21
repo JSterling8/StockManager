@@ -32,7 +32,7 @@ public class StockGUI extends JPanel {
 		JButton btnSell = new JButton("Sell");
 		btnSell.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SellStockGUI ss = new SellStockGUI();
+				SellStockGUI ss = new SellStockGUI(StockGUI.this);
 			}
 		});
 		btnSell.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -72,10 +72,10 @@ public class StockGUI extends JPanel {
 	
 	public void loadStock(){
 		stock = new ArrayList<Stock>();
-		stock.add(new Stock("prod1", new Supplier("Supp1"), 1.1, 2.2));
-		stock.add(new Stock("prod2", new Supplier("Supp2"), 1.1, 2.2));
-		stock.add(new Stock("prod3", new Supplier("Supp3"), 1.1, 2.2));
-		stock.add(new Stock("prod4", new Supplier("Supp4"), 1.1, 2.2));
+		stock.add(new Stock("prod1", new Supplier("Supp1"), 1.1, 2.2, 4));
+		stock.add(new Stock("prod2", new Supplier("Supp2"), 1.1, 2.2, 5));
+		stock.add(new Stock("prod3", new Supplier("Supp3"), 1.1, 2.2, 6));
+		stock.add(new Stock("prod4", new Supplier("Supp4"), 1.1, 2.2, 7));
 
 		
 		tableModel = 
@@ -94,10 +94,19 @@ public class StockGUI extends JPanel {
 	}
 	
 	public void addStock(Stock stockToAdd){
+		stock.add(stockToAdd);
 		tableModel.addRow(new String[] {stockToAdd.getProductName(),
 							stockToAdd.getSupplier().getName(),
 							"" + stockToAdd.getQuantity(),
 							"" + stockToAdd.getPrice()} );
+	}
+	
+	public JTable getTable(){
+		return table;
+	}
+	
+	public ArrayList<Stock> getStock(){
+		return stock;
 	}
 		
 }

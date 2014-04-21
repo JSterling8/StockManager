@@ -6,14 +6,15 @@ public class Stock {
 	private Supplier supplier;
 	private double quantity;
 	private double price;
+	private double rrp;
 	
-	public Stock(String productName, Supplier supplier, double quantity, double price) {
+	public Stock(String productName, Supplier supplier, double quantity, double price, double rrp) {
 		
 		this.productName = productName;
 		this.supplier = supplier;
 		this.quantity = quantity;
 		this.price = price;
-		
+		this.rrp = rrp;
 	}
 
 	/**
@@ -49,6 +50,10 @@ public class Stock {
 	 */
 	public double getQuantity() {
 		return quantity;
+	}
+	
+	public double getRrp() {
+		return rrp;
 	}
 	
 	public void addProduct(double amount) {
