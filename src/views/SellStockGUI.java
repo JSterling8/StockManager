@@ -5,6 +5,8 @@ package views;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -19,7 +21,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class SellStockGUI extends JFrame {
 
@@ -33,7 +34,9 @@ public class SellStockGUI extends JFrame {
 	private JComboBox cbProduct;
 	private StockGUI stockGUI;
 	private DefaultTableModel tableModel;
-
+	private double totalAmount;
+	private ArrayList<Double> purchasePrices;
+	
 
 	/**
 	 * Create the frame.
@@ -117,6 +120,8 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(tfPricePerUnit);
 		tfPricePerUnit.setColumns(10);
 
+		purchasePrices = new ArrayList<Double>();
+		
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnInsert.setBounds(605, 146, 100, 35);
@@ -125,7 +130,9 @@ public class SellStockGUI extends JFrame {
 				// TODO Add checks so you can't sell more than you have.
 				if(validateInput()){
 					addToTable();
+					getPurchasePrices().add(getStockGUI().getStock().get(cbProduct.getSelectedIndex()).getPrice());
 					calculatePrice();
+					calculateProfit();
 				}
 			}
 		});
@@ -232,13 +239,26 @@ public class SellStockGUI extends JFrame {
 	
 	public void calculatePrice() {
 		// TODO Auto-generated method stub
-		double totalPrice = 0;
+		totalAmount = 0;
 		
 		for (int i = 0; i < getTable().getRowCount(); i++){
-			totalPrice += Double.parseDouble((String)getTable().getModel().getValueAt(i, 4));
+			totalAmount += Double.parseDouble((String)getTable().getModel().getValueAt(i, 4));
 		}
 		
-		tfTotalAmount.setText("" + totalPrice);
+		DecimalFormat df = new DecimalFormat("#################0.00");
+
+		tfTotalAmount.setText(df.format(totalAmount));
+	}
+	
+	public void calculateProfit() {
+		double profit = 0;
+		
+		for (int i = 0; i < purchasePrices.size(); i++){
+			profit += purchasePrices.get(i);
+		}
+		DecimalFormat df = new DecimalFormat("#################0.00");
+		profit = totalAmount - profit;
+		tfProfitLoss.setText(df.format(profit));
 	}
 
 	public String getCompanyName(){
@@ -251,6 +271,10 @@ public class SellStockGUI extends JFrame {
 
 	public StockGUI getStockGUI() {
 		return stockGUI;
+	}
+
+	public ArrayList<Double> getPurchasePrices() {
+		return purchasePrices;
 	}
 
 }

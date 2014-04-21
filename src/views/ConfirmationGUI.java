@@ -81,10 +81,9 @@ public class ConfirmationGUI extends JFrame {
 		JButton btnNewButton = new JButton("Edit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				getAddStockGUI().setVisible(true);
+				getAddStockGUI().getTable().setVisible(true);
 				dispose();
-
 			}
 		});
 		btnNewButton.setBounds(106, 449, 100, 35);

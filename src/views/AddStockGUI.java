@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -183,6 +184,7 @@ public class AddStockGUI extends JFrame {
 						new String[] { "Product Name", "Supplier" , "Quantity" , "Price/Unit", "Retail Price"},
 						0);
 		table.setModel(tableModel);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.addActionListener(new ActionListener() {

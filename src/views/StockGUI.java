@@ -9,8 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import models.Stock;
 import models.Supplier;
@@ -65,6 +65,7 @@ public class StockGUI extends JPanel {
 		add(scrollPane);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		
 		loadStock();
