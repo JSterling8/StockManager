@@ -76,10 +76,10 @@ public class SellStockGUI extends JFrame {
 		button.setBounds(362, 12, 50, 35);
 		contentPane.add(button);
 		
-		JLabel lblProcuct = new JLabel("Product Name");
-		lblProcuct.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblProcuct.setBounds(10, 106, 291, 35);
-		contentPane.add(lblProcuct);
+		JLabel lblProduct = new JLabel("Product Name");
+		lblProduct.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblProduct.setBounds(10, 106, 291, 35);
+		contentPane.add(lblProduct);
 		
 		cbProduct = new JComboBox();
 		cbProduct.setBounds(10, 147, 291, 35);
@@ -90,9 +90,11 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(scrollPane);
 		
 		TableModel tableModel = 
-				new DefaultTableModel(
-						new String[][] { { "Title", "Units" , "Price per Unit", "VAT %" }},
-						new String[] { "Column 1", "Column 2", "Column3", "Column 4" });
+				new DefaultTableModel( new String[] { "Product Name", 
+													"Units", 
+													"Price Per Unit", 
+													"Price" }, 
+												0);
 		
 		table = new JTable();
 		table.setModel(tableModel);
