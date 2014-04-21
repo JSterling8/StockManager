@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controllers.CustomerController;
 import controllers.StockController;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class SellStockGUI extends JFrame {
 
@@ -91,8 +93,8 @@ public class SellStockGUI extends JFrame {
 				new DefaultTableModel( new String[] { "Product Name", 
 						"Units", 
 						"Price Per Unit", 
-						"Price" }, 
-						0);
+				"Price" }, 
+				0);
 
 		table = new JTable();
 		table.setModel(tableModel);
@@ -109,12 +111,32 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(lblPrice);
 
 		tfUnits = new JTextField();
+		tfUnits.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER && 
+					!tfPricePerUnit.getText().equals("") &&
+					!tfUnits.getText().equals("")){
+					insert();
+			    }
+			}
+		});
 		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfUnits.setBounds(313, 147, 134, 35);
 		contentPane.add(tfUnits);
 		tfUnits.setColumns(10);
 
 		tfPricePerUnit = new JTextField();
+		tfPricePerUnit.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER && 
+						!tfPricePerUnit.getText().equals("") &&
+						!tfUnits.getText().equals("")){
+					insert();
+			    }
+			}
+		});
 		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfPricePerUnit.setBounds(459, 147, 134, 35);
 		contentPane.add(tfPricePerUnit);
@@ -123,23 +145,7 @@ public class SellStockGUI extends JFrame {
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				double price = 0;
-				if (validateInput()){
-					price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
-					tableModel.addRow(new String[]{
-							(String) cbProduct.getSelectedItem(),
-							tfUnits.getText(),
-							NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
-							NumberFormat.getCurrencyInstance().format(price)});
-				}
-
-				totalAmount += price;
-				tfTotalAmount.setText(NumberFormat.getCurrencyInstance().format(totalAmount));
-				
-				// profit = (sellingPrice * numOfUnits) - (purchasePrice * numOfUnits)
-				profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfUnits.getText());
-				profit += price;
-				tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
+				insert();
 			}
 		});
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -245,6 +251,25 @@ public class SellStockGUI extends JFrame {
 
 
 		return isValid;
+	}
+	
+	public void insert(){
+		double price = 0;
+		if (validateInput()){
+			price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
+			tableModel.addRow(new String[]{
+					(String) cbProduct.getSelectedItem(),
+					tfUnits.getText(),
+					NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
+					NumberFormat.getCurrencyInstance().format(price)});
+			totalAmount += price;
+			tfTotalAmount.setText(NumberFormat.getCurrencyInstance().format(totalAmount));
+
+			// profit = (sellingPrice * numOfUnits) - (purchasePrice * numOfUnits)
+			profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfUnits.getText());
+			profit += price;
+			tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
+		}
 	}
 
 	public String getCompanyName(){
