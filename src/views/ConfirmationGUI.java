@@ -66,11 +66,6 @@ public class ConfirmationGUI extends JFrame {
 		lblTotalPrice.setBounds(10, 355, 193, 35);
 		contentPane.add(lblTotalPrice);
 
-		JLabel lblTotalPricePlusVat = new JLabel("Total Price plus VAT:");
-		lblTotalPricePlusVat.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTotalPricePlusVat.setBounds(10, 402, 193, 35);
-		contentPane.add(lblTotalPricePlusVat);
-
 		JLabel lblSupplierNameResult = new JLabel(addStockGUI.getSupplierName());
 		lblSupplierNameResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblSupplierNameResult.setBounds(186, 58, 266, 35);
@@ -85,8 +80,8 @@ public class ConfirmationGUI extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				setVisible(false);
 				getAddStockGUI().setVisible(true);
+				dispose();
 
 			}
 		});
@@ -97,8 +92,8 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				dispose();
 				getAddStockGUI().dispose();
+				dispose();
 
 			}
 		});
