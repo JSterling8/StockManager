@@ -97,7 +97,8 @@ public class ConfirmationGUI extends JFrame {
 				
 				for(int i = 0; i < getModel().getRowCount(); i++){
 					String productName = (String) getModel().getValueAt(i, 0);
-					Supplier supplier = new Supplier((String) getModel().getValueAt(i, 1));
+					//TODO the id for the supplier is set to -1.  Should be positive in actual implementation.
+					Supplier supplier = new Supplier((String) getModel().getValueAt(i, 1), -1);
 					double quantity = Double.parseDouble((String) getModel().getValueAt(i, 2));
 					double price = Double.parseDouble((String) getModel().getValueAt(i, 3));
 					double rrp = Double.parseDouble((String) getModel().getValueAt(i, 4));

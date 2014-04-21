@@ -7,6 +7,7 @@ public class Stock {
 	private double quantity;
 	private double price;
 	private double rrp;
+	private long id;
 	
 	public Stock(String productName, Supplier supplier, double quantity, double price, double rrp) {
 		

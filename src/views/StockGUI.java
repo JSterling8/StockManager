@@ -72,10 +72,11 @@ public class StockGUI extends JPanel {
 	
 	public void loadStock(){
 		stock = new ArrayList<Stock>();
-		stock.add(new Stock("prod1", new Supplier("Supp1"), 1.1, 2.2, 4));
-		stock.add(new Stock("prod2", new Supplier("Supp2"), 1.1, 2.2, 5));
-		stock.add(new Stock("prod3", new Supplier("Supp3"), 1.1, 2.2, 6));
-		stock.add(new Stock("prod4", new Supplier("Supp4"), 1.1, 2.2, 7));
+		//TODO the id for the supplier is set to -5,-2.  Should be positive in actual implementation.
+		stock.add(new Stock("prod1", new Supplier("Supp1", -2), 1.1, 2.2, 4));
+		stock.add(new Stock("prod2", new Supplier("Supp2", -3), 1.1, 2.2, 5));
+		stock.add(new Stock("prod3", new Supplier("Supp3", -4), 1.1, 2.2, 6));
+		stock.add(new Stock("prod4", new Supplier("Supp4", -5), 1.1, 2.2, 7));
 
 		
 		tableModel = 
