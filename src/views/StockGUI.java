@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 
 import models.Stock;
 import models.Supplier;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class StockGUI extends JPanel {
@@ -38,26 +39,27 @@ public class StockGUI extends JPanel {
 		btnSell.setBounds(10, 11, 70, 35);
 		add(btnSell);
 		
-		JButton btnRemoveStock = new JButton("-");
-		btnRemoveStock.addActionListener(new ActionListener() {
+		JButton btnRemove = new JButton("Remove");
+		btnRemove.setForeground(Color.RED);
+		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO Get the string to pass from what's selected in the JTable.
 				RemoveStockGUI rs = new RemoveStockGUI("Product A");
 			}
 		});
-		btnRemoveStock.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnRemoveStock.setBounds(540, 11, 50, 35);
-		add(btnRemoveStock);
+		btnRemove.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnRemove.setBounds(525, 11, 125, 35);
+		add(btnRemove);
 		
-		JButton btnAddStock = new JButton("+");
-		btnAddStock.addActionListener(new ActionListener() {
+		JButton btnBuy = new JButton("Buy");
+		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddStockGUI as = new AddStockGUI();
 			}
 		});
-		btnAddStock.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnAddStock.setBounds(600, 11, 50, 35);
-		add(btnAddStock);
+		btnBuy.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnBuy.setBounds(90, 11, 70, 35);
+		add(btnBuy);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 57, 640, 407);
