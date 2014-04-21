@@ -2,12 +2,11 @@ package views;
 
 
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,7 +19,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import controllers.CustomerController;
 import controllers.ProductController;
@@ -125,8 +123,8 @@ public class SellStockGUI extends JFrame {
 					tableModel.addRow(new String[]{
 							(String) cbProduct.getSelectedItem(),
 							tfUnits.getText(),
-							tfPricePerUnit.getText(),
-							"" + price});
+							NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
+							NumberFormat.getCurrencyInstance().format(price)});
 				}
 			}
 		});
