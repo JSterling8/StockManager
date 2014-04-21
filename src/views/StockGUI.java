@@ -19,6 +19,7 @@ import models.Supplier;
 public class StockGUI extends JPanel {
 	private JTable table;
 	private ArrayList<Stock> stock;
+	private DefaultTableModel tableModel;
 
 	/**
 	 * Create the panel.
@@ -35,10 +36,10 @@ public class StockGUI extends JPanel {
 			}
 		});
 		btnSell.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnSell.setBounds(10, 11, 70, 35);
+		btnSell.setBounds(105, 11, 85, 35);
 		add(btnSell);
 		
-		JButton btnRemoveStock = new JButton("-");
+		JButton btnRemoveStock = new JButton("Remove");
 		btnRemoveStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO Get the string to pass from what's selected in the JTable.
@@ -46,18 +47,18 @@ public class StockGUI extends JPanel {
 			}
 		});
 		btnRemoveStock.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnRemoveStock.setBounds(540, 11, 50, 35);
+		btnRemoveStock.setBounds(498, 11, 152, 35);
 		add(btnRemoveStock);
 		
-		JButton btnAddStock = new JButton("+");
-		btnAddStock.addActionListener(new ActionListener() {
+		JButton btnBuyStock = new JButton("Buy");
+		btnBuyStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddStockGUI as = new AddStockGUI();
+				AddStockGUI as = new AddStockGUI(StockGUI.this);
 			}
 		});
-		btnAddStock.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnAddStock.setBounds(600, 11, 50, 35);
-		add(btnAddStock);
+		btnBuyStock.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnBuyStock.setBounds(10, 11, 85, 35);
+		add(btnBuyStock);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 57, 640, 407);
@@ -66,10 +67,10 @@ public class StockGUI extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		updateStock();
+		loadStock();
 	}
 	
-	public void updateStock(){
+	public void loadStock(){
 		stock = new ArrayList<Stock>();
 		stock.add(new Stock("prod1", new Supplier("Supp1"), 1.1, 2.2));
 		stock.add(new Stock("prod2", new Supplier("Supp2"), 1.1, 2.2));
@@ -77,7 +78,7 @@ public class StockGUI extends JPanel {
 		stock.add(new Stock("prod4", new Supplier("Supp4"), 1.1, 2.2));
 
 		
-		DefaultTableModel tableModel = 
+		tableModel = 
 				new DefaultTableModel(
 						new String[] { "Product Name", "Supplier" , "Quantity" , "Price"},
 						0);
@@ -90,7 +91,13 @@ public class StockGUI extends JPanel {
 		}
 		
 		table.setModel(tableModel);
-		
 	}
 	
+	public void addStock(Stock stockToAdd){
+		tableModel.addRow(new String[] {stockToAdd.getProductName(),
+							stockToAdd.getSupplier().getName(),
+							"" + stockToAdd.getQuantity(),
+							"" + stockToAdd.getPrice()} );
+	}
+		
 }

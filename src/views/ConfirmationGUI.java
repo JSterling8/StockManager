@@ -1,7 +1,5 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,11 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import models.Stock;
+import models.Supplier;
 
 public class ConfirmationGUI extends JFrame {
 
@@ -25,11 +24,13 @@ public class ConfirmationGUI extends JFrame {
 	private RemoveStockGUI removeStockGUI;
 	private SellStockGUI sellStockGUI;
 	private AddStockGUI addStockGUI;
+	private StockGUI stockGUI;
 
 
-	public ConfirmationGUI(AddStockGUI addStockGUI) {
+	public ConfirmationGUI(AddStockGUI addStockGUI, StockGUI stockGUI) {
 
 		this.addStockGUI = addStockGUI;
+		this.stockGUI = stockGUI;
 
 		setTitle("Confirmation");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -45,7 +46,7 @@ public class ConfirmationGUI extends JFrame {
 		lblProductName.setBounds(10, 11, 164, 35);
 		contentPane.add(lblProductName);
 
-		JLabel lblProductNameResult = new JLabel(addStockGUI.getProductName());
+		final JLabel lblProductNameResult = new JLabel(addStockGUI.getProductName());
 		lblProductNameResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblProductNameResult.setBounds(186, 11, 266, 35);
 		contentPane.add(lblProductNameResult);
@@ -66,12 +67,7 @@ public class ConfirmationGUI extends JFrame {
 		lblTotalPrice.setBounds(10, 355, 193, 35);
 		contentPane.add(lblTotalPrice);
 
-		JLabel lblTotalPricePlusVat = new JLabel("Total Price plus VAT:");
-		lblTotalPricePlusVat.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTotalPricePlusVat.setBounds(10, 402, 193, 35);
-		contentPane.add(lblTotalPricePlusVat);
-
-		JLabel lblSupplierNameResult = new JLabel(addStockGUI.getSupplierName());
+		final JLabel lblSupplierNameResult = new JLabel(addStockGUI.getSupplierName());
 		lblSupplierNameResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblSupplierNameResult.setBounds(186, 58, 266, 35);
 		contentPane.add(lblSupplierNameResult);
@@ -81,17 +77,13 @@ public class ConfirmationGUI extends JFrame {
 		lblTotalPriceResult.setBounds(215, 355, 266, 35);
 		contentPane.add(lblTotalPriceResult);
 
-		JLabel lblTotalPricePlusVatResult = new JLabel(addStockGUI.getTotalPricePlusVat());
-		lblTotalPricePlusVatResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTotalPricePlusVatResult.setBounds(215, 402, 266, 35);
-		contentPane.add(lblTotalPricePlusVatResult);
 
 		JButton btnNewButton = new JButton("Edit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				setVisible(false);
 				getAddStockGUI().setVisible(true);
+				dispose();
 
 			}
 		});
@@ -101,15 +93,25 @@ public class ConfirmationGUI extends JFrame {
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				dispose();
+				String productName = lblProductNameResult.getText();
+				Supplier supplier = new Supplier(lblSupplierNameResult.getText());
+				double quantity = Double.parseDouble((String) getModel().getValueAt(0, 2));
+				double price = Double.parseDouble((String) getModel().getValueAt(0, 3));
+				Stock stock = new Stock(productName, supplier, quantity, price);
+				
+				getStockGUI().addStock(stock);
 				getAddStockGUI().dispose();
+				dispose();
 
 			}
 		});
 		btnConfirm.setBounds(312, 449, 100, 35);
 		contentPane.add(btnConfirm);
 
+	}
+	
+	public TableModel getModel(){
+		return addStockGUI.getTable().getModel();
 	}
 
 	public ConfirmationGUI(SellStockGUI sellStockGUI) {
@@ -381,6 +383,10 @@ public class ConfirmationGUI extends JFrame {
 	 */
 	public AddStockGUI getAddStockGUI() {
 		return addStockGUI;
+	}
+
+	public StockGUI getStockGUI() {
+		return stockGUI;
 	}
 }
 
