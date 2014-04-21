@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.NumberFormat;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class AddStockGUI extends JFrame {
 
@@ -29,6 +31,8 @@ public class AddStockGUI extends JFrame {
 	private JTextField tfPricePerUnit;
 	private JTextField tfRRP;
 	private JTextField tfTotalPrice;
+	private DefaultTableModel tableModel;
+	private double totalPrice;
 
 	/**
 	 * Launch the application.
@@ -50,6 +54,9 @@ public class AddStockGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddStockGUI() {
+		
+		totalPrice = 0;
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Stock");
@@ -184,13 +191,33 @@ public class AddStockGUI extends JFrame {
 		scrollPane.setBounds(10, 195, 516, 99);
 		contentPane.add(scrollPane);
 
+		tableModel = 
+				new DefaultTableModel( new String[] { "Product Name", 
+													"Units", 
+													"Price Per Unit", 
+													"Price" }, 
+												0);
+		
 		table = new JTable();
+		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
 
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				validateInput();
+				if(validateInput()) {
+					double price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
+					
+					tableModel.addRow(new String[]{
+							(String) cbProductName.getSelectedItem(),
+							tfUnits.getText(),
+							NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
+							NumberFormat.getCurrencyInstance().format(price)});
+					
+							totalPrice = totalPrice + (Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText()));
+							tfTotalPrice.setText("" + totalPrice);
+					
+				}
 			}
 		});
 		btnInsert.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -208,6 +235,7 @@ public class AddStockGUI extends JFrame {
 		tfTotalPrice.setBounds(392, 352, 134, 35);
 		contentPane.add(tfTotalPrice);
 		tfTotalPrice.setColumns(10);
+		tfTotalPrice.setEditable(false);
 	
 		setVisible(true);
 	}
