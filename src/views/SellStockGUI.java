@@ -5,7 +5,10 @@ package views;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,11 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import models.Customer;
 import controllers.CustomerController;
 import controllers.StockController;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class SellStockGUI extends JFrame {
 
@@ -39,16 +40,21 @@ public class SellStockGUI extends JFrame {
 	private DefaultTableModel tableModel;
 	private double totalAmount;
 	private double profit;
+	private Customer customer;
+	private ArrayList<Double> pricePerUnitList;
+	private ArrayList<Double> priceList;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public SellStockGUI() {
-
+	public SellStockGUI() {		
 		totalAmount = 0;
 		profit = 0;
 
+		pricePerUnitList = new ArrayList<Double>();
+		priceList = new ArrayList<Double>();
+		
 		setTitle("Sell Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 722, 621);
@@ -59,7 +65,7 @@ public class SellStockGUI extends JFrame {
 
 		cbCompanyName = new JComboBox();
 		for(int i = 0; i < CustomerController.customerList.size(); i++){
-			cbCompanyName.addItem(CustomerController.customerList.get(i).getName());
+			cbCompanyName.addItem(CustomerController.customerList.get(i));
 		}
 		cbCompanyName.setBounds(200, 14, 150, 35);
 		contentPane.add(cbCompanyName);
@@ -199,7 +205,7 @@ public class SellStockGUI extends JFrame {
 					JOptionPane.showMessageDialog(new JFrame(), "Please insert at least one product to sell.");
 				}
 
-				else {
+				else {		
 					ConfirmationGUI conf = new ConfirmationGUI(SellStockGUI.this);
 					setVisible(false);
 				}
@@ -257,7 +263,11 @@ public class SellStockGUI extends JFrame {
 	public void insert(){
 		double price = 0;
 		if (validateInput()){
+			customer = (Customer) cbCompanyName.getSelectedItem();
+			
 			price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
+			pricePerUnitList.add(Double.parseDouble(tfPricePerUnit.getText()));
+			priceList.add(price);
 			tableModel.addRow(new String[]{
 					(String) cbProduct.getSelectedItem(),
 					tfUnits.getText(),
@@ -287,6 +297,18 @@ public class SellStockGUI extends JFrame {
 
 	public double getTotalAmount() {
 		return totalAmount;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public ArrayList<Double> getPricePerUnitList() {
+		return pricePerUnitList;
+	}
+
+	public ArrayList<Double> getPriceList() {
+		return priceList;
 	}
 
 }

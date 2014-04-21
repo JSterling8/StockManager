@@ -1,25 +1,22 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
-import models.Stock;
-import models.Supplier;
-import controllers.StockController;
+import models.Customer;
+import models.SellTransaction;
+import controllers.TransactionController;
 
 public class ConfirmationGUI extends JFrame {
 
@@ -136,6 +133,49 @@ this.sellStockGUI = sellStockGUI;
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
+				Customer customer = getSellStockGUI().getCustomer();
+				
+				ArrayList<String> productList = new ArrayList<String>();
+				for (int i = 0; i < getSellStockGUI().getTable().getRowCount(); i++){
+					productList.add((String) getSellStockGUI().getTable().getModel().getValueAt(i, 0));
+				}
+				
+				ArrayList<Double> unitList = new ArrayList<Double>();
+				for (int j = 0; j < getSellStockGUI().getTable().getRowCount(); j++){
+					unitList.add(Double.parseDouble((String) getSellStockGUI().getTable().getModel().getValueAt(j, 1)));
+				}
+				
+				ArrayList<Double> pricePerUnitList = new ArrayList<Double>();
+				pricePerUnitList = getSellStockGUI().getPricePerUnitList();
+				
+				ArrayList<Double> priceList = getSellStockGUI().getPriceList();
+				
+				double profit = getSellStockGUI().getProfitLoss();
+				
+				Date date = new Date(System.currentTimeMillis());
+				
+				long id = 0;
+				if (TransactionController.sellTransactionList.size() > 0){
+					id = TransactionController.
+							sellTransactionList.
+								get(TransactionController.sellTransactionList.size()-1).
+										getId() + 1;
+				}
+				else {
+					id = 0;
+				}
+				
+				SellTransaction transaction = new SellTransaction(customer, 
+																productList, 
+																unitList,
+																pricePerUnitList,
+																priceList,
+																profit,
+																date,
+																id);
+				TransactionController.sellTransactionList.add(transaction);
+				
+				System.out.println(TransactionController.sellTransactionList.get(0));
 				getSellStockGUI().dispose();
 				dispose();
 			}

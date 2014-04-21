@@ -14,6 +14,7 @@ import controllers.CustomerController;
 import controllers.ProductController;
 import controllers.StockController;
 import controllers.SupplierController;
+import controllers.TransactionController;
 
 @SuppressWarnings("serial")
 public class MainGUI extends javax.swing.JFrame {
@@ -73,6 +74,7 @@ public class MainGUI extends javax.swing.JFrame {
 		ProductController pc = new ProductController();
 		CustomerController cc = new CustomerController();
 		SupplierController supc = new SupplierController();
+		TransactionController tc = new TransactionController();
 		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
