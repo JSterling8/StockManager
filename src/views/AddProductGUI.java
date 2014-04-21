@@ -20,7 +20,21 @@ public class AddProductGUI extends JFrame {
 	private JButton btnSubmit;
 	private JButton btnCancel;
 
-
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AddProductGUI frame = new AddProductGUI(new AddStockGUI());
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.

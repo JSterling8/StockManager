@@ -2,18 +2,16 @@ package views;
 
 
 
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -21,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class SellStockGUI extends JFrame {
 
@@ -28,265 +27,196 @@ public class SellStockGUI extends JFrame {
 	private JTable table;
 	private JTextField tfUnits;
 	private JTextField tfPricePerUnit;
+	private JTextField tfVat;
 	private JTextField tfTotalAmount;
+	private JTextField tfTotalAmountPlusVat;
 	private JTextField tfProfitLoss;
 	private JComboBox cbCompanyName;
 	private JComboBox cbProduct;
-	private StockGUI stockGUI;
-	private DefaultTableModel tableModel;
-	private double totalAmount;
-	private ArrayList<Double> purchasePrices;
-	private double profit;
-	private ArrayList<Integer> idList;
-	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SellStockGUI frame = new SellStockGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public SellStockGUI(StockGUI stockGUI) {
-		this.stockGUI =  stockGUI;
-		idList = new ArrayList<Integer>();
+	public SellStockGUI() {
+		
 		setTitle("Sell Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 722, 600);
+		setBounds(100, 100, 722, 650);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		cbCompanyName = new JComboBox();
 		cbCompanyName.setModel(new DefaultComboBoxModel(new String[] {"ACME Corp."}));
 		cbCompanyName.setBounds(200, 14, 150, 35);
 		contentPane.add(cbCompanyName);
-
+		
 		JLabel lblCompanyName = new JLabel("Company Name");
 		lblCompanyName.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblCompanyName.setBounds(10, 11, 178, 35);
 		contentPane.add(lblCompanyName);
-
+		
 		JButton button = new JButton("+");
 		button.setFont(new Font("Tahoma", Font.BOLD, 18));
 		button.setBounds(362, 12, 50, 35);
 		contentPane.add(button);
-
+		
 		JLabel lblProcuct = new JLabel("Product Name");
 		lblProcuct.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblProcuct.setBounds(10, 106, 297, 35);
+		lblProcuct.setBounds(10, 106, 150, 35);
 		contentPane.add(lblProcuct);
-
+		
 		cbProduct = new JComboBox();
-		cbProduct.setBounds(10, 150, 297, 35);
-		// TODO get from database instead of table.
-		for (int i = 0; i < stockGUI.getTable().getModel().getRowCount(); i++){
-			cbProduct.addItem(stockGUI.getTable().getModel().getValueAt(i, 0));
-		}
-		cbProduct.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int selectedIndex = cbProduct.getSelectedIndex();
-				tfPricePerUnit.setText("" + getStockGUI().getStock().get(selectedIndex).getRrp());
-			}
-		});
+		cbProduct.setBounds(10, 150, 150, 35);
 		contentPane.add(cbProduct);
-
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 200, 695, 169);
 		contentPane.add(scrollPane);
-
-		tableModel = 
+		
+		TableModel tableModel = 
 				new DefaultTableModel(
-						new String[] { "Product Name", "Supplier" , "Quantity" , "Price/Unit", "Total Price"},
-						0);
-
+						new String[][] { { "Title", "Units" , "Price per Unit", "VAT %" }},
+						new String[] { "Column 1", "Column 2", "Column3", "Column 4" });
+		
 		table = new JTable();
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
-
+		
 		JLabel lblUnits = new JLabel("Units");
 		lblUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblUnits.setBounds(317, 106, 91, 35);
+		lblUnits.setBounds(167, 105, 91, 35);
 		contentPane.add(lblUnits);
-
+		
 		JLabel lblPrice = new JLabel("Price/Unit");
 		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPrice.setBounds(461, 106, 134, 35);
+		lblPrice.setBounds(313, 105, 134, 35);
 		contentPane.add(lblPrice);
-
+		
+		JLabel lblVat = new JLabel("VAT %");
+		lblVat.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblVat.setBounds(459, 105, 92, 35);
+		contentPane.add(lblVat);
+		
 		tfUnits = new JTextField();
 		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfUnits.setBounds(317, 147, 134, 35);
+		tfUnits.setBounds(167, 150, 134, 35);
 		contentPane.add(tfUnits);
 		tfUnits.setColumns(10);
-
+		
 		tfPricePerUnit = new JTextField();
 		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfPricePerUnit.setBounds(461, 147, 134, 35);
+		tfPricePerUnit.setBounds(459, 150, 134, 35);
 		contentPane.add(tfPricePerUnit);
 		tfPricePerUnit.setColumns(10);
-
-		purchasePrices = new ArrayList<Double>();
+		
+		tfVat = new JTextField();
+		tfVat.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfVat.setBounds(313, 150, 134, 35);
+		contentPane.add(tfVat);
+		tfVat.setColumns(10);
 		
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnInsert.setBounds(605, 146, 100, 35);
-		btnInsert.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO Add checks so you can't sell more than you have.
-				if(validateInput()){
-					addToTable();
-					idList.add(cbProduct.getSelectedIndex());
-					getPurchasePrices().add(getStockGUI().getStock().get(cbProduct.getSelectedIndex()).getPrice());
-					calculatePrice();
-					calculateProfit();
-				}
-			}
-		});
+		btnInsert.setBounds(605, 151, 100, 35);
 		contentPane.add(btnInsert);
-
+		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 81, 713, 12);
 		contentPane.add(separator);
-
+		
 		JLabel lblTotalAmount = new JLabel("Total Amount");
 		lblTotalAmount.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblTotalAmount.setBounds(313, 433, 223, 35);
 		contentPane.add(lblTotalAmount);
-
+		
+		JLabel lblTotalAmountPlus = new JLabel("Total Amount plus VAT");
+		lblTotalAmountPlus.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTotalAmountPlus.setBounds(313, 480, 223, 35);
+		contentPane.add(lblTotalAmountPlus);
+		
 		JLabel lblProfitloss = new JLabel("Profit/Loss");
 		lblProfitloss.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblProfitloss.setBounds(313, 479, 223, 35);
+		lblProfitloss.setBounds(313, 527, 223, 35);
 		contentPane.add(lblProfitloss);
-
+		
 		tfTotalAmount = new JTextField();
 		tfTotalAmount.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfTotalAmount.setBounds(548, 433, 157, 35);
 		contentPane.add(tfTotalAmount);
 		tfTotalAmount.setColumns(10);
-
+		
+		tfTotalAmountPlusVat = new JTextField();
+		tfTotalAmountPlusVat.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfTotalAmountPlusVat.setBounds(548, 480, 157, 35);
+		contentPane.add(tfTotalAmountPlusVat);
+		tfTotalAmountPlusVat.setColumns(10);
+		
 		tfProfitLoss = new JTextField();
 		tfProfitLoss.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfProfitLoss.setBounds(548, 479, 157, 35);
+		tfProfitLoss.setBounds(548, 527, 157, 35);
 		contentPane.add(tfProfitLoss);
 		tfProfitLoss.setColumns(10);
-
+		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				dispose();
-
+				
 			}
 		});
-		btnCancel.setBounds(605, 525, 100, 35);
+		btnCancel.setBounds(605, 574, 100, 35);
 		contentPane.add(btnCancel);
-
+		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				ConfirmationGUI conf = new ConfirmationGUI(SellStockGUI.this, getStockGUI(), idList);
+				
+				ConfirmationGUI conf = new ConfirmationGUI(SellStockGUI.this);
 				setVisible(false);				
 			}
 		});
-		btnSubmit.setBounds(494, 525, 100, 35);
+		btnSubmit.setBounds(494, 574, 100, 35);
 		contentPane.add(btnSubmit);
-
+		
 		JLabel lblAttachInvoice = new JLabel("Attach Invoice");
 		lblAttachInvoice.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblAttachInvoice.setBounds(313, 386, 177, 35);
 		contentPane.add(lblAttachInvoice);
-
+		
 		JButton btnBrowse = new JButton("Browse");
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBrowse.setBounds(548, 386, 157, 35);
 		contentPane.add(btnBrowse);
 		setResizable(false);
-
-		if (cbProduct.getItemCount() > 0){
-			tfPricePerUnit.setText("" + getStockGUI().getStock().get(0).getRrp());
-		}
-
+		
 		setVisible(true);
 	}
-
-	public boolean validateInput(){
-		boolean isValid = true;
-
-		if (cbProduct.getSelectedIndex() == -1){
-			JOptionPane.showMessageDialog(new JFrame(), "Please select a product name.");
-			isValid = false;
-		}
-		else if (cbCompanyName.getSelectedIndex() == -1){
-			JOptionPane.showMessageDialog(new JFrame(), "Please select a company name.");
-			isValid = false;
-		}
-		else if(tfUnits.getText() != null && tfUnits.getText().equals("")){
-			JOptionPane.showMessageDialog(new JFrame(), "Please enter a number of units.");
-			isValid = false;
-		}
-		else if(tfPricePerUnit.getText() != null && tfPricePerUnit.getText().equals("")){
-			JOptionPane.showMessageDialog(new JFrame(), "Please enter a price per unit.");
-			isValid = false;
-		}
-
-		return isValid;
-	}
-
-	public void addToTable(){
-		double totalPrice = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
-		tableModel.addRow(new String [] {(String) cbProduct.getSelectedItem(),
-				(String)cbCompanyName.getSelectedItem(),
-				tfUnits.getText(),
-				tfPricePerUnit.getText(),
-				"" + totalPrice
-		});
-	}
 	
-	public void calculatePrice() {
-		// TODO Auto-generated method stub
-		totalAmount = 0;
-		
-		for (int i = 0; i < getTable().getRowCount(); i++){
-			totalAmount += Double.parseDouble((String)getTable().getModel().getValueAt(i, 4));
-		}
-		
-		DecimalFormat df = new DecimalFormat("#################0.00");
-
-		tfTotalAmount.setText(df.format(totalAmount));
-	}
-	
-	public void calculateProfit() {
-		profit = 0;
-		
-		for (int i = 0; i < purchasePrices.size(); i++){
-			profit += purchasePrices.get(i);
-		}
-		DecimalFormat df = new DecimalFormat("#################0.00");
-		profit = totalAmount - profit;
-		tfProfitLoss.setText(df.format(profit));
-	}
-
 	public String getCompanyName(){
 		return cbCompanyName.getSelectedItem().toString();
 	}
-
+	
 	public JTable getTable(){
 		return table;
-	}
-
-	public StockGUI getStockGUI() {
-		return stockGUI;
-	}
-
-	public ArrayList<Double> getPurchasePrices() {
-		return purchasePrices;
-	}
-
-	public double getTotalAmount(){
-		return totalAmount;
-	}
-	
-	public double getProfit(){
-		return profit;
 	}
 	
 }

@@ -3,15 +3,14 @@ package views;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import models.Stock;
 import models.Supplier;
@@ -20,7 +19,6 @@ import models.Supplier;
 public class StockGUI extends JPanel {
 	private JTable table;
 	private ArrayList<Stock> stock;
-	private DefaultTableModel tableModel;
 
 	/**
 	 * Create the panel.
@@ -33,14 +31,14 @@ public class StockGUI extends JPanel {
 		JButton btnSell = new JButton("Sell");
 		btnSell.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SellStockGUI ss = new SellStockGUI(StockGUI.this);
+				SellStockGUI ss = new SellStockGUI();
 			}
 		});
 		btnSell.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnSell.setBounds(105, 11, 85, 35);
+		btnSell.setBounds(10, 11, 70, 35);
 		add(btnSell);
 		
-		JButton btnRemoveStock = new JButton("Remove");
+		JButton btnRemoveStock = new JButton("-");
 		btnRemoveStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO Get the string to pass from what's selected in the JTable.
@@ -48,40 +46,38 @@ public class StockGUI extends JPanel {
 			}
 		});
 		btnRemoveStock.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnRemoveStock.setBounds(498, 11, 152, 35);
+		btnRemoveStock.setBounds(540, 11, 50, 35);
 		add(btnRemoveStock);
 		
-		JButton btnBuyStock = new JButton("Buy");
-		btnBuyStock.addActionListener(new ActionListener() {
+		JButton btnAddStock = new JButton("+");
+		btnAddStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddStockGUI as = new AddStockGUI(StockGUI.this);
+				AddStockGUI as = new AddStockGUI();
 			}
 		});
-		btnBuyStock.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnBuyStock.setBounds(10, 11, 85, 35);
-		add(btnBuyStock);
+		btnAddStock.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnAddStock.setBounds(600, 11, 50, 35);
+		add(btnAddStock);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 57, 640, 407);
 		add(scrollPane);
 		
 		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		
-		loadStock();
+		updateStock();
 	}
 	
-	public void loadStock(){
+	public void updateStock(){
 		stock = new ArrayList<Stock>();
-		//TODO the id for the supplier is set to -5,-2.  Should be positive in actual implementation.
-		stock.add(new Stock("prod1", new Supplier("Supp1", -2), 1.1, 2.2, 4, 0));
-		stock.add(new Stock("prod2", new Supplier("Supp2", -3), 1.1, 2.2, 5, 1));
-		stock.add(new Stock("prod3", new Supplier("Supp3", -4), 1.1, 2.2, 6, 2));
-		stock.add(new Stock("prod4", new Supplier("Supp4", -5), 1.1, 2.2, 7, 3));
+		stock.add(new Stock("prod1", new Supplier("Supp1"), 1.1, 2.2));
+		stock.add(new Stock("prod2", new Supplier("Supp2"), 1.1, 2.2));
+		stock.add(new Stock("prod3", new Supplier("Supp3"), 1.1, 2.2));
+		stock.add(new Stock("prod4", new Supplier("Supp4"), 1.1, 2.2));
 
 		
-		tableModel = 
+		DefaultTableModel tableModel = 
 				new DefaultTableModel(
 						new String[] { "Product Name", "Supplier" , "Quantity" , "Price"},
 						0);
@@ -94,46 +90,7 @@ public class StockGUI extends JPanel {
 		}
 		
 		table.setModel(tableModel);
-	}
-	
-	public void addStock(Stock stockToAdd){
-		stock.add(stockToAdd);
-		tableModel.addRow(new String[] {stockToAdd.getProductName(),
-							stockToAdd.getSupplier().getName(),
-							"" + stockToAdd.getQuantity(),
-							"" + stockToAdd.getPrice()} );
-	}
-	
-	public void removeStock(ArrayList<Stock> stocksToRemove){
-		for (int i = 0; i < stock.size(); i++){
-			for (int j = 0; j < stocksToRemove.size(); j++){
-				// If the id of the stock to remove matches the current stock being examined in the loop.
-				if (stock.get(i).getId() == stocksToRemove.get(j).getId()){
-					// Get that stock then remove a specified quantity from it.
-					stock.get(i).removeProduct(stocksToRemove.get(j).getQuantity());
-					// Set the value of the quantity field in the table to the new value.
-					DecimalFormat df = new DecimalFormat("#################0.00");
-					tableModel.setValueAt(df.format(stock.get(i).getQuantity()), i, 2);
-					
-					// If there is no stock left, remove it from the table and from the ArrayList of Stock.
-					if (stock.get(i).getQuantity() == 0){
-						stock.remove(i);
-						tableModel.removeRow(i);
-					}
-				}
-				
-			}
-		}
-	}
-	
-
-	
-	public JTable getTable(){
-		return table;
-	}
-	
-	public ArrayList<Stock> getStock(){
-		return stock;
-	}
 		
+	}
+	
 }
