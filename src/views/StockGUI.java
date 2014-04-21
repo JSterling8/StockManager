@@ -12,14 +12,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import controllers.StockController;
 import models.Stock;
 import models.Supplier;
+
 import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class StockGUI extends JPanel {
 	private JTable table;
-	private ArrayList<Stock> stock;
 
 	/**
 	 * Create the panel.
@@ -72,23 +73,16 @@ public class StockGUI extends JPanel {
 	}
 	
 	public void updateStock(){
-		stock = new ArrayList<Stock>();
-		stock.add(new Stock("prod1", new Supplier("Supp1"), 1.1, 2.2));
-		stock.add(new Stock("prod2", new Supplier("Supp2"), 1.1, 2.2));
-		stock.add(new Stock("prod3", new Supplier("Supp3"), 1.1, 2.2));
-		stock.add(new Stock("prod4", new Supplier("Supp4"), 1.1, 2.2));
-
-		
 		DefaultTableModel tableModel = 
 				new DefaultTableModel(
 						new String[] { "Product Name", "Supplier" , "Quantity" , "Price"},
 						0);
 		
-		for (int i = 0; i < stock.size(); i++){
-			tableModel.addRow(new String[] {stock.get(i).getProductName(), 
-										stock.get(i).getSupplier().getName(),
-										"" + stock.get(i).getQuantity(),
-										"" + stock.get(i).getPrice()} );
+		for (int i = 0; i < StockController.stockList.size(); i++){
+			tableModel.addRow(new String[] {StockController.stockList.get(i).getProductName(), 
+					StockController.stockList.get(i).getSupplier().getName(),
+										"" + StockController.stockList.get(i).getQuantity(),
+										"" + StockController.stockList.get(i).getPrice()} );
 		}
 		
 		table.setModel(tableModel);
