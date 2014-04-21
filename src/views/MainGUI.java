@@ -10,8 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import controllers.CustomerController;
 import controllers.ProductController;
 import controllers.StockController;
+import controllers.SupplierController;
 
 @SuppressWarnings("serial")
 public class MainGUI extends javax.swing.JFrame {
@@ -69,7 +71,9 @@ public class MainGUI extends javax.swing.JFrame {
 	private void initialize() {
 		StockController sc = new StockController();
 		ProductController pc = new ProductController();
-
+		CustomerController cc = new CustomerController();
+		SupplierController supc = new SupplierController();
+		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
