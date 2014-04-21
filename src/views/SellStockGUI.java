@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import controllers.CustomerController;
 import controllers.ProductController;
 
 public class SellStockGUI extends JFrame {
@@ -49,7 +50,9 @@ public class SellStockGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		cbCompanyName = new JComboBox();
-		cbCompanyName.setModel(new DefaultComboBoxModel(new String[] {"ACME Corp."}));
+		for(int i = 0; i < CustomerController.customerList.size(); i++){
+			cbCompanyName.addItem(CustomerController.customerList.get(i).getName());
+		}
 		cbCompanyName.setBounds(200, 14, 150, 35);
 		contentPane.add(cbCompanyName);
 		
