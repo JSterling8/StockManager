@@ -119,6 +119,14 @@ public class SellStockGUI extends JFrame {
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnInsert.setBounds(605, 146, 100, 35);
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(validateInput()){
+					// addToTable();
+					// calculatePrice();
+				}
+			}
+		});
 		contentPane.add(btnInsert);
 		
 		JSeparator separator = new JSeparator();
@@ -185,6 +193,29 @@ public class SellStockGUI extends JFrame {
 		}
 		
 		setVisible(true);
+	}
+	
+	public boolean validateInput(){
+		boolean isValid = true;
+		
+		if (cbProduct.getSelectedIndex() == -1){
+			JOptionPane.showMessageDialog(new JFrame(), "Please select a product name.");
+			isValid = false;
+		}
+		else if (cbCompanyName.getSelectedIndex() == -1){
+			JOptionPane.showMessageDialog(new JFrame(), "Please select a company name.");
+			isValid = false;
+		}
+		else if(tfUnits.getText() != null && tfUnits.getText().equals("")){
+			JOptionPane.showMessageDialog(new JFrame(), "Please enter a number of units.");
+			isValid = false;
+		}
+		else if(tfPricePerUnit.getText() != null && tfPricePerUnit.getText().equals("")){
+			JOptionPane.showMessageDialog(new JFrame(), "Please enter a price per unit.");
+			isValid = false;
+		}
+		
+		return isValid;
 	}
 	
 	public String getCompanyName(){
