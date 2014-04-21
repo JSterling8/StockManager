@@ -155,12 +155,14 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(lblProfitloss);
 		
 		tfTotalAmount = new JTextField();
+		tfTotalAmount.setEditable(false);
 		tfTotalAmount.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfTotalAmount.setBounds(548, 455, 157, 35);
 		contentPane.add(tfTotalAmount);
 		tfTotalAmount.setColumns(10);
 		
 		tfProfitLoss = new JTextField();
+		tfProfitLoss.setEditable(false);
 		tfProfitLoss.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfProfitLoss.setBounds(548, 501, 157, 35);
 		contentPane.add(tfProfitLoss);
