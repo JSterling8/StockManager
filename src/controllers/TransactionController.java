@@ -19,7 +19,7 @@ public class TransactionController {
 		
 		buyTransactionList.add(new BuyTransaction());
 		
-		sellTransactionList.add(new SellTransaction());
+
 		
 		removalTransactionList.add(new RemovalTransaction());
 	}

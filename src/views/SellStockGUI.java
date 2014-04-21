@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controllers.CustomerController;
 import controllers.StockController;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -278,6 +279,14 @@ public class SellStockGUI extends JFrame {
 
 	public JTable getTable(){
 		return table;
+	}
+
+	public double getProfitLoss() {
+		return profit;
+	}
+
+	public double getTotalAmount() {
+		return totalAmount;
 	}
 
 }

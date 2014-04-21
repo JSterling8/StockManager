@@ -143,12 +143,14 @@ this.sellStockGUI = sellStockGUI;
 		btnOk.setBounds(454, 239, 100, 35);
 		contentPane.add(btnOk);
 		
-		JLabel lblProfitLoss = new JLabel("Profit/Loss:");
+		
+		JLabel lblProfitLoss = new JLabel("Profit/Loss: " + sellStockGUI.getProfitLoss());
 		lblProfitLoss.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblProfitLoss.setBounds(359, 191, 365, 35);
 		contentPane.add(lblProfitLoss);
 		
-		JLabel lblTotalAmount = new JLabel("Total Amount:");
+		
+		JLabel lblTotalAmount = new JLabel("Total Amount: " + sellStockGUI.getTotalAmount());
 		lblTotalAmount.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTotalAmount.setBounds(10, 191, 339, 37);
 		contentPane.add(lblTotalAmount);
