@@ -36,6 +36,7 @@ public class SellStockGUI extends JFrame {
 	private DefaultTableModel tableModel;
 	private double totalAmount;
 	private ArrayList<Double> purchasePrices;
+	private double profit;
 	
 
 	/**
@@ -251,7 +252,7 @@ public class SellStockGUI extends JFrame {
 	}
 	
 	public void calculateProfit() {
-		double profit = 0;
+		profit = 0;
 		
 		for (int i = 0; i < purchasePrices.size(); i++){
 			profit += purchasePrices.get(i);
@@ -277,4 +278,12 @@ public class SellStockGUI extends JFrame {
 		return purchasePrices;
 	}
 
+	public double getTotalAmount(){
+		return totalAmount;
+	}
+	
+	public double getProfit(){
+		return profit;
+	}
+	
 }
