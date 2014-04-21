@@ -1,3 +1,8 @@
+/** 
+ * @author Jonathan Sterling 
+ * @author Mindaugas R.
+ */
+
 package views;
 
 import java.awt.Font;
@@ -94,9 +99,15 @@ public class ConfirmationGUI extends JFrame {
 
 	}
 
+	/** 
+	 * The constructor used when confirming a sale of stock.
+	 * 
+	 * @author Jonathan Sterling
+	 * @param sellStockGUI
+	 */
 	public ConfirmationGUI(SellStockGUI sellStockGUI) {
 
-this.sellStockGUI = sellStockGUI;
+		this.sellStockGUI = sellStockGUI;
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 750, 325);
