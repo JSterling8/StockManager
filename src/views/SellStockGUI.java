@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controllers.CustomerController;
-import controllers.ProductController;
+import controllers.StockController;
 
 public class SellStockGUI extends JFrame {
 
@@ -44,6 +44,7 @@ public class SellStockGUI extends JFrame {
 	public SellStockGUI() {
 
 		totalAmount = 0;
+		profit = 0;
 
 		setTitle("Sell Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -77,8 +78,8 @@ public class SellStockGUI extends JFrame {
 
 		cbProduct = new JComboBox();
 		cbProduct.setBounds(10, 147, 291, 35);
-		for(int i = 0; i < ProductController.productList.size(); i++){
-			cbProduct.addItem(ProductController.productList.get(i));
+		for(int i = 0; i < StockController.stockList.size(); i++){
+			cbProduct.addItem(StockController.stockList.get(i).getProductName());
 		}
 		contentPane.add(cbProduct);
 
@@ -90,8 +91,8 @@ public class SellStockGUI extends JFrame {
 				new DefaultTableModel( new String[] { "Product Name", 
 						"Units", 
 						"Price Per Unit", 
-				"Price" }, 
-				0);
+						"Price" }, 
+						0);
 
 		table = new JTable();
 		table.setModel(tableModel);
@@ -133,8 +134,12 @@ public class SellStockGUI extends JFrame {
 				}
 
 				totalAmount += price;
-
 				tfTotalAmount.setText(NumberFormat.getCurrencyInstance().format(totalAmount));
+				
+				// profit = (sellingPrice * numOfUnits) - (purchasePrice * numOfUnits)
+				profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfUnits.getText());
+				profit += price;
+				tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
 			}
 		});
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 18));
