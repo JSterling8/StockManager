@@ -20,7 +20,7 @@ import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class StockGUI extends JPanel {
-	private JTable table;
+	private static JTable table;
 
 	/**
 	 * Create the panel.
@@ -72,7 +72,7 @@ public class StockGUI extends JPanel {
 		updateStock();
 	}
 	
-	public void updateStock(){
+	public static void updateStock(){
 		DefaultTableModel tableModel = 
 				new DefaultTableModel(
 						new String[] { "Product Name", "Supplier" , "Quantity" , "Price"},

@@ -160,6 +160,8 @@ public class ConfirmationGUI extends JFrame {
 					StockController.stockList.add(stock);
 				}
 				
+				StockGUI.updateStock();
+				
 				getAddStockGUI().dispose();
 				dispose();
 				
