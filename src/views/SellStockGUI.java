@@ -163,6 +163,7 @@ public class SellStockGUI extends JFrame {
 		lblPrice.setBounds(459, 106, 134, 35);
 		contentPane.add(lblPrice);
 
+		// TODO format output to 4 or 5 decimal points.
 		tfUnits = new JTextField();
 		tfUnits.addKeyListener(new KeyAdapter() {
 			@Override
@@ -319,8 +320,13 @@ public class SellStockGUI extends JFrame {
 			profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfUnits.getText());
 			profit += price;
 			tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
-			
-			//TODO remove from local qty arraylist.
+						
+			// Subtract the amount they're inserting from the quantity left.
+			// Update the quantity left ArrayList
+			// Update tfQuantityLeft
+			double quantity = quantityLeftList.get(cbProduct.getSelectedIndex()) - Double.parseDouble(tfUnits.getText());
+			quantityLeftList.set(cbProduct.getSelectedIndex(), quantity);
+			tfQuantityLeft.setText("" + quantity);
 		}
 	}
 
