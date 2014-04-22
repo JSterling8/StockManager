@@ -290,6 +290,10 @@ public class SellStockGUI extends JFrame {
 			JOptionPane.showMessageDialog(new JFrame(), "Price per unit must be greater than 0.");
 			isValid = false;
 		}
+		else if (Double.parseDouble(tfQuantityLeft.getText()) < Double.parseDouble(tfUnits.getText())){
+			JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
+			isValid = false;
+		}
 
 
 		return isValid;
