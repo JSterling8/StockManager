@@ -129,7 +129,7 @@ public class SellStockGUI extends JFrame {
 				tfQuantityLeft.setText("" + quantityLeftList.get(cbProduct.getSelectedIndex()));
 				
 				// Shows the recommended price.
-				tfPricePerUnit.setText("" + StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice());
+				tfPricePerUnit.setText("" + StockController.stockList.get(cbProduct.getSelectedIndex()).getRRP());
 			}
 		});
 		cbProduct.setBounds(10, 147, 172, 35);
