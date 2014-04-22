@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -24,6 +25,7 @@ import models.Customer;
 import models.SellTransaction;
 import models.Stock;
 import models.Supplier;
+import controllers.ProductController;
 import controllers.StockController;
 import controllers.TransactionController;
 
@@ -389,6 +391,9 @@ public class ConfirmationGUI extends JFrame {
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Attempts to add the product and pops up with either success or failure message.
+				JOptionPane.showMessageDialog(new JFrame(), ProductController.addProduct(getAddProductGUI().getName()));
+				getAddProductGUI().getAddStockGUI().updateProductList();
 
 				dispose();
 				getAddProductGUI().dispose();

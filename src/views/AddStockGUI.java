@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +30,7 @@ public class AddStockGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfUnits;
 	private JTable table;
-	private JComboBox cbProductName;
+	private JComboBox<String> cbProductName;
 	private JComboBox<Supplier> cbSupplier;
 	private JTextField tfPricePerUnit;
 	private JTextField tfRRP;
@@ -41,19 +40,19 @@ public class AddStockGUI extends JFrame {
 	private ArrayList<Double> pricePerUnitList;
 	private ArrayList<Double> priceList;
 	private ArrayList<Double> rrpList;
-	
+
 
 	/**
 	 * Create the frame.
 	 */
 	public AddStockGUI() {
-		
+
 		pricePerUnitList = new ArrayList<Double>();
 		priceList = new ArrayList<Double>();
 		rrpList = new ArrayList<Double>();
-		
+
 		totalPrice = 0;
-		
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Stock");
@@ -93,18 +92,21 @@ public class AddStockGUI extends JFrame {
 		lblRecommendedRetailPrice.setBounds(241, 104, 115, 35);
 		contentPane.add(lblRecommendedRetailPrice);
 
-		cbProductName = new JComboBox();
+		cbProductName = new JComboBox<String>();
 		cbProductName.setModel(new DefaultComboBoxModel(new String[] {}));
 		cbProductName.setFont(new Font("Tahoma", Font.BOLD, 18));
 		cbProductName.setBounds(197, 12, 250, 35);
 		contentPane.add(cbProductName);
 		for(int i = 0; i < ProductController.productList.size(); i++) {
-			
 			cbProductName.addItem(ProductController.productList.get(i));
-			
 		}
 
 		JButton btnAddProduct = new JButton("+");
+		btnAddProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddProductGUI apg = new AddProductGUI(AddStockGUI.this);
+			}
+		});
 		btnAddProduct.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAddProduct.setBounds(476, 11, 50, 35);
 		contentPane.add(btnAddProduct);
@@ -115,12 +117,12 @@ public class AddStockGUI extends JFrame {
 		cbSupplier.setBounds(197, 58, 250, 35);
 		contentPane.add(cbSupplier);
 		for(int i = 0; i < SupplierController.supplierList.size(); i++) {
-			
+
 			cbSupplier.addItem(SupplierController.supplierList.get(i));
-			
+
 		}
-		
-		
+
+
 		JButton btnAddSupplier = new JButton("+");
 		btnAddSupplier.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAddSupplier.setBounds(476, 57, 50, 35);
@@ -201,11 +203,11 @@ public class AddStockGUI extends JFrame {
 
 		tableModel = 
 				new DefaultTableModel( new String[] { "Product Name", 
-													"Units", 
-													"Price Per Unit", 
-													"Price" }, 
-												0);
-		
+						"Units", 
+						"Price Per Unit", 
+				"Price" }, 
+				0);
+
 		table = new JTable();
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
@@ -215,32 +217,32 @@ public class AddStockGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(validateInput()) {
 					double price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
-					
+
 					rrpList.add(Double.parseDouble(tfRRP.getText()));
 					priceList.add(price);
 					pricePerUnitList.add(Double.parseDouble(tfPricePerUnit.getText()));
-					
+
 					tableModel.addRow(new String[]{
 							(String) cbProductName.getSelectedItem(),
 							tfUnits.getText(),
 							NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
 							NumberFormat.getCurrencyInstance().format(price)});
-					
-							totalPrice = totalPrice + (Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText()));
-							tfTotalPrice.setText("" + totalPrice);
-					
+
+					totalPrice = totalPrice + (Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText()));
+					tfTotalPrice.setText("" + totalPrice);
+
 				}
 			}
 		});
 		btnInsert.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnInsert.setBounds(372, 150, 154, 35);
 		contentPane.add(btnInsert);
-		
+
 		JLabel lblTotalPrice = new JLabel("Total Price");
 		lblTotalPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblTotalPrice.setBounds(259, 352, 100, 35);
 		contentPane.add(lblTotalPrice);
-		
+
 		tfTotalPrice = new JTextField();
 		tfTotalPrice.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfTotalPrice.setEditable(false);
@@ -248,7 +250,7 @@ public class AddStockGUI extends JFrame {
 		contentPane.add(tfTotalPrice);
 		tfTotalPrice.setColumns(10);
 		tfTotalPrice.setEditable(false);
-	
+
 		setVisible(true);
 	}
 
@@ -261,7 +263,7 @@ public class AddStockGUI extends JFrame {
 	 */
 	public boolean validateInput(){
 		boolean isValid = true;
-		
+
 		if (cbProductName.getSelectedIndex() == -1){
 			JOptionPane.showMessageDialog(new JFrame(), "Please select a product name.");
 			isValid = false;
@@ -283,62 +285,53 @@ public class AddStockGUI extends JFrame {
 			JOptionPane.showMessageDialog(new JFrame(), "Please enter a RRP.");
 			isValid = false;
 		}
-		
+
 		return isValid;
 	}
-	
+
 	public JTable getTable() {
-		
 		return table;
-		
-	}
-	
-	public String getProductName() {
-		
-		return cbProductName.getSelectedItem().toString();
-		
-	}
-	
-	public String getSupplierName() {
-		
-		return cbSupplier.getSelectedItem().toString();
-		
-	}
-	
-	public String getRRP() {
-		
-		return tfRRP.getText();
-		
-	}
-	
-	public String getTotalPrice() {
-		
-		return tfTotalPrice.getText();
-		
-	}
-	
-	public Supplier getSupplier() {
-		
-		return (Supplier) cbSupplier.getSelectedItem();
-		
 	}
 
-	
-	public ArrayList<Double> getPriceList() {
-		
-		return priceList;
-		
+	public String getProductName() {
+		return cbProductName.getSelectedItem().toString();
 	}
-	
+
+	public String getSupplierName() {
+		return cbSupplier.getSelectedItem().toString();
+	}
+
+	public String getRRP() {
+		return tfRRP.getText();
+	}
+
+	public String getTotalPrice() {
+		return tfTotalPrice.getText();
+	}
+
+	public Supplier getSupplier() {
+		return (Supplier) cbSupplier.getSelectedItem();
+	}
+
+	public ArrayList<Double> getPriceList() {	
+		return priceList;	
+	}
+
 	public ArrayList<Double> getPricePerUnitList() {
-		
 		return pricePerUnitList;
-		
 	}
-	
+
 	public ArrayList<Double> getRrpList() {
-		
 		return rrpList;
-		
 	}
+
+	public void updateProductList() {
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+		for (int i = 0; i < ProductController.productList.size(); i++){
+			model.addElement(ProductController.productList.get(i));
+		}
+		
+		cbProductName.setModel(model);
+	}
+
 }
