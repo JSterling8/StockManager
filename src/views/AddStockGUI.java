@@ -31,7 +31,7 @@ public class AddStockGUI extends JFrame {
 	private JTextField tfUnits;
 	private JTable table;
 	private JComboBox<String> cbProductName;
-	private JComboBox<Supplier> cbSupplier;
+	private static JComboBox<Supplier> cbSupplier;
 	private JTextField tfPricePerUnit;
 	private JTextField tfRRP;
 	private JTextField tfTotalPrice;
@@ -124,6 +124,11 @@ public class AddStockGUI extends JFrame {
 
 
 		JButton btnAddSupplier = new JButton("+");
+		btnAddSupplier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddCompanyGUI ac = new AddCompanyGUI("Supplier", AddStockGUI.this);
+			}
+		});
 		btnAddSupplier.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAddSupplier.setBounds(476, 57, 50, 35);
 		contentPane.add(btnAddSupplier);
@@ -332,6 +337,15 @@ public class AddStockGUI extends JFrame {
 		}
 		
 		cbProductName.setModel(model);
+	}
+	
+	public static void updateSupplierList() {
+		DefaultComboBoxModel<Supplier> model = new DefaultComboBoxModel<Supplier>();
+		for (int i = 0; i < SupplierController.supplierList.size(); i++){
+			model.addElement(SupplierController.supplierList.get(i));
+		}
+		
+		cbSupplier.setModel(model);
 	}
 
 }

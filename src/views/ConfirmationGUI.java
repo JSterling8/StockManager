@@ -27,6 +27,7 @@ import models.Stock;
 import models.Supplier;
 import controllers.ProductController;
 import controllers.StockController;
+import controllers.SupplierController;
 import controllers.TransactionController;
 
 public class ConfirmationGUI extends JFrame {
@@ -93,91 +94,91 @@ public class ConfirmationGUI extends JFrame {
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// Creating a transaction object
-				
+
 				Supplier supplier = getAddStockGUI().getSupplier();
 				ArrayList<String> productList = new ArrayList<String>();
-				
+
 				for (int i = 0; i < getAddStockGUI().getTable().getRowCount(); i++){
 					productList.add((String) getAddStockGUI().getTable().getModel().getValueAt(i, 0));
 				}
-				
+
 				ArrayList<Double> unitList = new ArrayList<Double>();
 				for (int j = 0; j < getAddStockGUI().getTable().getRowCount(); j++){
 					unitList.add(Double.parseDouble((String) getAddStockGUI().getTable().getModel().getValueAt(j, 1)));
 				}
-				
+
 				ArrayList<Double> pricePerUnitList = getAddStockGUI().getPricePerUnitList();
-				
+
 				ArrayList<Double> priceList = getAddStockGUI().getPriceList();
-				
+
 				Double totalPrice = Double.parseDouble(getAddStockGUI().getTotalPrice());
-				
+
 				Date date = new Date(System.currentTimeMillis());
-				
+
 				long id = 0;
-				
+
 				if (TransactionController.buyTransactionList.size() > 0){
 					id = TransactionController.
 							buyTransactionList.
-								get(TransactionController.buyTransactionList.size()-1).
-										getId() + 1;
+							get(TransactionController.buyTransactionList.size()-1).
+							getId() + 1;
 				}
 				else {
 					id = 0;
 				}
-				
+
 				BuyTransaction transaction = new BuyTransaction(supplier, 
-																productList, 
-																unitList,
-																pricePerUnitList,
-																priceList,
-																totalPrice,
-																date,
-																id);
-				
+						productList, 
+						unitList,
+						pricePerUnitList,
+						priceList,
+						totalPrice,
+						date,
+						id);
+
 				// Add transaction object to the ArrayList
-				
+
 				TransactionController.buyTransactionList.add(transaction);
-				
+
 				// Creating Stock objects
-				
+
 				for (int i = 0; i < productList.size(); i++) {
-					
+
 					String productName = productList.get(i);
 					Double units = unitList.get(i);
 					Double price = priceList.get(i);
 					Double rrp = getAddStockGUI().getRrpList().get(i);
 					long idForStock = 0;
-					
+
 					if (StockController.stockList.size() > 0){
 						idForStock = StockController.
 								stockList.
-									get(StockController.stockList.size()-1).
-											getId() + 1;
+								get(StockController.stockList.size()-1).
+								getId() + 1;
 					}
 					else {
 						idForStock = 0;
 					}
-					
+
 					Stock stock = new Stock(productName, 
-											supplier, 
-											units, 
-											price, 
-											rrp, 
-											idForStock);
-					
+							supplier, 
+							units, 
+							price, 
+							rrp, 
+							idForStock);
+
 					// Add stock object to the ArrayList
-					
+
 					StockController.stockList.add(stock);
 				}
-				
+
 				StockGUI.updateStock();
-				
+
 				getAddStockGUI().dispose();
 				dispose();
-				
+
 			}
 		});
 		btnConfirm.setBounds(312, 449, 100, 35);
@@ -194,7 +195,7 @@ public class ConfirmationGUI extends JFrame {
 	public ConfirmationGUI(SellStockGUI sellStockGUI) {
 
 		this.sellStockGUI = sellStockGUI;
-		
+
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 750, 325);
 		setTitle("Confirmation");
@@ -203,19 +204,19 @@ public class ConfirmationGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setVisible(true);
-		
+
 		JLabel lblPleaseConfirmThat = new JLabel("Sell " + sellStockGUI.getCompanyName() + " the following:");
 		lblPleaseConfirmThat.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblPleaseConfirmThat.setBounds(10, 11, 364, 35);
 		contentPane.add(lblPleaseConfirmThat);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 57, 695, 123);
 		contentPane.add(scrollPane);
-		
+
 		scrollPane.setViewportView(sellStockGUI.getTable());
-		
-		
+
+
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -225,67 +226,67 @@ public class ConfirmationGUI extends JFrame {
 		});
 		btnEdit.setBounds(177, 239, 100, 35);
 		contentPane.add(btnEdit);
-		
+
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
 				Customer customer = getSellStockGUI().getCustomer();
-				
+
 				ArrayList<String> productList = new ArrayList<String>();
 				for (int i = 0; i < getSellStockGUI().getTable().getRowCount(); i++){
 					productList.add((String) getSellStockGUI().getTable().getModel().getValueAt(i, 0));
 				}
-				
+
 				ArrayList<Double> unitList = new ArrayList<Double>();
 				for (int j = 0; j < getSellStockGUI().getTable().getRowCount(); j++){
 					unitList.add(Double.parseDouble((String) getSellStockGUI().getTable().getModel().getValueAt(j, 1)));
 				}
-				
+
 				ArrayList<Double> pricePerUnitList = new ArrayList<Double>();
 				pricePerUnitList = getSellStockGUI().getPricePerUnitList();
-				
+
 				ArrayList<Double> priceList = getSellStockGUI().getPriceList();
-				
+
 				double profit = getSellStockGUI().getProfitLoss();
-				
+
 				Date date = new Date(System.currentTimeMillis());
-				
+
 				long id = 0;
 				if (TransactionController.sellTransactionList.size() > 0){
 					id = TransactionController.
 							sellTransactionList.
-								get(TransactionController.sellTransactionList.size()-1).
-										getId() + 1;
+							get(TransactionController.sellTransactionList.size()-1).
+							getId() + 1;
 				}
 				else {
 					id = 0;
 				}
-				
+
 				SellTransaction transaction = new SellTransaction(customer, 
-																productList, 
-																unitList,
-																pricePerUnitList,
-																priceList,
-																profit,
-																date,
-																id);
+						productList, 
+						unitList,
+						pricePerUnitList,
+						priceList,
+						profit,
+						date,
+						id);
 				TransactionController.sellTransactionList.add(transaction);
-				
+
 				getSellStockGUI().dispose();
 				dispose();
 			}
 		});
 		btnConfirm.setBounds(454, 239, 100, 35);
 		contentPane.add(btnConfirm);
-		
-		
+
+
 		JLabel lblProfitLoss = new JLabel("Profit/Loss: " + sellStockGUI.getProfitLoss());
 		lblProfitLoss.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblProfitLoss.setBounds(359, 191, 365, 35);
 		contentPane.add(lblProfitLoss);
-		
-		
+
+
 		JLabel lblTotalAmount = new JLabel("Total Amount: " + sellStockGUI.getTotalAmount());
 		lblTotalAmount.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTotalAmount.setBounds(10, 191, 339, 37);
@@ -343,6 +344,15 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
+				if(getAddCompanyGUI().getTitle().equals("Add Supplier")){
+					
+					JOptionPane.showMessageDialog(new JFrame(), SupplierController.addSupplier(getAddCompanyGUI().getName()));
+					AddStockGUI.updateSupplierList();
+				}
+				else if (getAddCompanyGUI().getTitle().equals("Add Customer")){
+					//TODO When adding customer, do something.
+				}
+
 				getAddCompanyGUI().dispose();
 				dispose();
 			}

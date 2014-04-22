@@ -21,29 +21,25 @@ public class AddCompanyGUI extends JFrame {
 	private JTextField tfPhone;
 	private JTextField tfAddress;
 	private String companyType;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddCompanyGUI frame = new AddCompanyGUI("");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private AddStockGUI addStockGUI;
 
+	
 	/**
 	 * Create the frame.
 	 */
 	public AddCompanyGUI(String companyType) {
+		initialize(companyType);
+	}
+	
+	public AddCompanyGUI(String companyType, AddStockGUI addStockGUI) {
+		this.addStockGUI = addStockGUI;
+		initialize(companyType);
+	}
+	
+	public void initialize(String companyType){
 		this.companyType = companyType;
 		
+		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 380, 285);
@@ -144,4 +140,7 @@ public class AddCompanyGUI extends JFrame {
 		return tfAddress.getText();
 	}
 	
+	public AddStockGUI getAddStockGUI(){
+		return addStockGUI;
+	}
 }
