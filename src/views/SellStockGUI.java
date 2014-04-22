@@ -48,6 +48,8 @@ public class SellStockGUI extends JFrame {
 	private Customer customer;
 	private ArrayList<Double> pricePerUnitList;
 	private ArrayList<Double> priceList;
+	private JTextField tfQuantityLeft;
+	private ArrayList<Double> quantityLeftList;
 
 
 	/**
@@ -59,6 +61,12 @@ public class SellStockGUI extends JFrame {
 
 		pricePerUnitList = new ArrayList<Double>();
 		priceList = new ArrayList<Double>();
+		quantityLeftList = new ArrayList<Double>();
+		
+		// Puts all of the quantities of products into an ArrayList.
+		for (int a = 0; a < StockController.stockList.size(); a++){
+			quantityLeftList.add(StockController.stockList.get(a).getQuantity());
+		}
 		
 		setTitle("Sell Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -87,11 +95,26 @@ public class SellStockGUI extends JFrame {
 
 		JLabel lblProduct = new JLabel("Product Name");
 		lblProduct.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblProduct.setBounds(10, 106, 291, 35);
+		lblProduct.setBounds(10, 106, 178, 35);
 		contentPane.add(lblProduct);
 
+		tfQuantityLeft = new JTextField();
+		tfQuantityLeft.setEditable(false);
+		tfQuantityLeft.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfQuantityLeft.setColumns(10);
+		tfQuantityLeft.setBounds(192, 147, 111, 35);
+		contentPane.add(tfQuantityLeft);
+		setResizable(false);
+		
 		cbProduct = new JComboBox();
-		cbProduct.setBounds(10, 147, 291, 35);
+		cbProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tfQuantityLeft.setText("" + quantityLeftList.get(cbProduct.getSelectedIndex()));
+				
+				//TODO Show rec price.
+			}
+		});
+		cbProduct.setBounds(10, 147, 172, 35);
 		for(int i = 0; i < StockController.stockList.size(); i++){
 			cbProduct.addItem(StockController.stockList.get(i).getProductName());
 		}
@@ -228,7 +251,11 @@ public class SellStockGUI extends JFrame {
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBrowse.setBounds(548, 409, 157, 35);
 		contentPane.add(btnBrowse);
-		setResizable(false);
+		
+		JLabel lblQuantityOwned = new JLabel("Quantity");
+		lblQuantityOwned.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblQuantityOwned.setBounds(192, 106, 111, 35);
+		contentPane.add(lblQuantityOwned);
 
 		setVisible(true);
 	}
@@ -236,6 +263,7 @@ public class SellStockGUI extends JFrame {
 	public boolean validateInput(){
 		boolean isValid = true;
 
+		//TODO Add check to see if they can remove that much product.
 		if (cbCompanyName.getSelectedIndex() == -1){
 			JOptionPane.showMessageDialog(new JFrame(), "Please select a product name.");
 			isValid = false;
@@ -285,6 +313,8 @@ public class SellStockGUI extends JFrame {
 			profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfUnits.getText());
 			profit += price;
 			tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
+			
+			//TODO remove from local qty arraylist.
 		}
 	}
 
@@ -315,5 +345,4 @@ public class SellStockGUI extends JFrame {
 	public ArrayList<Double> getPriceList() {
 		return priceList;
 	}
-
 }

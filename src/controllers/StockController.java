@@ -11,9 +11,9 @@ public class StockController {
 	
 	public StockController(){
 		stockList.add(new Stock("prod0", new Supplier("Supp0", 0), 1.1, 2.2, 0));
-		stockList.add(new Stock("prod1", new Supplier("Supp1", 1), 1.1, 2.2, 1));
-		stockList.add(new Stock("prod2", new Supplier("Supp2", 2), 1.1, 2.2, 2));
-		stockList.add(new Stock("prod3", new Supplier("Supp3", 3), 1.1, 2.2, 3));
+		stockList.add(new Stock("prod1", new Supplier("Supp1", 1), 2.1, 2.2, 1));
+		stockList.add(new Stock("prod2", new Supplier("Supp2", 2), 3.1, 2.2, 2));
+		stockList.add(new Stock("prod3", new Supplier("Supp3", 3), 4.1, 2.2, 3));
 	}
 	
 }
