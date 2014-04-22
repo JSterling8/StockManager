@@ -106,7 +106,7 @@ public class ConfirmationGUI extends JFrame {
 				
 				ArrayList<Double> priceList = getAddStockGUI().getPriceList();
 				
-				Double totalPrice = getAddStockGUI().getTotalPriceDouble();
+				Double totalPrice = Double.parseDouble(getAddStockGUI().getTotalPrice());
 				
 				Date date = new Date(System.currentTimeMillis());
 				

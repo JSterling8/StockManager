@@ -319,12 +319,7 @@ public class AddStockGUI extends JFrame {
 		return (Supplier) cbSupplier.getSelectedItem();
 		
 	}
-	
-	public Double getTotalPriceDouble() {
-		
-		return totalPrice;
-		
-	}
+
 	
 	public ArrayList<Double> getPriceList() {
 		
