@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -37,11 +38,17 @@ public class AddStockGUI extends JFrame {
 	private JTextField tfTotalPrice;
 	private DefaultTableModel tableModel;
 	private double totalPrice;
+	private ArrayList<Double> pricePerUnitList;
+	private ArrayList<Double> priceList;
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public AddStockGUI() {
+		
+		pricePerUnitList = new ArrayList<Double>();
+		priceList = new ArrayList<Double>();
 		
 		totalPrice = 0;
 		
@@ -206,7 +213,8 @@ public class AddStockGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(validateInput()) {
 					double price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
-					
+					priceList.add(price);
+					priceList.add(Double.parseDouble(tfPricePerUnit.getText()));
 					tableModel.addRow(new String[]{
 							(String) cbProductName.getSelectedItem(),
 							tfUnits.getText(),
@@ -307,6 +315,24 @@ public class AddStockGUI extends JFrame {
 	public Supplier getSupplier() {
 		
 		return (Supplier) cbSupplier.getSelectedItem();
+		
+	}
+	
+	public Double getTotalPriceDouble() {
+		
+		return totalPrice;
+		
+	}
+	
+	public ArrayList<Double> getPriceList() {
+		
+		return priceList;
+		
+	}
+	
+	public ArrayList<Double> getPricePerUnitList() {
+		
+		return pricePerUnitList;
 		
 	}
 }

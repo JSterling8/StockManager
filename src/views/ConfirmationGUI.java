@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import models.BuyTransaction;
 import models.Customer;
 import models.SellTransaction;
 import models.Supplier;
@@ -90,6 +91,46 @@ public class ConfirmationGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				Supplier supplier = getAddStockGUI().getSupplier();
+				ArrayList<String> productList = new ArrayList<String>();
+				
+				for (int i = 0; i < getAddStockGUI().getTable().getRowCount(); i++){
+					productList.add((String) getAddStockGUI().getTable().getModel().getValueAt(i, 0));
+				}
+				
+				ArrayList<Double> unitList = new ArrayList<Double>();
+				for (int j = 0; j < getAddStockGUI().getTable().getRowCount(); j++){
+					unitList.add(Double.parseDouble((String) getAddStockGUI().getTable().getModel().getValueAt(j, 1)));
+				}
+				
+				ArrayList<Double> pricePerUnitList = getAddStockGUI().getPricePerUnitList();
+				
+				ArrayList<Double> priceList = getAddStockGUI().getPriceList();
+				
+				Double totalPrice = getAddStockGUI().getTotalPriceDouble();
+				
+				Date date = new Date(System.currentTimeMillis());
+				
+				long id = 0;
+				
+				if (TransactionController.buyTransactionList.size() > 0){
+					id = TransactionController.
+							buyTransactionList.
+								get(TransactionController.buyTransactionList.size()-1).
+										getId() + 1;
+				}
+				else {
+					id = 0;
+				}
+				
+				BuyTransaction transaction = new BuyTransaction(supplier, 
+																productList, 
+																unitList,
+																pricePerUnitList,
+																priceList,
+																totalPrice,
+																date,
+																id);
+				TransactionController.buyTransactionList.add(transaction);
 				
 				getAddStockGUI().dispose();
 				dispose();

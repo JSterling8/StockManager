@@ -27,4 +27,10 @@ public class BuyTransaction extends Transaction {
 				this.date = date;
 				this.id = id;
 }
+	
+	public long getId() {
+		
+		return id;
+		
+	}
 }
