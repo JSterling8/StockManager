@@ -265,7 +265,7 @@ public class SellStockGUI extends JFrame {
 	public boolean validateInput(){
 		boolean isValid = true;
 
-		//TODO Add check to see if they can remove that much product.
+		//TODO Check that they're inserting only numbers.
 		if (cbCompanyName.getSelectedIndex() == -1){
 			JOptionPane.showMessageDialog(new JFrame(), "Please select a product name.");
 			isValid = false;
