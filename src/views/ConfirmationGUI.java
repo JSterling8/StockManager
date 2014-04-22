@@ -144,7 +144,18 @@ public class ConfirmationGUI extends JFrame {
 					Double units = unitList.get(i);
 					Double price = priceList.get(i);
 					Double rrp = getAddStockGUI().getRrpList().get(i);
-					long idForStock = 4;
+					long idForStock = 0;
+					
+					if (StockController.stockList.size() > 0){
+						idForStock = StockController.
+								stockList.
+									get(StockController.stockList.size()-1).
+											getId() + 1;
+					}
+					else {
+						idForStock = 0;
+					}
+					
 					Stock stock = new Stock(productName, supplier, units, price, rrp, idForStock);
 					StockController.stockList.add(stock);
 				}

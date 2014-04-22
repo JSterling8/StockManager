@@ -66,5 +66,8 @@ public class Stock {
 		return rrp;
 	}
 	
+	public long getId() {
+		return id;
+	}
 
 }
