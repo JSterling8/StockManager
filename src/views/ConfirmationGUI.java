@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import models.Customer;
 import models.SellTransaction;
+import models.Supplier;
 import controllers.TransactionController;
 
 public class ConfirmationGUI extends JFrame {
@@ -88,7 +89,7 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				Supplier supplier = getAddStockGUI().getSupplier();
 				
 				getAddStockGUI().dispose();
 				dispose();
