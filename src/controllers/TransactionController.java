@@ -17,8 +17,6 @@ public class TransactionController {
 		sellTransactionList = new ArrayList<SellTransaction>();
 		removalTransactionList = new ArrayList<RemovalTransaction>();
 		
-		buyTransactionList.add(new BuyTransaction());
-		
 
 		
 		removalTransactionList.add(new RemovalTransaction());

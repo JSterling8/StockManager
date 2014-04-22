@@ -88,6 +88,8 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
+				
 				getAddStockGUI().dispose();
 				dispose();
 				
