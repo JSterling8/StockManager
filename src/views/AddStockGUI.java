@@ -40,6 +40,7 @@ public class AddStockGUI extends JFrame {
 	private double totalPrice;
 	private ArrayList<Double> pricePerUnitList;
 	private ArrayList<Double> priceList;
+	private ArrayList<Double> rrpList;
 	
 
 	/**
@@ -49,6 +50,7 @@ public class AddStockGUI extends JFrame {
 		
 		pricePerUnitList = new ArrayList<Double>();
 		priceList = new ArrayList<Double>();
+		rrpList = new ArrayList<Double>();
 		
 		totalPrice = 0;
 		
@@ -214,6 +216,7 @@ public class AddStockGUI extends JFrame {
 				if(validateInput()) {
 					double price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
 					
+					rrpList.add(Double.parseDouble(tfRRP.getText()));
 					priceList.add(price);
 					pricePerUnitList.add(Double.parseDouble(tfPricePerUnit.getText()));
 					
@@ -330,6 +333,12 @@ public class AddStockGUI extends JFrame {
 	public ArrayList<Double> getPricePerUnitList() {
 		
 		return pricePerUnitList;
+		
+	}
+	
+	public ArrayList<Double> getRrpList() {
+		
+		return rrpList;
 		
 	}
 }

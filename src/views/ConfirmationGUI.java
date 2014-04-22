@@ -22,7 +22,9 @@ import javax.swing.border.EmptyBorder;
 import models.BuyTransaction;
 import models.Customer;
 import models.SellTransaction;
+import models.Stock;
 import models.Supplier;
+import controllers.StockController;
 import controllers.TransactionController;
 
 public class ConfirmationGUI extends JFrame {
@@ -90,6 +92,8 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				// Creating a transaction object
+				
 				Supplier supplier = getAddStockGUI().getSupplier();
 				ArrayList<String> productList = new ArrayList<String>();
 				
@@ -132,10 +136,22 @@ public class ConfirmationGUI extends JFrame {
 																id);
 				TransactionController.buyTransactionList.add(transaction);
 				
+				// Creating Stock objects
+				
+				for (int i = 0; i < productList.size(); i++) {
+					
+					String productName = productList.get(i);
+					Double units = unitList.get(i);
+					Double price = priceList.get(i);
+					Double rrp = getAddStockGUI().getRrpList().get(i);
+					long idForStock = 4;
+					Stock stock = new Stock(productName, supplier, units, price, rrp, idForStock);
+					StockController.stockList.add(stock);
+				}
+				
 				getAddStockGUI().dispose();
 				dispose();
 				
-
 			}
 		});
 		btnConfirm.setBounds(312, 449, 100, 35);
