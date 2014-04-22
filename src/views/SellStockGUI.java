@@ -34,14 +34,15 @@ import controllers.StockController;
 
 public class SellStockGUI extends JFrame {
 
+	private static final long serialVersionUID = -1802942040864294457L;
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField tfUnits;
 	private JTextField tfPricePerUnit;
 	private JTextField tfTotalAmount;
 	private JTextField tfProfitLoss;
-	private JComboBox cbCompanyName;
-	private JComboBox cbProduct;
+	private JComboBox<String> cbCompanyName;
+	private JComboBox<String> cbProduct;
 	private DefaultTableModel tableModel;
 	private double totalAmount;
 	private double profit;
@@ -87,9 +88,9 @@ public class SellStockGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		cbCompanyName = new JComboBox();
+		cbCompanyName = new JComboBox<String>();
 		for(int i = 0; i < CustomerController.customerList.size(); i++){
-			cbCompanyName.addItem(CustomerController.customerList.get(i));
+			cbCompanyName.addItem(CustomerController.customerList.get(i).toString());
 		}
 		cbCompanyName.setBounds(200, 14, 150, 35);
 		contentPane.add(cbCompanyName);
@@ -159,7 +160,7 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(tfPricePerUnit);
 		tfPricePerUnit.setColumns(10);
 
-		cbProduct = new JComboBox();
+		cbProduct = new JComboBox<String>();
 		cbProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Shows the amount of that stock available.
@@ -300,6 +301,7 @@ public class SellStockGUI extends JFrame {
 				}
 
 				else {		
+					@SuppressWarnings("unused")
 					ConfirmationGUI conf = new ConfirmationGUI(SellStockGUI.this);
 					setVisible(false);
 				}
@@ -421,7 +423,7 @@ public class SellStockGUI extends JFrame {
 		return priceList;
 	}
 
-	public JComboBox getCbProduct() {
+	public JComboBox<String> getCbProduct() {
 		return cbProduct;
 	}
 }
