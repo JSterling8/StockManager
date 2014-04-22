@@ -51,7 +51,7 @@ public class SellStockGUI extends JFrame {
 	private ArrayList<Double> priceList;
 	private JTextField tfQuantityLeft;
 	private ArrayList<Double> quantityLeftList;
-	
+
 	/*
 	 *  This justPressed variable is used to solve an issue where
 	 *  if the user presses enter whilst in a text field, a popup
@@ -123,29 +123,54 @@ public class SellStockGUI extends JFrame {
 		tfPricePerUnit.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode()==KeyEvent.VK_ENTER && 
-						!tfPricePerUnit.getText().equals("") &&
-						!tfUnits.getText().equals("") &&
-						!(Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))
-						){
-					insert();
-				}
-				
-				// Else if they're entereing too much product so enter is disabled, let them know:
-				else if ( !justPressed && 
-						e.getKeyCode()==KeyEvent.VK_ENTER &&  
-						tfUnits.getText() != null &&
-						!tfUnits.getText().equals("") && 
-						Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
-					JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
-					justPressed = true;
-				}
-				// Else if they've just pressed the enter key to create the popup, set justPressed to false
-				// so enter works the next time they press the key.
-				else if(justPressed){
-					justPressed = false;
-				}
+				boolean isValid = true;
 
+				// If the user pressed enter.
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+
+					// If there's no popup that they're pressing enter to get rid of.
+					if (!justPressed){
+						// Tests/checks that they're only entering numbers.
+						try{
+							double test = Double.parseDouble(tfPricePerUnit.getText());
+							test = Double.parseDouble(tfUnits.getText());
+						}
+						catch(NumberFormatException error){
+							JOptionPane.showMessageDialog(new JFrame(), "You can only enter valid numbers.");
+							isValid = false;
+							justPressed = true;
+						}
+						
+						// If the input doesn't throw an error.
+						if (isValid){
+							// If the input isn't empty.
+							if ( !tfPricePerUnit.getText().equals("") && !tfUnits.getText().equals("")){
+								// If they're not entering more product than they have.
+								if (!(Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))){
+									insert();
+								}
+							}
+
+							// Else if they're entering too much product so enter is disabled, let them know:
+							else if ( !justPressed && 
+									tfUnits.getText() != null &&
+									!tfUnits.getText().equals("") && 
+									Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
+								JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
+								justPressed = true;
+							}
+							// Else if they've just pressed the enter key to create the popup, 
+							// set justPressed to false so enter works the next time they press the key.
+							else if(justPressed){
+								justPressed = false;
+							}
+						}
+					}
+					// Otherwise set justPressed to false to indicate there's no longer a popup.
+					else {
+						justPressed = false;
+					}
+				}
 			}
 			public void keyTyped(KeyEvent e) {
 				char character = e.getKeyChar();
@@ -155,6 +180,7 @@ public class SellStockGUI extends JFrame {
 				}
 			}
 		});
+		
 		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfPricePerUnit.setBounds(459, 147, 134, 35);
 		contentPane.add(tfPricePerUnit);
@@ -200,35 +226,61 @@ public class SellStockGUI extends JFrame {
 		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblPrice.setBounds(459, 106, 134, 35);
 		contentPane.add(lblPrice);
-		
+
 		// TODO format output to 4 or 5 decimal points.
 		tfUnits = new JTextField();
 		tfUnits.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode()==KeyEvent.VK_ENTER && 
-						!tfPricePerUnit.getText().equals("") &&
-						!tfUnits.getText().equals("") &&
-						!(Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))
-						){
-					insert();
-				}
-				
-				// Else if they're entereing too much product so enter is disabled, let them know:
-				else if ( !justPressed && 
-						e.getKeyCode()==KeyEvent.VK_ENTER &&  
-						tfUnits.getText() != null &&
-						!tfUnits.getText().equals("") && 
-						Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
-					JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
-					justPressed = true;
-				}
-				// Else if they've just pressed the enter key to create the popup, set justPressed to false
-				// so enter works the next time they press the key.
-				else if(justPressed){
-					justPressed = false;
-				}
+				boolean isValid = true;
 
+				// If the user pressed enter.
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+
+					// If there's no popup that they're pressing enter to remove.
+					if (!justPressed){
+						// Tests/checks that they're only entering numbers.
+						try{
+							double test = Double.parseDouble(tfPricePerUnit.getText());
+							test = Double.parseDouble(tfUnits.getText());
+						}
+						catch(NumberFormatException error){
+							JOptionPane.showMessageDialog(new JFrame(), "You can only enter valid numbers.");
+							isValid = false;
+							justPressed = true;
+						}
+
+
+						// If the input doesn't throw an error.
+						if (isValid){
+							// If the input isn't empty.
+							if ( !tfPricePerUnit.getText().equals("") && !tfUnits.getText().equals("")){
+								// If they're not entering more product than they have.
+								if (!(Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))){
+									insert();
+								}
+							}
+
+							// Else if they're entering too much product so enter is disabled, let them know:
+							else if ( !justPressed && 
+									tfUnits.getText() != null &&
+									!tfUnits.getText().equals("") && 
+									Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
+								JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
+								justPressed = true;
+							}
+							// Else if they've just pressed the enter key to create the popup, 
+							// set justPressed to false so enter works the next time they press the key.
+							else if(justPressed){
+								justPressed = false;
+							}
+						}
+					}
+					// Otherwise set justPressed to false to indicate there's no longer a popup.
+					else {
+						justPressed = false;
+					}
+				}
 			}
 			public void keyTyped(KeyEvent e) {
 				char character = e.getKeyChar();
@@ -331,7 +383,6 @@ public class SellStockGUI extends JFrame {
 	public boolean validateInput(){
 		boolean isValid = true;
 
-		//TODO Check that they're inserting only numbers.
 		if (cbCompanyName.getSelectedIndex() == -1){
 			JOptionPane.showMessageDialog(new JFrame(), "Please select a product name.");
 			isValid = false;
@@ -368,7 +419,7 @@ public class SellStockGUI extends JFrame {
 	public void insert(){
 		double price = 0;
 		if (validateInput()){
-			customer = (Customer) cbCompanyName.getSelectedItem();
+			customer = CustomerController.customerList.get(cbCompanyName.getSelectedIndex());
 
 			price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
 			pricePerUnitList.add(Double.parseDouble(tfPricePerUnit.getText()));
