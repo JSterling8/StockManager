@@ -140,8 +140,8 @@ public class ConfirmationGUI extends JFrame {
 		btnEdit.setBounds(177, 239, 100, 35);
 		contentPane.add(btnEdit);
 		
-		JButton btnOk = new JButton("Ok");
-		btnOk.addActionListener(new ActionListener() {
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
 				Customer customer = getSellStockGUI().getCustomer();
@@ -190,8 +190,8 @@ public class ConfirmationGUI extends JFrame {
 				dispose();
 			}
 		});
-		btnOk.setBounds(454, 239, 100, 35);
-		contentPane.add(btnOk);
+		btnConfirm.setBounds(454, 239, 100, 35);
+		contentPane.add(btnConfirm);
 		
 		
 		JLabel lblProfitLoss = new JLabel("Profit/Loss: " + sellStockGUI.getProfitLoss());
@@ -253,16 +253,16 @@ public class ConfirmationGUI extends JFrame {
 		btnEdit.setBounds(61, 239, 100, 35);
 		contentPane.add(btnEdit);
 
-		JButton btnOk = new JButton("Ok");
-		btnOk.addActionListener(new ActionListener() {
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
 				getAddCompanyGUI().dispose();
 				dispose();
 			}
 		});
-		btnOk.setBounds(222, 239, 100, 35);
-		contentPane.add(btnOk);
+		btnConfirm.setBounds(222, 239, 100, 35);
+		contentPane.add(btnConfirm);
 
 		JLabel lblName = new JLabel(addCompanyGUI.getName());
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -370,16 +370,16 @@ public class ConfirmationGUI extends JFrame {
 		btnEdit.setBounds(61, 239, 100, 35);
 		contentPane.add(btnEdit);
 
-		JButton btnOk = new JButton("Ok");
-		btnOk.addActionListener(new ActionListener() {
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
 				getRemoveStockGUI().dispose();
 				dispose();
 			}
 		});
-		btnOk.setBounds(222, 239, 100, 35);
-		contentPane.add(btnOk);
+		btnConfirm.setBounds(222, 239, 100, 35);
+		contentPane.add(btnConfirm);
 
 		JLabel lblProduct = new JLabel(removeStockGUI.getProductName());
 		lblProduct.setFont(new Font("Tahoma", Font.PLAIN, 18));
