@@ -134,6 +134,9 @@ public class ConfirmationGUI extends JFrame {
 																totalPrice,
 																date,
 																id);
+				
+				// Add transaction object to the ArrayList
+				
 				TransactionController.buyTransactionList.add(transaction);
 				
 				// Creating Stock objects
@@ -156,7 +159,15 @@ public class ConfirmationGUI extends JFrame {
 						idForStock = 0;
 					}
 					
-					Stock stock = new Stock(productName, supplier, units, price, rrp, idForStock);
+					Stock stock = new Stock(productName, 
+											supplier, 
+											units, 
+											price, 
+											rrp, 
+											idForStock);
+					
+					// Add stock object to the ArrayList
+					
 					StockController.stockList.add(stock);
 				}
 				
