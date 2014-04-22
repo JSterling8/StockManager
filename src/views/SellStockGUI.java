@@ -106,12 +106,29 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(tfQuantityLeft);
 		setResizable(false);
 		
+		tfPricePerUnit = new JTextField();
+		tfPricePerUnit.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER && 
+						!tfPricePerUnit.getText().equals("") &&
+						!tfUnits.getText().equals("")){
+					insert();
+			    }
+			}
+		});
+		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfPricePerUnit.setBounds(459, 147, 134, 35);
+		contentPane.add(tfPricePerUnit);
+		tfPricePerUnit.setColumns(10);
+		
 		cbProduct = new JComboBox();
 		cbProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tfQuantityLeft.setText("" + quantityLeftList.get(cbProduct.getSelectedIndex()));
 				
 				//TODO Show rec price.
+				tfPricePerUnit.setText("" + StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice());
 			}
 		});
 		cbProduct.setBounds(10, 147, 172, 35);
@@ -160,22 +177,6 @@ public class SellStockGUI extends JFrame {
 		tfUnits.setBounds(313, 147, 134, 35);
 		contentPane.add(tfUnits);
 		tfUnits.setColumns(10);
-
-		tfPricePerUnit = new JTextField();
-		tfPricePerUnit.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode()==KeyEvent.VK_ENTER && 
-						!tfPricePerUnit.getText().equals("") &&
-						!tfUnits.getText().equals("")){
-					insert();
-			    }
-			}
-		});
-		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfPricePerUnit.setBounds(459, 147, 134, 35);
-		contentPane.add(tfPricePerUnit);
-		tfPricePerUnit.setColumns(10);
 
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.addActionListener(new ActionListener() {
@@ -252,7 +253,7 @@ public class SellStockGUI extends JFrame {
 		btnBrowse.setBounds(548, 409, 157, 35);
 		contentPane.add(btnBrowse);
 		
-		JLabel lblQuantityOwned = new JLabel("Quantity");
+		JLabel lblQuantityOwned = new JLabel("Available");
 		lblQuantityOwned.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblQuantityOwned.setBounds(192, 106, 111, 35);
 		contentPane.add(lblQuantityOwned);
