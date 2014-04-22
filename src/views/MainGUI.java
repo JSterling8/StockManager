@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import controllers.CustomerController;
-import controllers.ProductController;
 import controllers.StockController;
 import controllers.SupplierController;
 import controllers.TransactionController;
@@ -71,7 +70,6 @@ public class MainGUI extends javax.swing.JFrame {
 	 */
 	private void initialize() {
 		StockController sc = new StockController();
-		ProductController pc = new ProductController();
 		CustomerController cc = new CustomerController();
 		SupplierController supc = new SupplierController();
 		TransactionController tc = new TransactionController();
