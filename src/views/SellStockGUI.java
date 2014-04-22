@@ -50,6 +50,16 @@ public class SellStockGUI extends JFrame {
 	private ArrayList<Double> priceList;
 	private JTextField tfQuantityLeft;
 	private ArrayList<Double> quantityLeftList;
+	
+	/*
+	 *  This justPressed variable is used to solve an issue where
+	 *  if the user presses enter whilst in a text field, a popup
+	 *  appears if the amount of units entered is more than the
+	 *  amount of units in stock, and then if they push enter
+	 *  again to get rid of the popup they can just press enter
+	 *  indefinitely because it pops up again and again.
+	 */
+	private boolean justPressed;
 
 
 	/**
@@ -58,16 +68,17 @@ public class SellStockGUI extends JFrame {
 	public SellStockGUI() {		
 		totalAmount = 0;
 		profit = 0;
+		justPressed = false;
 
 		pricePerUnitList = new ArrayList<Double>();
 		priceList = new ArrayList<Double>();
 		quantityLeftList = new ArrayList<Double>();
-		
+
 		// Puts all of the quantities of products into an ArrayList.
 		for (int a = 0; a < StockController.stockList.size(); a++){
 			quantityLeftList.add(StockController.stockList.get(a).getQuantity());
 		}
-		
+
 		setTitle("Sell Stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 722, 621);
@@ -98,6 +109,7 @@ public class SellStockGUI extends JFrame {
 		lblProduct.setBounds(10, 106, 178, 35);
 		contentPane.add(lblProduct);
 
+		//TODO Format text output to 4/5 decimals.
 		tfQuantityLeft = new JTextField();
 		tfQuantityLeft.setEditable(false);
 		tfQuantityLeft.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -105,29 +117,54 @@ public class SellStockGUI extends JFrame {
 		tfQuantityLeft.setBounds(192, 147, 111, 35);
 		contentPane.add(tfQuantityLeft);
 		setResizable(false);
-		
+
 		tfPricePerUnit = new JTextField();
 		tfPricePerUnit.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER && 
 						!tfPricePerUnit.getText().equals("") &&
-						!tfUnits.getText().equals("")){
+						!tfUnits.getText().equals("") &&
+						!(Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))
+						){
 					insert();
-			    }
+				}
+				
+				// Else if they're entereing too much product so enter is disabled, let them know:
+				else if ( !justPressed && 
+						e.getKeyCode()==KeyEvent.VK_ENTER &&  
+						tfUnits.getText() != null &&
+						!tfUnits.getText().equals("") && 
+						Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
+					JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
+					justPressed = true;
+				}
+				// Else if they've just pressed the enter key to create the popup, set justPressed to false
+				// so enter works the next time they press the key.
+				else if(justPressed){
+					justPressed = false;
+				}
+
+			}
+			public void keyTyped(KeyEvent e) {
+				char character = e.getKeyChar();
+				if (((character < '0') || (character > '9'))
+						&& (character != '\b') && (character != '.')) {
+					e.consume();
+				}
 			}
 		});
 		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfPricePerUnit.setBounds(459, 147, 134, 35);
 		contentPane.add(tfPricePerUnit);
 		tfPricePerUnit.setColumns(10);
-		
+
 		cbProduct = new JComboBox();
 		cbProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Shows the amount of that stock available.
 				tfQuantityLeft.setText("" + quantityLeftList.get(cbProduct.getSelectedIndex()));
-				
+
 				// Shows the recommended price.
 				tfPricePerUnit.setText("" + StockController.stockList.get(cbProduct.getSelectedIndex()).getRRP());
 			}
@@ -162,19 +199,45 @@ public class SellStockGUI extends JFrame {
 		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblPrice.setBounds(459, 106, 134, 35);
 		contentPane.add(lblPrice);
-
+		
 		// TODO format output to 4 or 5 decimal points.
 		tfUnits = new JTextField();
 		tfUnits.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER && 
-					!tfPricePerUnit.getText().equals("") &&
-					!tfUnits.getText().equals("")){
+						!tfPricePerUnit.getText().equals("") &&
+						!tfUnits.getText().equals("") &&
+						!(Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))
+						){
 					insert();
-			    }
+				}
+				
+				// Else if they're entereing too much product so enter is disabled, let them know:
+				else if ( !justPressed && 
+						e.getKeyCode()==KeyEvent.VK_ENTER &&  
+						tfUnits.getText() != null &&
+						!tfUnits.getText().equals("") && 
+						Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
+					JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
+					justPressed = true;
+				}
+				// Else if they've just pressed the enter key to create the popup, set justPressed to false
+				// so enter works the next time they press the key.
+				else if(justPressed){
+					justPressed = false;
+				}
+
+			}
+			public void keyTyped(KeyEvent e) {
+				char character = e.getKeyChar();
+				if (((character < '0') || (character > '9'))
+						&& (character != '\b') && (character != '.')) {
+					e.consume();
+				}
 			}
 		});
+
 		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfUnits.setBounds(313, 147, 134, 35);
 		contentPane.add(tfUnits);
@@ -254,7 +317,7 @@ public class SellStockGUI extends JFrame {
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBrowse.setBounds(548, 409, 157, 35);
 		contentPane.add(btnBrowse);
-		
+
 		JLabel lblQuantityOwned = new JLabel("Available");
 		lblQuantityOwned.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblQuantityOwned.setBounds(192, 106, 111, 35);
@@ -299,12 +362,12 @@ public class SellStockGUI extends JFrame {
 
 		return isValid;
 	}
-	
+
 	public void insert(){
 		double price = 0;
 		if (validateInput()){
 			customer = (Customer) cbCompanyName.getSelectedItem();
-			
+
 			price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
 			pricePerUnitList.add(Double.parseDouble(tfPricePerUnit.getText()));
 			priceList.add(price);
@@ -320,7 +383,7 @@ public class SellStockGUI extends JFrame {
 			profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfUnits.getText());
 			profit += price;
 			tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
-						
+
 			// Subtract the amount they're inserting from the quantity left.
 			// Update the quantity left ArrayList
 			// Update tfQuantityLeft
@@ -345,7 +408,7 @@ public class SellStockGUI extends JFrame {
 	public double getTotalAmount() {
 		return totalAmount;
 	}
-	
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -356,5 +419,9 @@ public class SellStockGUI extends JFrame {
 
 	public ArrayList<Double> getPriceList() {
 		return priceList;
+	}
+
+	public JComboBox getCbProduct() {
+		return cbProduct;
 	}
 }
