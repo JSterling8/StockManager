@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controllers.ProductController;
+import controllers.SupplierController;
 
 public class AddStockGUI extends JFrame {
 
@@ -99,11 +100,17 @@ public class AddStockGUI extends JFrame {
 		contentPane.add(btnAddProduct);
 
 		cbSupplier = new JComboBox();
-		cbSupplier.setModel(new DefaultComboBoxModel(new String[] {"Test11", "Test22", "Test33"}));
+		cbSupplier.setModel(new DefaultComboBoxModel(new String[] {}));
 		cbSupplier.setFont(new Font("Tahoma", Font.BOLD, 18));
 		cbSupplier.setBounds(197, 58, 250, 35);
 		contentPane.add(cbSupplier);
-
+		for(int i = 0; i < SupplierController.supplierList.size(); i++) {
+			
+			cbSupplier.addItem(SupplierController.supplierList.get(i));
+			
+		}
+		
+		
 		JButton btnAddSupplier = new JButton("+");
 		btnAddSupplier.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAddSupplier.setBounds(476, 57, 50, 35);
