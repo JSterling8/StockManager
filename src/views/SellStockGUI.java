@@ -125,9 +125,10 @@ public class SellStockGUI extends JFrame {
 		cbProduct = new JComboBox();
 		cbProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Shows the amount of that stock available.
 				tfQuantityLeft.setText("" + quantityLeftList.get(cbProduct.getSelectedIndex()));
 				
-				//TODO Show rec price.
+				// Shows the recommended price.
 				tfPricePerUnit.setText("" + StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice());
 			}
 		});
