@@ -186,7 +186,6 @@ public class ConfirmationGUI extends JFrame {
 																id);
 				TransactionController.sellTransactionList.add(transaction);
 				
-				System.out.println(TransactionController.sellTransactionList.get(0));
 				getSellStockGUI().dispose();
 				dispose();
 			}
