@@ -132,6 +132,7 @@ public class SellStockGUI extends JFrame {
 					if (!justPressed){
 						// Tests/checks that they're only entering numbers.
 						try{
+							@SuppressWarnings("unused")
 							double test = Double.parseDouble(tfPricePerUnit.getText());
 							test = Double.parseDouble(tfUnits.getText());
 						}
@@ -241,6 +242,7 @@ public class SellStockGUI extends JFrame {
 					if (!justPressed){
 						// Tests/checks that they're only entering numbers.
 						try{
+							@SuppressWarnings("unused")
 							double test = Double.parseDouble(tfPricePerUnit.getText());
 							test = Double.parseDouble(tfUnits.getText());
 						}
