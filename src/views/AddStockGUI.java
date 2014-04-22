@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import models.Supplier;
 import controllers.ProductController;
 import controllers.SupplierController;
 
@@ -30,7 +31,7 @@ public class AddStockGUI extends JFrame {
 	private JTextField tfUnits;
 	private JTable table;
 	private JComboBox cbProductName;
-	private JComboBox cbSupplier;
+	private JComboBox<Supplier> cbSupplier;
 	private JTextField tfPricePerUnit;
 	private JTextField tfRRP;
 	private JTextField tfTotalPrice;
@@ -99,7 +100,7 @@ public class AddStockGUI extends JFrame {
 		btnAddProduct.setBounds(476, 11, 50, 35);
 		contentPane.add(btnAddProduct);
 
-		cbSupplier = new JComboBox();
+		cbSupplier = new JComboBox<Supplier>();
 		cbSupplier.setModel(new DefaultComboBoxModel(new String[] {}));
 		cbSupplier.setFont(new Font("Tahoma", Font.BOLD, 18));
 		cbSupplier.setBounds(197, 58, 250, 35);
@@ -303,4 +304,9 @@ public class AddStockGUI extends JFrame {
 		
 	}
 	
+	public Supplier getSupplier() {
+		
+		return (Supplier) cbSupplier.getSelectedItem();
+		
+	}
 }
