@@ -80,7 +80,7 @@ public class StockGUI extends JPanel {
 		
 		for (int i = 0; i < StockController.stockList.size(); i++){
 			tableModel.addRow(new String[] {StockController.stockList.get(i).getProductName(), 
-					StockController.stockList.get(i).getSupplier().getName(),
+					StockController.stockList.get(i).getSupplier().toString(),
 										"" + StockController.stockList.get(i).getQuantity(),
 										"" + StockController.stockList.get(i).getPrice()} );
 		}

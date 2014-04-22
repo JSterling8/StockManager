@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controllers.ProductController;
+
 public class AddStockGUI extends JFrame {
 
 	private JPanel contentPane;
@@ -33,22 +35,6 @@ public class AddStockGUI extends JFrame {
 	private JTextField tfTotalPrice;
 	private DefaultTableModel tableModel;
 	private double totalPrice;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddStockGUI frame = new AddStockGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -97,10 +83,15 @@ public class AddStockGUI extends JFrame {
 		contentPane.add(lblRecommendedRetailPrice);
 
 		cbProductName = new JComboBox();
-		cbProductName.setModel(new DefaultComboBoxModel(new String[] {"Test1", "Test2", "Test3"}));
+		cbProductName.setModel(new DefaultComboBoxModel(new String[] {}));
 		cbProductName.setFont(new Font("Tahoma", Font.BOLD, 18));
 		cbProductName.setBounds(197, 12, 250, 35);
 		contentPane.add(cbProductName);
+		for(int i = 0; i < ProductController.productList.size(); i++) {
+			
+			cbProductName.addItem(ProductController.productList.get(i));
+			
+		}
 
 		JButton btnAddProduct = new JButton("+");
 		btnAddProduct.setFont(new Font("Tahoma", Font.BOLD, 18));

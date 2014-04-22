@@ -6,8 +6,6 @@ public class Customer extends Company {
 		super(name, id);
 	}
 	
-	public String toString(){
-		return getName();
-	}
+
 	
 }
