@@ -213,8 +213,10 @@ public class AddStockGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(validateInput()) {
 					double price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
+					
 					priceList.add(price);
-					priceList.add(Double.parseDouble(tfPricePerUnit.getText()));
+					pricePerUnitList.add(Double.parseDouble(tfPricePerUnit.getText()));
+					
 					tableModel.addRow(new String[]{
 							(String) cbProductName.getSelectedItem(),
 							tfUnits.getText(),
