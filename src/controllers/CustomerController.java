@@ -9,11 +9,13 @@ public class CustomerController {
 
 	/**
 	 * Initializes the customerList.
-	 * This is only called from the MainGUI.
+	 * This should only be called from the MainGUI.
 	 */
 	public CustomerController(){
 		customerList = new ArrayList<Customer>();
 
+		// Mock data for the customerList.
+		// TODO Pull this information from a database.
 		customerList.add(new Customer("Customer 0", "phone0", "email0", "addr0", 0));
 		customerList.add(new Customer("Customer 1", "phone1", "email1", "addr1", 0));
 		customerList.add(new Customer("Customer 2", "phone2", "email2", "addr2", 0));
