@@ -29,9 +29,7 @@ public class BuyTransaction extends Transaction {
 }
 	
 	public long getId() {
-		
 		return id;
-		
 	}
 
 	public Supplier getSupplier() {
