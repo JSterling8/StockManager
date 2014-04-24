@@ -2,15 +2,18 @@ package views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.JScrollPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import controllers.CustomerController;
 
 public class CustomersGUI extends JPanel {
 
@@ -69,6 +72,15 @@ public class CustomersGUI extends JPanel {
 	
 	public static void updateTable() {
 		
+	}
+	
+	public void removeCustomer(int[] indicesToRemove){		
+		Arrays.sort(indicesToRemove);
+	    for (int i = indicesToRemove.length - 1; i >= 0; i--) {
+	        tableModel.removeRow(indicesToRemove[i]);
+	        tableModel.fireTableRowsDeleted(indicesToRemove[i], indicesToRemove[i]);
+			CustomerController.customerList.remove(i);
+	    }
 	}
 
 }
