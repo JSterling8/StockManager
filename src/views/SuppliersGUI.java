@@ -63,6 +63,10 @@ public class SuppliersGUI extends JPanel {
 	}
 	
 	public static void updateTable(){
+		tableModel = 
+				new DefaultTableModel(
+						new String[] { "Name", "Phone" , "Email" , "Address"},
+						0);
 		for (int i = 0; i < SupplierController.supplierList.size(); i++){
 			tableModel.addRow(new String[] {SupplierController.supplierList.get(i).getCompanyName(), 
 					SupplierController.supplierList.get(i).getPhoneNumber().toString(),
