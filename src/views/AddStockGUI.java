@@ -28,6 +28,10 @@ import controllers.SupplierController;
 
 public class AddStockGUI extends JFrame {
 
+	
+	private JComboBox cbDay;
+	private JComboBox cbMonth;
+	private JComboBox cbYear;
 	private JPanel contentPane;
 	private JTextField tfUnits;
 	private JTable table;
@@ -261,17 +265,20 @@ public class AddStockGUI extends JFrame {
 		lblDueDate.setBounds(6, 348, 100, 35);
 		contentPane.add(lblDueDate);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(168, 351, 63, 35);
-		contentPane.add(comboBox);
+		cbDay = new JComboBox();
+		cbDay.setBounds(158, 351, 73, 35);
+		cbDay.setModel(new DefaultComboBoxModel(new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31}));
+		contentPane.add(cbDay);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(306, 351, 87, 35);
-		contentPane.add(comboBox_1);
+		cbMonth = new JComboBox();
+		cbMonth.setBounds(296, 351, 73, 35);
+		cbMonth.setModel(new DefaultComboBoxModel(new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12}));
+		contentPane.add(cbMonth);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(455, 348, 63, 35);
-		contentPane.add(comboBox_2);
+		cbYear = new JComboBox();
+		cbYear.setBounds(437, 348, 89, 35);
+		cbYear.setModel(new DefaultComboBoxModel(new Integer[] {2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026,2027, 2028, 2029, 2030}));
+		contentPane.add(cbYear);
 		
 		JLabel lblDay = new JLabel("Day:");
 		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -285,7 +292,7 @@ public class AddStockGUI extends JFrame {
 		
 		JLabel lblYear = new JLabel("Year:");
 		lblYear.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblYear.setBounds(399, 348, 50, 35);
+		lblYear.setBounds(375, 348, 50, 35);
 		contentPane.add(lblYear);
 
 		setVisible(true);
@@ -326,7 +333,7 @@ public class AddStockGUI extends JFrame {
 
 		return isValid;
 	}
-
+	
 	public JTable getTable() {
 		return table;
 	}
@@ -380,4 +387,17 @@ public class AddStockGUI extends JFrame {
 		
 		cbSupplier.setModel(model);
 	}
+
+	public int getDay() {	
+		return cbDay.getSelectedIndex();
+	}
+	
+	public int getMonth() {
+		return cbMonth.getSelectedIndex();
+	}
+	
+	public int getYear() {
+		return cbYear.getSelectedIndex();
+	}
+	
 }
