@@ -43,4 +43,12 @@ public class SupplierController {
 			return "This supplier is already in the supplier list";
 		}
 	}
+	
+	public static void removeSupplier(long id){
+		for (Supplier supplier : supplierList){
+			if(supplier.getId() == id){
+				supplierList.remove(supplier);
+			}
+		}
+	}
 }
