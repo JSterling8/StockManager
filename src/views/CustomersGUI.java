@@ -66,5 +66,9 @@ public class CustomersGUI extends JPanel {
 	public String getName() {
 		return name;
 	}
+	
+	public static void updateTable() {
+		
+	}
 
 }

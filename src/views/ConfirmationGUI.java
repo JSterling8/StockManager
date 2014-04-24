@@ -376,6 +376,7 @@ public class ConfirmationGUI extends JFrame {
 																				getAddCompanyGUI().getEmail(),
 																				getAddCompanyGUI().getAddress()));
 					AddStockGUI.updateSupplierList();
+					SuppliersGUI.updateTable();
 				}
 				else if (getAddCompanyGUI().getTitle().equals("Add Customer")){
 					JOptionPane.showMessageDialog(new JFrame(), 
@@ -384,6 +385,7 @@ public class ConfirmationGUI extends JFrame {
 															getAddCompanyGUI().getEmail(),
 															getAddCompanyGUI().getAddress()));					
 					SellStockGUI.updateCompanyList();
+					CustomersGUI.updateTable();
 				}
 
 				getAddCompanyGUI().dispose();
