@@ -16,6 +16,8 @@ import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
 
 import controllers.TransactionController;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class TransactionsGUI extends JPanel {
 
@@ -23,6 +25,7 @@ public class TransactionsGUI extends JPanel {
 	private DefaultTableModel tableModel;
 	private JRadioButton rdbtnBuying;
 	private JRadioButton rdbtnSelling;
+	private JTextField tfProfitLoss;
 	
 	/**
 	 * Create the panel.
@@ -66,7 +69,7 @@ public class TransactionsGUI extends JPanel {
 		add(rdbtnBuying);
 		
 		rdbtnSelling = new JRadioButton("Selling");
-		rdbtnSelling.setSelected(false);
+		rdbtnSelling.setSelected(true);
 		rdbtnSelling.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -113,6 +116,8 @@ public class TransactionsGUI extends JPanel {
 		btnMonthly.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				double profitLoss = 0;
+				
 				Date date = new Date(System.currentTimeMillis());
 				int year = date.getYear();
 				int month = date.getMonth();
@@ -132,6 +137,8 @@ public class TransactionsGUI extends JPanel {
 					if(TransactionController.sellTransactionList.get(i).getDate().getYear() == year
 							&& TransactionController.sellTransactionList.get(i).getDate().getMonth() == month) {
 					
+					profitLoss = profitLoss + TransactionController.sellTransactionList.get(i).getProfit();
+						
 					tableModel.addRow(new String[] {"Sell" , 
 							TransactionController.sellTransactionList.get(i).getCustomer().toString(),
 												"" + TransactionController.sellTransactionList.get(i).getProfit(),
@@ -145,6 +152,7 @@ public class TransactionsGUI extends JPanel {
 				}
 				
 				table.setModel(tableModel);
+				tfProfitLoss.setText(Double.toString(profitLoss));
 				
 			}
 		});
@@ -183,7 +191,7 @@ public class TransactionsGUI extends JPanel {
 						0);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 88, 640, 376);
+		scrollPane.setBounds(10, 88, 640, 324);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -191,6 +199,18 @@ public class TransactionsGUI extends JPanel {
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
+		
+		JLabel lblProfitLoss = new JLabel("Profit/Loss");
+		lblProfitLoss.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblProfitLoss.setBounds(297, 430, 223, 35);
+		add(lblProfitLoss);
+		
+		tfProfitLoss = new JTextField();
+		tfProfitLoss.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfProfitLoss.setEditable(false);
+		tfProfitLoss.setColumns(10);
+		tfProfitLoss.setBounds(497, 430, 157, 35);
+		add(tfProfitLoss);
 		
 	}
 	
@@ -226,5 +246,4 @@ public class TransactionsGUI extends JPanel {
 		table.setModel(tableModel);
 		
 	}
-
 }
