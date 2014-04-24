@@ -126,7 +126,7 @@ public class AddStockGUI extends JFrame {
 		JButton btnAddSupplier = new JButton("+");
 		btnAddSupplier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddCompanyGUI ac = new AddCompanyGUI("Supplier", AddStockGUI.this);
+				AddCompanyGUI ac = new AddCompanyGUI("Supplier");
 			}
 		});
 		btnAddSupplier.setFont(new Font("Tahoma", Font.BOLD, 18));

@@ -25,6 +25,7 @@ import models.Customer;
 import models.SellTransaction;
 import models.Stock;
 import models.Supplier;
+import controllers.CustomerController;
 import controllers.ProductController;
 import controllers.StockController;
 import controllers.SupplierController;
@@ -345,12 +346,12 @@ public class ConfirmationGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
 				if(getAddCompanyGUI().getTitle().equals("Add Supplier")){
-					
 					JOptionPane.showMessageDialog(new JFrame(), SupplierController.addSupplier(getAddCompanyGUI().getName()));
 					AddStockGUI.updateSupplierList();
 				}
 				else if (getAddCompanyGUI().getTitle().equals("Add Customer")){
-					//TODO When adding customer, do something.
+					JOptionPane.showMessageDialog(new JFrame(), CustomerController.addCustomer(getAddCompanyGUI().getName()));
+					SellStockGUI.updateCompanyList();
 				}
 
 				getAddCompanyGUI().dispose();

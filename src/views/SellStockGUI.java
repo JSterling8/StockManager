@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -28,6 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import models.Company;
 import models.Customer;
 import controllers.CustomerController;
 import controllers.StockController;
@@ -41,7 +43,7 @@ public class SellStockGUI extends JFrame {
 	private JTextField tfPricePerUnit;
 	private JTextField tfTotalAmount;
 	private JTextField tfProfitLoss;
-	private JComboBox<String> cbCompanyName;
+	private static JComboBox<Company> cbCompanyName;
 	private JComboBox<String> cbProduct;
 	private DefaultTableModel tableModel;
 	private double totalAmount;
@@ -88,9 +90,9 @@ public class SellStockGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		cbCompanyName = new JComboBox<String>();
+		cbCompanyName = new JComboBox<Company>();
 		for(int i = 0; i < CustomerController.customerList.size(); i++){
-			cbCompanyName.addItem(CustomerController.customerList.get(i).toString());
+			cbCompanyName.addItem(CustomerController.customerList.get(i));
 		}
 		cbCompanyName.setBounds(200, 14, 150, 35);
 		contentPane.add(cbCompanyName);
@@ -100,10 +102,15 @@ public class SellStockGUI extends JFrame {
 		lblCompanyName.setBounds(10, 11, 178, 35);
 		contentPane.add(lblCompanyName);
 
-		JButton button = new JButton("+");
-		button.setFont(new Font("Tahoma", Font.BOLD, 18));
-		button.setBounds(362, 12, 50, 35);
-		contentPane.add(button);
+		JButton btnAddCompany = new JButton("+");
+		btnAddCompany.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddCompanyGUI ac = new AddCompanyGUI("Customer");
+			}
+		});
+		btnAddCompany.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnAddCompany.setBounds(362, 14, 50, 35);
+		contentPane.add(btnAddCompany);
 
 		JLabel lblProduct = new JLabel("Product Name");
 		lblProduct.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -478,5 +485,15 @@ public class SellStockGUI extends JFrame {
 
 	public JComboBox<String> getCbProduct() {
 		return cbProduct;
+	}
+
+	public static void updateCompanyList() {
+		DefaultComboBoxModel<Company> model = new DefaultComboBoxModel<Company>();
+		for (int i = 0; i < CustomerController.customerList.size(); i++){
+			model.addElement(CustomerController.customerList.get(i));
+		}
+		
+		cbCompanyName.setModel(model);
+		
 	}
 }

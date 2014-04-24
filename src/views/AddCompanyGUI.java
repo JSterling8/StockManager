@@ -1,17 +1,15 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class AddCompanyGUI extends JFrame {
 
@@ -28,11 +26,6 @@ public class AddCompanyGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddCompanyGUI(String companyType) {
-		initialize(companyType);
-	}
-	
-	public AddCompanyGUI(String companyType, AddStockGUI addStockGUI) {
-		this.addStockGUI = addStockGUI;
 		initialize(companyType);
 	}
 	
@@ -138,9 +131,5 @@ public class AddCompanyGUI extends JFrame {
 	
 	public String getAddress(){
 		return tfAddress.getText();
-	}
-	
-	public AddStockGUI getAddStockGUI(){
-		return addStockGUI;
 	}
 }
