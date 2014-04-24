@@ -188,7 +188,7 @@ public class ConfirmationGUI extends JFrame {
 					
 					// Adding the reminder object to the ArrayList
 					
-					ReminderController.addReminder(buy, sell, amountToPay, dateToAdd);
+					ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, supplier);
 					
 					System.out.println(ReminderController.reminderList.get(0));
 					
@@ -307,7 +307,7 @@ public class ConfirmationGUI extends JFrame {
 				
 				// Adding the reminder object to the ArrayList
 				
-				ReminderController.addReminder(buy, sell, amountToPay, dateToAdd);
+				ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, customer);
 				
 				// --------- End of Transaction creation/addition --------
 				

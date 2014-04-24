@@ -11,9 +11,11 @@ public class Reminder {
 	private double amountToPay;
 	private double amountPaid;
 	private Date dueDate;
+	private Company company;
 	
-	public Reminder(long id, boolean buy, boolean sell, double amountToPay, Date dueDate) {
+	public Reminder(long id, boolean buy, boolean sell, double amountToPay, Date dueDate, Company company) {
 		
+		this.company = company;
 		this.id = id;
 		this.buy = buy;
 		this.sell = sell;
