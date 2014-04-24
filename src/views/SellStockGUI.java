@@ -53,6 +53,7 @@ public class SellStockGUI extends JFrame {
 	private ArrayList<Double> priceList;
 	private JTextField tfQuantityLeft;
 	private ArrayList<Double> quantityLeftList;
+	private ArrayList<Long> idList; // List of ids of stocks being sold.
 
 	/*
 	 *  This justPressed variable is used to solve an issue where
@@ -76,7 +77,8 @@ public class SellStockGUI extends JFrame {
 		pricePerUnitList = new ArrayList<Double>();
 		priceList = new ArrayList<Double>();
 		quantityLeftList = new ArrayList<Double>();
-
+		idList = new ArrayList<Long>();
+		
 		// Puts all of the quantities of products into an ArrayList.
 		for (int a = 0; a < StockController.stockList.size(); a++){
 			quantityLeftList.add(StockController.stockList.get(a).getQuantity());
@@ -433,6 +435,7 @@ public class SellStockGUI extends JFrame {
 			price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
 			pricePerUnitList.add(Double.parseDouble(tfPricePerUnit.getText()));
 			priceList.add(price);
+			idList.add(StockController.stockList.get(cbProduct.getSelectedIndex()).getId());
 			tableModel.addRow(new String[]{
 					(String) cbProduct.getSelectedItem(),
 					tfUnits.getText(),
@@ -446,7 +449,7 @@ public class SellStockGUI extends JFrame {
 			profit += price;
 			tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
 
-			// Subtract the amount they're inserting from the quantity left.
+			// Subtract the amount they wish to remove from the quantity left.
 			// Update the quantity left ArrayList
 			// Update tfQuantityLeft
 			double quantity = quantityLeftList.get(cbProduct.getSelectedIndex()) - Double.parseDouble(tfUnits.getText());
@@ -494,6 +497,9 @@ public class SellStockGUI extends JFrame {
 		}
 		
 		cbCompanyName.setModel(model);
-		
+	}
+
+	public ArrayList<Long> getIdList() {
+		return idList;
 	}
 }
