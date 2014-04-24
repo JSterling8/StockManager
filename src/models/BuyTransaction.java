@@ -29,8 +29,34 @@ public class BuyTransaction extends Transaction {
 }
 	
 	public long getId() {
-		
 		return id;
-		
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public ArrayList<String> getProductNames() {
+		return productNames;
+	}
+
+	public ArrayList<Double> getUnits() {
+		return units;
+	}
+
+	public ArrayList<Double> getPricePerUnit() {
+		return pricePerUnit;
+	}
+
+	public ArrayList<Double> getPrice() {
+		return price;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public Date getDate() {
+		return date;
 	}
 }
