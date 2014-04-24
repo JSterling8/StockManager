@@ -186,6 +186,8 @@ public class ConfirmationGUI extends JFrame {
 					int day = getAddStockGUI().getDay();
 					Date dateToAdd = new Date(year, month, day);
 					
+					// Adding the reminder object to the ArrayList
+					
 					ReminderController.addReminder(buy, sell, amountToPay, dateToAdd);
 					
 					System.out.println(ReminderController.reminderList.get(0));
@@ -292,6 +294,21 @@ public class ConfirmationGUI extends JFrame {
 						date,
 						id);
 				TransactionController.sellTransactionList.add(transaction);
+				
+				// Creating Reminder object
+				
+				//boolean buy = false;
+				//boolean sell = true;
+				//double amountToPay = 10;
+				//int year = getSellStockGUI().getYear();
+				//int month = getSellStockGUI().getMonth();
+				//int day = getSellStockGUI().getDay();
+				//Date dateToAdd = new Date(year, month, day);
+				
+				// Adding the reminder object to the ArrayList
+				
+				//ReminderController.addReminder(buy, sell, amountToPay, dateToAdd);
+				
 				// --------- End of Transaction creation/addition --------
 				
 				// TODO placeholder.
