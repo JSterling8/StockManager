@@ -12,46 +12,49 @@ public class Reminder {
 	private double amountPaid;
 	private Date dueDate;
 	private Company company;
-	
+
 	public Reminder(long id, boolean buy, boolean sell, double amountToPay, Date dueDate, Company company) {
-		
 		this.company = company;
 		this.id = id;
 		this.buy = buy;
 		this.sell = sell;
 		this.amountToPay = amountToPay;
-		amountPaid = 0;
 		this.dueDate = dueDate;
-		
+
+		this.amountPaid = 0;
 	}
-	
+
 	public long getId() {
-		
 		return id;
-		
 	}
-	
+
 	/**
 	 * 
 	 * @return Buy for buy reminders and sell for sell reminders
 	 */
-	
+
 	public String getBuyOrSell() {
-		
 		if(sell == true) {
-			
-			return "You need to be paid";
-			
-		} else if(buy == true){
-			
-			return "You need to pay";
-			
-		} else {
-			
-			return "Not specified reminder";
-			
-		}
-		
+			return "You need to be paid";			
+		} else if(buy == true){			
+			return "You need to pay";		
+		} else {			
+			return "Not specified reminder";			
+		}	
+	}
+
+	/**
+	 * This method is used to pay a supplier.
+	 */
+	public void pay(double amount){
+		amountToPay -= amount;
+	}
+
+	/**
+	 * This method is used to receive payments from customers.
+	 */
+	public void receive(double amount){
+		amountPaid += amount;
 	}
 
 	/**
@@ -95,5 +98,5 @@ public class Reminder {
 	public Company getCompany() {
 		return company;
 	}
-	
+
 }

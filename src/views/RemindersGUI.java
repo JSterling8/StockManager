@@ -59,7 +59,7 @@ public class RemindersGUI extends JPanel {
 				//TODO placeholder
 				if (table.getSelectedRow() != -1){
 					if(table.getValueAt(table.getSelectedRow(), 0).equals("You need to pay")){
-						JOptionPane.showMessageDialog(new JFrame(), "Test.");
+						PaySupplierGUI ps = new PaySupplierGUI(ReminderController.reminderList.get(table.getSelectedRow()).getId());
 					}
 				}
 			}
@@ -75,7 +75,7 @@ public class RemindersGUI extends JPanel {
 				//TODO placeholder2
 				if (table.getSelectedRow() != -1){
 					if(table.getValueAt(table.getSelectedRow(), 0).equals("You need to be paid")){
-						JOptionPane.showMessageDialog(new JFrame(), "Test.");
+						CollectPaymentGUI cp = new CollectPaymentGUI(ReminderController.reminderList.get(table.getSelectedRow()).getId());
 					}
 				}
 			}
