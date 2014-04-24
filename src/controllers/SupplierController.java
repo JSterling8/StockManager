@@ -28,7 +28,13 @@ public class SupplierController {
 		}
 		// If it doesn't exist in the product list, then add it.
 		if (!exists){
-			long idToAdd = supplierList.get(supplierList.size()-1).getId() + 1;
+			long idToAdd;
+			if (supplierList.size() == 0){
+				idToAdd = 0;
+			}
+			else{
+				idToAdd = supplierList.get(supplierList.size()-1).getId() + 1;
+			}
 			Supplier supplierToAdd = new Supplier(name, phone, email, address, idToAdd);
 			supplierList.add(supplierToAdd);
 			return "Supplier added.";
