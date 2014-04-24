@@ -193,6 +193,7 @@ public class ConfirmationGUI extends JFrame {
 				}
 
 				StockGUI.updateStock();
+				RemindersGUI.updateReminder();
 
 				getAddStockGUI().dispose();
 				dispose();
@@ -323,6 +324,7 @@ public class ConfirmationGUI extends JFrame {
 				StockController.removeStock(stockToRemove);
 				
 				StockGUI.updateStock();
+				RemindersGUI.updateReminder();
 
 				
 				getSellStockGUI().dispose();

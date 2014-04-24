@@ -31,4 +31,69 @@ public class Reminder {
 		
 	}
 	
+	/**
+	 * 
+	 * @return Buy for buy reminders and sell for sell reminders
+	 */
+	
+	public String getBuyOrSell() {
+		
+		if(sell == true) {
+			
+			return "Sell";
+			
+		} else if(buy == true){
+			
+			return "Buy";
+			
+		} else {
+			
+			return "Not specified";
+			
+		}
+		
+	}
+
+	/**
+	 * @return the sell
+	 */
+	public boolean isSell() {
+		return sell;
+	}
+
+	/**
+	 * @return the buy
+	 */
+	public boolean isBuy() {
+		return buy;
+	}
+
+	/**
+	 * @return the amountToPay
+	 */
+	public double getAmountToPay() {
+		return amountToPay;
+	}
+
+	/**
+	 * @return the amountPaid
+	 */
+	public double getAmountPaid() {
+		return amountPaid;
+	}
+
+	/**
+	 * @return the dueDate
+	 */
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	/**
+	 * @return the company
+	 */
+	public Company getCompany() {
+		return company;
+	}
+	
 }

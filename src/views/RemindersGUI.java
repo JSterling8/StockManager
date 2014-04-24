@@ -9,9 +9,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
 
+import controllers.ReminderController;
+import controllers.StockController;
+
 @SuppressWarnings("serial")
 public class RemindersGUI extends JPanel {
-	private JTable table;
+	private static JTable table;
 
 	private String name = "Reminders";
 	private DefaultTableModel tableModel;
@@ -46,6 +49,8 @@ public class RemindersGUI extends JPanel {
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
 
+		updateReminder();
+		
 	}
 
 	/**
@@ -53,5 +58,24 @@ public class RemindersGUI extends JPanel {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	public static void updateReminder(){
+		DefaultTableModel tableModel = 
+				new DefaultTableModel( new String[] { "Buy/Sell", 
+						"Company Name", 
+						"Outstanding amount", 
+						"Due Date" }, 
+						0);
+		
+		for (int i = 0; i < ReminderController.reminderList.size(); i++){
+			tableModel.addRow(new String[] {ReminderController.reminderList.get(i).getBuyOrSell(), 
+					ReminderController.reminderList.get(i).getCompany().toString(),
+										"" + ReminderController.reminderList.get(i).getAmountToPay(),
+										"" + ReminderController.reminderList.get(i).getDueDate()} );
+		}
+		
+		table.setModel(tableModel);
+		
 	}
 }
