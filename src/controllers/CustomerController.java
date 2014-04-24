@@ -3,7 +3,6 @@ package controllers;
 import java.util.ArrayList;
 
 import models.Customer;
-import models.Supplier;
 
 public class CustomerController {
 	public static ArrayList<Customer> customerList;				// The master ArrayList of customers used throughout the application.
