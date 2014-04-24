@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -150,7 +151,7 @@ public class ConfirmationGUI extends JFrame {
 					String productName = productList.get(i);
 					Double units = unitList.get(i);
 					Double price = priceList.get(i);
-					Double rrp = getAddStockGUI().getRrpList().get(i);
+					Double rrp = AddStockGUI.getRrpList().get(i);
 					long idForStock = 0;
 
 					if (StockController.stockList.size() > 0){
@@ -232,6 +233,8 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
+				
+				// --------- Start of Transaction creation/addition --------
 				Customer customer = getSellStockGUI().getCustomer();
 
 				ArrayList<String> productList = new ArrayList<String>();
@@ -273,7 +276,24 @@ public class ConfirmationGUI extends JFrame {
 						date,
 						id);
 				TransactionController.sellTransactionList.add(transaction);
+				// --------- End of Transaction creation/addition --------
+				
+				// TODO placeholder.
+				// --------- Start of stock removal --------
+				ArrayList<Stock> stockToRemove = new ArrayList<Stock>();
+				
+				ArrayList<Long> idList = new ArrayList<Long>();
+				idList = getSellStockGUI().getIdList();
+				//String productName, Supplier supplier, double quantity, double price, double rrp, long id
+				for(int k = 0; k < productList.size(); k++){
+					Stock stock = new Stock(productList.get(k), new Supplier("irrelevant", 0), unitList.get(k), 0, 0, idList.get(k));
+					stockToRemove.add(stock);
+				}
+				StockController.removeStock(stockToRemove);
+				
+				StockGUI.updateStock();
 
+				
 				getSellStockGUI().dispose();
 				dispose();
 			}
