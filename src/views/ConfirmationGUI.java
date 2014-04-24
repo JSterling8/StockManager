@@ -139,7 +139,7 @@ public class ConfirmationGUI extends JFrame {
 						totalPrice,
 						date,
 						id);
-
+				
 				// Add transaction object to the ArrayList
 
 				TransactionController.buyTransactionList.add(transaction);

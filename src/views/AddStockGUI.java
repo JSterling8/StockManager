@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Date;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
@@ -27,6 +28,10 @@ import controllers.SupplierController;
 
 public class AddStockGUI extends JFrame {
 
+	
+	private JComboBox cbDay;
+	private JComboBox cbMonth;
+	private JComboBox cbYear;
 	private JPanel contentPane;
 	private JTextField tfUnits;
 	private JTable table;
@@ -40,7 +45,6 @@ public class AddStockGUI extends JFrame {
 	private ArrayList<Double> pricePerUnitList;
 	private ArrayList<Double> priceList;
 	private static ArrayList<Double> rrpList;
-
 
 	/**
 	 * Create the frame.
@@ -56,7 +60,7 @@ public class AddStockGUI extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Stock");
-		setBounds(100, 100, 545, 485);
+		setBounds(100, 100, 545, 582);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -84,7 +88,7 @@ public class AddStockGUI extends JFrame {
 
 		JLabel lblAttachInvoice = new JLabel("Attach Invoice");
 		lblAttachInvoice.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblAttachInvoice.setBounds(10, 305, 177, 35);
+		lblAttachInvoice.setBounds(241, 408, 139, 35);
 		contentPane.add(lblAttachInvoice);
 
 		JLabel lblRecommendedRetailPrice = new JLabel("RRP");
@@ -165,7 +169,7 @@ public class AddStockGUI extends JFrame {
 
 		JButton btnBrowse = new JButton("Browse");
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBrowse.setBounds(197, 305, 329, 35);
+		btnBrowse.setBounds(392, 409, 134, 35);
 		contentPane.add(btnBrowse);
 
 		tfRRP = new JTextField();
@@ -190,7 +194,7 @@ public class AddStockGUI extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnSubmit.setBounds(426, 399, 100, 35);
+		btnSubmit.setBounds(426, 503, 100, 35);
 		contentPane.add(btnSubmit);
 
 		JButton btnCancel = new JButton("Cancel");
@@ -199,7 +203,7 @@ public class AddStockGUI extends JFrame {
 				dispose();
 			}
 		});
-		btnCancel.setBounds(314, 399, 100, 35);
+		btnCancel.setBounds(321, 503, 100, 35);
 		contentPane.add(btnCancel);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -245,18 +249,54 @@ public class AddStockGUI extends JFrame {
 
 		JLabel lblTotalPrice = new JLabel("Total Price");
 		lblTotalPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTotalPrice.setBounds(259, 352, 100, 35);
+		lblTotalPrice.setBounds(280, 456, 100, 35);
 		contentPane.add(lblTotalPrice);
 
 		tfTotalPrice = new JTextField();
 		tfTotalPrice.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfTotalPrice.setEditable(false);
-		tfTotalPrice.setBounds(392, 352, 134, 35);
+		tfTotalPrice.setBounds(392, 456, 134, 35);
 		contentPane.add(tfTotalPrice);
 		tfTotalPrice.setColumns(10);
 		tfTotalPrice.setEditable(false);
+		
+		JLabel lblDueDate = new JLabel("Due Date");
+		lblDueDate.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblDueDate.setBounds(6, 348, 100, 35);
+		contentPane.add(lblDueDate);
+		
+		cbDay = new JComboBox();
+		cbDay.setBounds(158, 351, 73, 35);
+		cbDay.setModel(new DefaultComboBoxModel(new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31}));
+		contentPane.add(cbDay);
+		
+		cbMonth = new JComboBox();
+		cbMonth.setBounds(296, 351, 73, 35);
+		cbMonth.setModel(new DefaultComboBoxModel(new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12}));
+		contentPane.add(cbMonth);
+		
+		cbYear = new JComboBox();
+		cbYear.setBounds(437, 348, 89, 35);
+		cbYear.setModel(new DefaultComboBoxModel(new Integer[] {2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026,2027, 2028, 2029, 2030}));
+		contentPane.add(cbYear);
+		
+		JLabel lblDay = new JLabel("Day:");
+		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDay.setBounds(112, 348, 50, 35);
+		contentPane.add(lblDay);
+		
+		JLabel lblMonth = new JLabel("Month:");
+		lblMonth.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMonth.setBounds(237, 348, 63, 35);
+		contentPane.add(lblMonth);
+		
+		JLabel lblYear = new JLabel("Year:");
+		lblYear.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblYear.setBounds(375, 348, 50, 35);
+		contentPane.add(lblYear);
 
 		setVisible(true);
+		
 	}
 
 	/**
@@ -293,7 +333,7 @@ public class AddStockGUI extends JFrame {
 
 		return isValid;
 	}
-
+	
 	public JTable getTable() {
 		return table;
 	}
@@ -348,4 +388,16 @@ public class AddStockGUI extends JFrame {
 		cbSupplier.setModel(model);
 	}
 
+	public int getDay() {	
+		return cbDay.getSelectedIndex();
+	}
+	
+	public int getMonth() {
+		return cbMonth.getSelectedIndex();
+	}
+	
+	public int getYear() {
+		return cbYear.getSelectedIndex();
+	}
+	
 }
