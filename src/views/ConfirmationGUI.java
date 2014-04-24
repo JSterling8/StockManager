@@ -316,8 +316,8 @@ public class ConfirmationGUI extends JFrame {
 				boolean buy = false;
 				boolean sell = true;
 				double amountToPay = getSellStockGUI().getTotalAmount();
-				int year = getSellStockGUI().getYear();
-				int month = getSellStockGUI().getMonth();
+				int year = getSellStockGUI().getYear() + 1900;
+				int month = getSellStockGUI().getMonth() - 1;
 				int day = getSellStockGUI().getDay();
 				Date dateToAdd = new Date(year, month, day);
 				
