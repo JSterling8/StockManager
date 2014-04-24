@@ -422,8 +422,8 @@ public class SellStockGUI extends JFrame {
 		contentPane.add(lblYear);
 		
 		cbYear = new JComboBox();
-		cbYear.setBounds(616, 431, 89, 35);
-		cbYear.setModel(new DefaultComboBoxModel(new Integer[] {2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026,2027, 2028, 2029, 2030}));
+		cbYear.setBounds(605, 431, 100, 35);
+		cbYear.setModel(new DefaultComboBoxModel(new Integer[] {2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026,2027, 2028, 2029, 2030}));
 		contentPane.add(cbYear);
 
 		setVisible(true);

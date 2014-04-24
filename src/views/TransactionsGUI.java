@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Date;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,8 @@ public class TransactionsGUI extends JPanel {
 
 	private static JTable table;
 	private DefaultTableModel tableModel;
+	private JRadioButton rdbtnBuying;
+	private JRadioButton rdbtnSelling;
 	
 	/**
 	 * Create the panel.
@@ -30,11 +33,67 @@ public class TransactionsGUI extends JPanel {
 		setLayout(null);
 		setVisible(false);
 		
-		JRadioButton rdbtnBuying = new JRadioButton("Buying");
+		rdbtnBuying = new JRadioButton("Buying");
+		rdbtnBuying.setSelected(false);
+		rdbtnBuying.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// Create a new table model
+				
+				DefaultTableModel tableModel = 
+						new DefaultTableModel( new String[] { "Buy/Sell", 
+								"Company Name", 
+								"Cost/Profit"}, 
+								0);
+				
+				// Update buy transaction list
+				
+				for (int i = 0; i < TransactionController.buyTransactionList.size(); i++){
+					tableModel.addRow(new String[] {"Buy" , 
+							TransactionController.buyTransactionList.get(i).getSupplier().toString(),
+												"" + TransactionController.buyTransactionList.get(i).getTotalPrice(),
+												} );
+				}
+				
+				table.setModel(tableModel);
+				
+				System.out.println("Buy");
+				rdbtnSelling.setSelected(false);
+				
+			}
+		});
 		rdbtnBuying.setBounds(385, 6, 161, 23);
 		add(rdbtnBuying);
 		
-		JRadioButton rdbtnSelling = new JRadioButton("Selling");
+		rdbtnSelling = new JRadioButton("Selling");
+		rdbtnSelling.setSelected(false);
+		rdbtnSelling.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// Create a new table model
+				
+				DefaultTableModel tableModel = 
+						new DefaultTableModel( new String[] { "Buy/Sell", 
+								"Company Name", 
+								"Cost/Profit"}, 
+								0);
+				
+				// Update sell transaction list
+				
+				for (int i = 0; i < TransactionController.sellTransactionList.size(); i++){
+					tableModel.addRow(new String[] {"Sell" , 
+							TransactionController.sellTransactionList.get(i).getCustomer().toString(),
+												"" + TransactionController.sellTransactionList.get(i).getProfit(),
+												} );
+				}
+				
+				table.setModel(tableModel);
+				
+				System.out.println("Sell");
+				rdbtnBuying.setSelected(false);
+				
+			}
+		});
 		rdbtnSelling.setBounds(112, 6, 161, 23);
 		add(rdbtnSelling);
 		
@@ -42,12 +101,53 @@ public class TransactionsGUI extends JPanel {
 		btnWeekly.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnWeekly.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
 			}
 		});
 		btnWeekly.setBounds(6, 41, 120, 35);
 		add(btnWeekly);
 		
 		JButton btnMonthly = new JButton("Monthly");
+		btnMonthly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Date date = new Date(System.currentTimeMillis());
+				int year = date.getYear();
+				int month = date.getMonth();
+				
+				DefaultTableModel tableModel = 
+						new DefaultTableModel( new String[] { "Buy/Sell", 
+								"Company Name", 
+								"Cost/Profit"}, 
+								0);
+				
+				// Update sell transaction list
+				
+				for (int i = 0; i < TransactionController.sellTransactionList.size(); i++){
+					
+					// Check if the transaction's year and month match
+					
+					if(TransactionController.sellTransactionList.get(i).getDate().getYear() == year
+							&& TransactionController.sellTransactionList.get(i).getDate().getMonth() == month) {
+					
+					tableModel.addRow(new String[] {"Sell" , 
+							TransactionController.sellTransactionList.get(i).getCustomer().toString(),
+												"" + TransactionController.sellTransactionList.get(i).getProfit(),
+												} );
+					} else {
+						
+						// Do not add it
+						
+					}
+				
+				}
+				
+				table.setModel(tableModel);
+				
+			}
+		});
 		btnMonthly.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnMonthly.setBounds(182, 41, 120, 35);
 		add(btnMonthly);
@@ -55,6 +155,9 @@ public class TransactionsGUI extends JPanel {
 		JButton btnQuarterly = new JButton("Quarterly");
 		btnQuarterly.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
 			}
 		});
 		btnQuarterly.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -65,6 +168,9 @@ public class TransactionsGUI extends JPanel {
 		btnAnnually.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAnnually.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
 			}
 		});
 		btnAnnually.setBounds(534, 41, 120, 35);
@@ -85,7 +191,7 @@ public class TransactionsGUI extends JPanel {
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
-
+		
 	}
 	
 	public static void updateTransaction(){
