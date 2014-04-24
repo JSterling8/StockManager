@@ -59,4 +59,5 @@ public class BuyTransaction extends Transaction {
 	public Date getDate() {
 		return date;
 	}
+
 }

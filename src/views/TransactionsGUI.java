@@ -14,9 +14,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
 
+import controllers.TransactionController;
+
 public class TransactionsGUI extends JPanel {
 
-	private JTable table;
+	private static JTable table;
+	private DefaultTableModel tableModel;
 	
 	/**
 	 * Create the panel.
@@ -67,10 +70,11 @@ public class TransactionsGUI extends JPanel {
 		btnAnnually.setBounds(534, 41, 120, 35);
 		add(btnAnnually);
 		
-		TableModel tableModel = 
-				new DefaultTableModel(
-						new String[] [] { { "Buy/Sell", "Company", "Amout" , "Invoice" } },
-						new String[] { "Column 1", "Column 2" , "Column 3" , "Column 4"});
+		tableModel = 
+				new DefaultTableModel( new String[] { "Buy/Sell", 
+						"Company Name", 
+						"Cost/Profit"}, 
+						0);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 88, 640, 376);
@@ -82,6 +86,39 @@ public class TransactionsGUI extends JPanel {
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
 
+	}
+	
+	public static void updateTransaction(){
+		DefaultTableModel tableModel = 
+				new DefaultTableModel( new String[] { "Buy/Sell", 
+						"Company Name", 
+						"Cost/Profit"}, 
+						0);
+		
+		// Update buy transaction list
+		
+		for (int i = 0; i < TransactionController.buyTransactionList.size(); i++){
+			tableModel.addRow(new String[] {"Buy" , 
+					TransactionController.buyTransactionList.get(i).getSupplier().toString(),
+										"" + TransactionController.buyTransactionList.get(i).getTotalPrice(),
+										} );
+		}
+		
+		// Update sell transaction list
+		
+		for (int i = 0; i < TransactionController.sellTransactionList.size(); i++){
+			tableModel.addRow(new String[] {"Sell" , 
+					TransactionController.sellTransactionList.get(i).getCustomer().toString(),
+										"" + TransactionController.sellTransactionList.get(i).getProfit(),
+										} );
+		}
+		
+		// Update removal transaction list
+		
+		// TODO the update bit for removal transactions
+		
+		table.setModel(tableModel);
+		
 	}
 
 }
