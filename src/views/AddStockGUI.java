@@ -31,7 +31,7 @@ public class AddStockGUI extends JFrame {
 	private JTextField tfUnits;
 	private JTable table;
 	private JComboBox<String> cbProductName;
-	private static JComboBox<Supplier> cbSupplier;
+	private static JComboBox<Supplier> cbSupplier = new JComboBox<Supplier>();
 	private JTextField tfPricePerUnit;
 	private JTextField tfRRP;
 	private JTextField tfTotalPrice;
@@ -39,7 +39,7 @@ public class AddStockGUI extends JFrame {
 	private double totalPrice;
 	private ArrayList<Double> pricePerUnitList;
 	private ArrayList<Double> priceList;
-	private ArrayList<Double> rrpList;
+	private static ArrayList<Double> rrpList;
 
 
 	/**
@@ -326,7 +326,7 @@ public class AddStockGUI extends JFrame {
 		return pricePerUnitList;
 	}
 
-	public ArrayList<Double> getRrpList() {
+	public static ArrayList<Double> getRrpList() {
 		return rrpList;
 	}
 
