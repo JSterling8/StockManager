@@ -30,9 +30,9 @@ public class StockController {
 		}
 		
 		// Remove any stocks with a quantity of 0.
-		for (Stock stock : stockList){
-			if (stock.getQuantity() == 0){
-				stockList.remove(stock);
+		for (int j = stockList.size()-1; j >= 0; j--){
+			if (stockList.get(j).getQuantity() == 0){
+				stockList.remove(j);
 			}
 		}
 	}
