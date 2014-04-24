@@ -19,11 +19,12 @@ import java.awt.event.KeyEvent;
 
 public class PaySupplierGUI extends JFrame {
 
+	private static final long serialVersionUID = -8768310562519638406L;
 	private JPanel contentPane;
 	private JTextField tfAmount;
 	private JButton btnSubmit;
 	private JButton btnCancel;
-	private long reminderId;
+	private long reminderId;		// The id of the reminder that this popup is referring to.
 
 	/**
 	 * Create the frame.
@@ -49,7 +50,6 @@ public class PaySupplierGUI extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				// If the user pressed enter.
 				if (e.getKeyCode()==KeyEvent.VK_ENTER){
-					//TODO make sure they're not paying more than they owe.
 					submit();
 				}
 			}
@@ -79,7 +79,11 @@ public class PaySupplierGUI extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * This is the method called when the user presses enter or clicks submit.
+	 */
 	public void submit(){
+		//TODO make sure they're not paying more than they owe.
 		ReminderController.payAmountOutstanding(Double.parseDouble(tfAmount.getText()), reminderId);
 		dispose();
 	}

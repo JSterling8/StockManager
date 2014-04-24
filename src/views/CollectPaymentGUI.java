@@ -18,9 +18,10 @@ import controllers.ReminderController;
 
 public class CollectPaymentGUI extends JFrame {
 
+	private static final long serialVersionUID = -1189443536999357395L;
 	private JPanel contentPane;
 	private JTextField tfAmount;
-	private long reminderId;
+	private long reminderId;				// The id of the reminder that this popup is referring to.
 
 
 	/**
@@ -77,6 +78,9 @@ public class CollectPaymentGUI extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * This is the method called when the user presses enter or clicks submit.
+	 */
 	public void submit(){
 		//TODO make sure they're not paying more than they owe.
 		ReminderController.collectAmountOwed(Double.parseDouble(tfAmount.getText()), reminderId);
