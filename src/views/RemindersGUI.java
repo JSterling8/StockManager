@@ -1,5 +1,6 @@
 package views;
-
+//TODO put in pay and remove buttons.
+//TODO fix weird past dates.
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -11,6 +12,11 @@ import javax.swing.JScrollPane;
 
 import controllers.ReminderController;
 import controllers.StockController;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.ListSelectionModel;
 
 @SuppressWarnings("serial")
 public class RemindersGUI extends JPanel {
@@ -37,17 +43,36 @@ public class RemindersGUI extends JPanel {
 														0);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 640, 453);
+		scrollPane.setBounds(10, 65, 640, 399);
 		add(scrollPane);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		table.setEnabled(false);
 		table.setCellSelectionEnabled(true);
-		table.setColumnSelectionAllowed(true);
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
+		
+		JButton btnPay = new JButton("Pay Supplier");
+		btnPay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnPay.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnPay.setBounds(10, 11, 225, 35);
+		add(btnPay);
+		
+		JButton btnCollect = new JButton("Collect Payment");
+		btnCollect.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnCollect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCollect.setBounds(425, 11, 225, 35);
+		add(btnCollect);
 
 		updateReminder();
 		
