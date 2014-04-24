@@ -190,8 +190,6 @@ public class ConfirmationGUI extends JFrame {
 					
 					ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, supplier);
 					
-					System.out.println(ReminderController.reminderList.get(0));
-					
 				}
 
 				StockGUI.updateStock();
