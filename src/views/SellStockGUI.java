@@ -542,14 +542,15 @@ public class SellStockGUI extends JFrame {
 	}
 	
 	public int getDay() {	
-		return cbDay.getSelectedIndex();
+		return (int) cbDay.getSelectedItem();
 	}
 	
 	public int getMonth() {
-		return cbMonth.getSelectedIndex();
+		return (int) cbMonth.getSelectedItem();
 	}
 	
 	public int getYear() {
-		return cbYear.getSelectedIndex();
+		return (int) cbYear.getSelectedItem();
 	}
+	
 }

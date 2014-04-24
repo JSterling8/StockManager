@@ -182,8 +182,8 @@ public class ConfirmationGUI extends JFrame {
 				boolean buy = true;
 				boolean sell = false;
 				double amountToPay = Double.parseDouble(getAddStockGUI().getTotalPrice());
-				int year = getAddStockGUI().getYear();
-				int month = getAddStockGUI().getMonth();
+				int year = getAddStockGUI().getYear() - 1900;
+				int month = getAddStockGUI().getMonth() - 1;
 				int day = getAddStockGUI().getDay();
 				Date dateToAdd = new Date(year, month, day);
 				
@@ -316,8 +316,8 @@ public class ConfirmationGUI extends JFrame {
 				boolean buy = false;
 				boolean sell = true;
 				double amountToPay = getSellStockGUI().getTotalAmount();
-				int year = getSellStockGUI().getYear();
-				int month = getSellStockGUI().getMonth();
+				int year = getSellStockGUI().getYear() - 1900;
+				int month = getSellStockGUI().getMonth() - 1;
 				int day = getSellStockGUI().getDay();
 				Date dateToAdd = new Date(year, month, day);
 				
