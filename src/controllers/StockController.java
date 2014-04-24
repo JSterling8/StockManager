@@ -10,7 +10,7 @@ public class StockController {
 	public static ArrayList<Stock> stockList = new ArrayList<Stock>();
 	
 	public StockController(){
-		for (int i = 0; i < 4; i ++){
+		for (int i = 1; i < 5; i ++){
 			Stock stock = new Stock ("prod" + i, new Supplier("Supp" + i, "phone" + i, "email" + i, "addr" + i, i), i, i, i*2, i);
 			stockList.add(stock);
 		}
