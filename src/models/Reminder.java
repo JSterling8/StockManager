@@ -1,5 +1,5 @@
 package models;
 
-public class Reminder {
+public abstract class Reminder {
 
 }
