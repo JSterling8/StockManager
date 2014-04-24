@@ -19,8 +19,8 @@ public class CustomersGUI extends JPanel {
 
 	private String name = "Customers";
 	
-	private JTable table;
-	private DefaultTableModel tableModel;
+	private static JTable table;
+	private static DefaultTableModel tableModel;
 
 	/**
 	 * Create the panel.
@@ -49,8 +49,8 @@ public class CustomersGUI extends JPanel {
 		
 		TableModel tableModel = 
 				new DefaultTableModel(
-						new String[][] { { "Customer Name", "Phone Number" , "Email Address" }},
-						new String[] { "Column 1", "Column 2", "Column3" });
+						new String[] { "Name", "Phone" , "Email" , "Address"},
+						0);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 57, 640, 407);
@@ -64,6 +64,8 @@ public class CustomersGUI extends JPanel {
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
+		
+		updateTable();
 	}
 
 	public String getName() {
@@ -71,7 +73,18 @@ public class CustomersGUI extends JPanel {
 	}
 	
 	public static void updateTable() {
+		tableModel = 
+				new DefaultTableModel(
+						new String[] { "Name", "Phone" , "Email" , "Address"},
+						0);
+		for (int i = 0; i < CustomerController.customerList.size(); i++){
+			tableModel.addRow(new String[] {CustomerController.customerList.get(i).getCompanyName(), 
+					CustomerController.customerList.get(i).getPhoneNumber().toString(),
+										CustomerController.customerList.get(i).getEmail(),
+										CustomerController.customerList.get(i).getAddress()} );
+		}
 		
+		table.setModel(tableModel);
 	}
 	
 	public void removeCustomer(int[] indicesToRemove){		
