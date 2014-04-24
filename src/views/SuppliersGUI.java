@@ -4,14 +4,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import controllers.StockController;
 import controllers.SupplierController;
 
 public class SuppliersGUI extends JPanel {
@@ -27,6 +28,13 @@ public class SuppliersGUI extends JPanel {
 		setVisible(false);
 		
 		JButton btnRemove = new JButton("-");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (table.getSelectedRow() != -1){
+					removeSupplier(table.getSelectedRows());
+				}
+			}
+		});
 		btnRemove.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnRemove.setBounds(540, 11, 50, 35);
 		add(btnRemove);
@@ -51,10 +59,8 @@ public class SuppliersGUI extends JPanel {
 		add(scrollPane);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		scrollPane.setViewportView(table);
-		table.setEnabled(false);
-		table.setCellSelectionEnabled(true);
-		table.setColumnSelectionAllowed(true);
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
@@ -75,5 +81,14 @@ public class SuppliersGUI extends JPanel {
 		}
 		
 		table.setModel(tableModel);
+	}
+	
+	public void removeSupplier(int[] indicesToRemove){		
+		Arrays.sort(indicesToRemove);
+	    for (int i = indicesToRemove.length - 1; i >= 0; i--) {
+	        tableModel.removeRow(indicesToRemove[i]);
+	        tableModel.fireTableRowsDeleted(indicesToRemove[i], indicesToRemove[i]);
+			SupplierController.supplierList.remove(i);
+	    }
 	}
 }
