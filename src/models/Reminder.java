@@ -23,4 +23,10 @@ public class Reminder {
 		
 	}
 	
+	public long getId() {
+		
+		return id;
+		
+	}
+	
 }

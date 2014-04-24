@@ -174,6 +174,10 @@ public class ConfirmationGUI extends JFrame {
 					// Add stock object to the ArrayList
 
 					StockController.stockList.add(stock);
+					
+					// Creating Reminder object
+					
+					
 				}
 
 				StockGUI.updateStock();
