@@ -14,6 +14,7 @@ public class RemindersGUI extends JPanel {
 	private JTable table;
 
 	private String name = "Reminders";
+	private DefaultTableModel tableModel;
 	
 
 	
@@ -25,10 +26,12 @@ public class RemindersGUI extends JPanel {
 		setVisible(true);
 		this.setBounds(0, 0, 660, 475);
 		
-		TableModel tableModel = 
-				new DefaultTableModel(
-						new String[][] { { "Incoming/Outcoming", "Company", "Amout" , "Due Date" , "Invoice" }, { "Three", "Four" } },
-						new String[] { "Column 1", "Column 2" , "Column 3" , "Column 4", "Column 5"});
+		tableModel = 
+				new DefaultTableModel( new String[] { "Buy/Sell", 
+														"Company Name", 
+														"Outstanding amount", 
+														"Due Date" }, 
+														0);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 640, 453);

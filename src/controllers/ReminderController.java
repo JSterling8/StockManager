@@ -6,6 +6,7 @@ package controllers;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import models.Company;
 import models.Reminder;
 
 /**
@@ -22,7 +23,7 @@ public class ReminderController {
 		
 	}
 	
-	public static void addReminder(boolean buy, boolean sell, double amountToPay, Date dueDate) {
+	public static void addReminder(boolean buy, boolean sell, double amountToPay, Date dueDate, Company company) {
 		
 		long idToAdd;
 		
@@ -36,7 +37,7 @@ public class ReminderController {
 			
 		}
 	
-		Reminder reminderToAdd = new Reminder(idToAdd, buy, sell, amountToPay, dueDate);
+		Reminder reminderToAdd = new Reminder(idToAdd, buy, sell, amountToPay, dueDate, company);
 		reminderList.add(reminderToAdd);
 		
 	}
