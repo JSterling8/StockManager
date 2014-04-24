@@ -282,7 +282,7 @@ public class AddStockGUI extends JFrame {
 		
 		cbYear = new JComboBox();
 		cbYear.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbYear.setBounds(84, 443, 73, 35);
+		cbYear.setBounds(61, 443, 96, 35);
 		cbYear.setModel(new DefaultComboBoxModel(new Integer[] {2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026,2027, 2028, 2029, 2030}));
 		contentPane.add(cbYear);
 		
