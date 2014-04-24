@@ -177,9 +177,44 @@ public class TransactionsGUI extends JPanel {
 		btnAnnually.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				double profitLoss = 0;
 				
+				Date date = new Date(System.currentTimeMillis());
+				int year = date.getYear();
+				
+				DefaultTableModel tableModel = 
+						new DefaultTableModel( new String[] { "Buy/Sell", 
+								"Company Name", 
+								"Cost/Profit"}, 
+								0);
+				
+				// Update sell transaction list
+				
+				for (int i = 0; i < TransactionController.sellTransactionList.size(); i++){
+					
+					// Check if the transaction's year and month match
+					
+					if(TransactionController.sellTransactionList.get(i).getDate().getYear() == year) {
+					
+					profitLoss = profitLoss + TransactionController.sellTransactionList.get(i).getProfit();
+						
+					tableModel.addRow(new String[] {"Sell" , 
+							TransactionController.sellTransactionList.get(i).getCustomer().toString(),
+												"" + TransactionController.sellTransactionList.get(i).getProfit(),
+												} );
+					} else {
+						
+						// Do not add it
+						
+					}
+				
+				}
+				
+				table.setModel(tableModel);
+				tfProfitLoss.setText(Double.toString(profitLoss));
 				
 			}
+				
 		});
 		btnAnnually.setBounds(534, 41, 120, 35);
 		add(btnAnnually);
