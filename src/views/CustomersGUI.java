@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import controllers.CustomerController;
+import javax.swing.ListSelectionModel;
 
 public class CustomersGUI extends JPanel {
 
@@ -33,6 +34,13 @@ public class CustomersGUI extends JPanel {
 		setVisible(false);
 		
 		JButton btnRemoveCustomer = new JButton("-");
+		btnRemoveCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (table.getSelectedRow() != -1){
+					removeCustomer(table.getSelectedRows());
+				}
+			}
+		});
 		btnRemoveCustomer.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnRemoveCustomer.setBounds(540, 11, 50, 35);
 		add(btnRemoveCustomer);
@@ -57,10 +65,8 @@ public class CustomersGUI extends JPanel {
 		add(scrollPane);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		scrollPane.setViewportView(table);
-		table.setEnabled(false);
-		table.setCellSelectionEnabled(true);
-		table.setColumnSelectionAllowed(true);
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
