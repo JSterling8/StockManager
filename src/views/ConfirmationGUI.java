@@ -176,22 +176,23 @@ public class ConfirmationGUI extends JFrame {
 
 					StockController.stockList.add(stock);
 					
-					// Creating Reminder object
-					
-					boolean buy = true;
-					boolean sell = false;
-					double amountToPay = Double.parseDouble(getAddStockGUI().getTotalPrice());
-					int year = getAddStockGUI().getYear();
-					int month = getAddStockGUI().getMonth();
-					int day = getAddStockGUI().getDay();
-					Date dateToAdd = new Date(year, month, day);
-					
-					// Adding the reminder object to the ArrayList
-					
-					ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, supplier);
-					
 				}
-
+				// Creating Reminder object
+				
+				boolean buy = true;
+				boolean sell = false;
+				double amountToPay = Double.parseDouble(getAddStockGUI().getTotalPrice());
+				int year = getAddStockGUI().getYear();
+				int month = getAddStockGUI().getMonth();
+				int day = getAddStockGUI().getDay();
+				Date dateToAdd = new Date(year, month, day);
+				
+				// Adding the reminder object to the ArrayList
+				
+				ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, supplier);
+				
+				// Update displays
+				
 				StockGUI.updateStock();
 				RemindersGUI.updateReminder();
 
@@ -294,20 +295,6 @@ public class ConfirmationGUI extends JFrame {
 						id);
 				TransactionController.sellTransactionList.add(transaction);
 				
-				// Creating Reminder object
-				
-				boolean buy = false;
-				boolean sell = true;
-				double amountToPay = getSellStockGUI().getTotalAmount();
-				int year = getSellStockGUI().getYear();
-				int month = getSellStockGUI().getMonth();
-				int day = getSellStockGUI().getDay();
-				Date dateToAdd = new Date(year, month, day);
-				
-				// Adding the reminder object to the ArrayList
-				
-				ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, customer);
-				
 				// --------- End of Transaction creation/addition --------
 				
 				// TODO placeholder.
@@ -322,6 +309,22 @@ public class ConfirmationGUI extends JFrame {
 					stockToRemove.add(stock);
 				}
 				StockController.removeStock(stockToRemove);
+				
+				// Creating Reminder object
+				
+				boolean buy = false;
+				boolean sell = true;
+				double amountToPay = getSellStockGUI().getTotalAmount();
+				int year = getSellStockGUI().getYear();
+				int month = getSellStockGUI().getMonth();
+				int day = getSellStockGUI().getDay();
+				Date dateToAdd = new Date(year, month, day);
+				
+				// Adding the reminder object to the ArrayList
+				
+				ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, customer);
+				
+				// Update displays
 				
 				StockGUI.updateStock();
 				RemindersGUI.updateReminder();
