@@ -4,6 +4,7 @@ package controllers;
 public class Main {
 
 	public static void main(String[] args) throws Exception{
+		//
 		
 /*		// Accessing driver from the JAR file.
 		Class.forName("com.mysql.jdbc.Driver");
