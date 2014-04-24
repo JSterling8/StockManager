@@ -40,15 +40,15 @@ public class Reminder {
 		
 		if(sell == true) {
 			
-			return "Sell";
+			return "You need to be paid";
 			
 		} else if(buy == true){
 			
-			return "Buy";
+			return "You need to pay";
 			
 		} else {
 			
-			return "Not specified";
+			return "Not specified reminder";
 			
 		}
 		

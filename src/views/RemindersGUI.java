@@ -62,7 +62,7 @@ public class RemindersGUI extends JPanel {
 	
 	public static void updateReminder(){
 		DefaultTableModel tableModel = 
-				new DefaultTableModel( new String[] { "Buy/Sell", 
+				new DefaultTableModel( new String[] { "Reminder", 
 						"Company Name", 
 						"Outstanding amount", 
 						"Due Date" }, 
