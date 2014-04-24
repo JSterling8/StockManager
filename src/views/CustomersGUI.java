@@ -17,6 +17,7 @@ public class CustomersGUI extends JPanel {
 	private String name = "Customers";
 	
 	private JTable table;
+	private DefaultTableModel tableModel;
 
 	/**
 	 * Create the panel.

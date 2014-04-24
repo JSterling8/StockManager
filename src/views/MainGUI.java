@@ -70,9 +70,9 @@ public class MainGUI extends javax.swing.JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		SupplierController supc = new SupplierController();
 		StockController sc = new StockController();
 		CustomerController cc = new CustomerController();
-		SupplierController supc = new SupplierController();
 		TransactionController tc = new TransactionController();
 		ProductController pc = new ProductController();
 		

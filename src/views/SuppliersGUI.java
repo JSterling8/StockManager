@@ -2,19 +2,22 @@ package views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.JScrollPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import controllers.StockController;
+import controllers.SupplierController;
 
 public class SuppliersGUI extends JPanel {
-	private JTable table;
-
+	private static JTable table;
+	private static DefaultTableModel tableModel;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -38,10 +41,10 @@ public class SuppliersGUI extends JPanel {
 		btnAdd.setBounds(600, 11, 50, 35);
 		add(btnAdd);
 		
-		TableModel tableModel = 
+		tableModel = 
 				new DefaultTableModel(
-						new String[][] { { "Supplier Name", "Phone Number" , "Email Address" }},
-						new String[] { "Column 1", "Column 2", "Column3" });
+						new String[] { "Name", "Phone" , "Email" , "Address"},
+						0);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 57, 640, 407);
@@ -55,5 +58,18 @@ public class SuppliersGUI extends JPanel {
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
+		
+		updateTable();
+	}
+	
+	public static void updateTable(){
+		for (int i = 0; i < SupplierController.supplierList.size(); i++){
+			tableModel.addRow(new String[] {SupplierController.supplierList.get(i).getCompanyName(), 
+					SupplierController.supplierList.get(i).getPhoneNumber().toString(),
+										"" + SupplierController.supplierList.get(i).getEmail(),
+										"" + SupplierController.supplierList.get(i).getAddress()} );
+		}
+		
+		table.setModel(tableModel);
 	}
 }

@@ -286,7 +286,7 @@ public class ConfirmationGUI extends JFrame {
 				idList = getSellStockGUI().getIdList();
 				//String productName, Supplier supplier, double quantity, double price, double rrp, long id
 				for(int k = 0; k < productList.size(); k++){
-					Stock stock = new Stock(productList.get(k), new Supplier("irrelevant", 0), unitList.get(k), 0, 0, idList.get(k));
+					Stock stock = new Stock(productList.get(k), new Supplier("irrelevant", "null", "null", "null", 0), unitList.get(k), 0, 0, idList.get(k));
 					stockToRemove.add(stock);
 				}
 				StockController.removeStock(stockToRemove);
@@ -366,11 +366,19 @@ public class ConfirmationGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
 				if(getAddCompanyGUI().getTitle().equals("Add Supplier")){
-					JOptionPane.showMessageDialog(new JFrame(), SupplierController.addSupplier(getAddCompanyGUI().getName()));
+					JOptionPane.showMessageDialog(new JFrame(), 
+												SupplierController.addSupplier(getAddCompanyGUI().getName(),
+																				getAddCompanyGUI().getPhone(),
+																				getAddCompanyGUI().getEmail(),
+																				getAddCompanyGUI().getAddress()));
 					AddStockGUI.updateSupplierList();
 				}
 				else if (getAddCompanyGUI().getTitle().equals("Add Customer")){
-					JOptionPane.showMessageDialog(new JFrame(), CustomerController.addCustomer(getAddCompanyGUI().getName()));
+					JOptionPane.showMessageDialog(new JFrame(), 
+							CustomerController.addCustomer(getAddCompanyGUI().getName(),
+															getAddCompanyGUI().getPhone(),
+															getAddCompanyGUI().getEmail(),
+															getAddCompanyGUI().getAddress()));					
 					SellStockGUI.updateCompanyList();
 				}
 

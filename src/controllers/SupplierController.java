@@ -17,19 +17,19 @@ public class SupplierController {
 	}
 	
 	// TODO Add address and other info as well.
-	public static String addSupplier(String supplierName){
+	public static String addSupplier(String name, String phone, String email, String address ){
 		boolean exists = false;
 		
 		// Loop through the product list and see if the product already exists.
 		for(int i = 0; i < supplierList.size(); i++){
-			if (supplierList.get(i).toString().equalsIgnoreCase(supplierName)){
+			if (supplierList.get(i).toString().equalsIgnoreCase(name)){
 				exists = true;
 			}
 		}
 		// If it doesn't exist in the product list, then add it.
 		if (!exists){
 			long idToAdd = supplierList.get(supplierList.size()-1).getId() + 1;
-			Supplier supplierToAdd = new Supplier(supplierName, idToAdd);
+			Supplier supplierToAdd = new Supplier(name, phone, email, address, idToAdd);
 			supplierList.add(supplierToAdd);
 			return "Supplier added.";
 		}
