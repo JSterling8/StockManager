@@ -28,6 +28,7 @@ import models.Stock;
 import models.Supplier;
 import controllers.CustomerController;
 import controllers.ProductController;
+import controllers.ReminderController;
 import controllers.StockController;
 import controllers.SupplierController;
 import controllers.TransactionController;
@@ -177,6 +178,17 @@ public class ConfirmationGUI extends JFrame {
 					
 					// Creating Reminder object
 					
+					boolean buy = true;
+					boolean sell = false;
+					double amountToPay = Double.parseDouble(getAddStockGUI().getTotalPrice());
+					int year = getAddStockGUI().getYear();
+					int month = getAddStockGUI().getMonth();
+					int day = getAddStockGUI().getDay();
+					Date dateToAdd = new Date(year, month, day);
+					
+					ReminderController.addReminder(buy, sell, amountToPay, dateToAdd);
+					
+					System.out.println(ReminderController.reminderList.get(0));
 					
 				}
 

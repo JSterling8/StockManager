@@ -22,10 +22,22 @@ public class ReminderController {
 		
 	}
 	
-	public void addReminder(boolean buy, boolean sell, double amountToPay, Date dueDate) {
+	public static void addReminder(boolean buy, boolean sell, double amountToPay, Date dueDate) {
 		
-		long idToAdd = reminderList.get(reminderList.size()-1).getId() + 1;
+		long idToAdd;
+		
+		if(reminderList.size() == 0) {
+			
+			idToAdd = 0;
+			
+		} else {
+			
+			idToAdd = reminderList.get(reminderList.size()-1).getId() + 1;
+			
+		}
+	
 		Reminder reminderToAdd = new Reminder(idToAdd, buy, sell, amountToPay, dueDate);
+		reminderList.add(reminderToAdd);
 		
 	}
 	

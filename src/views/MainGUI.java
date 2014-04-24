@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 
 import controllers.CustomerController;
 import controllers.ProductController;
+import controllers.ReminderController;
 import controllers.StockController;
 import controllers.SupplierController;
 import controllers.TransactionController;
@@ -75,6 +76,7 @@ public class MainGUI extends javax.swing.JFrame {
 		CustomerController cc = new CustomerController();
 		TransactionController tc = new TransactionController();
 		ProductController pc = new ProductController();
+		ReminderController rc = new ReminderController();
 		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
