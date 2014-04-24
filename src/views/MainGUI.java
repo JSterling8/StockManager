@@ -82,7 +82,8 @@ public class MainGUI extends javax.swing.JFrame {
 		frame.setSize(700, 575);
 		frame.setVisible(true);
 		setResizable(false);
-
+		frame.setTitle("Inventory Manager");
+		
 		stockGUI = new StockGUI();
 		stockGUI.setBounds(12, 48, 660, 475);
 		frame.getContentPane().add(stockGUI);
