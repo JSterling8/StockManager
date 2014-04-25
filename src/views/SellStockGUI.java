@@ -2,7 +2,7 @@
  * 
  * @author Jonathan Sterling
  */
-
+//TODO if you add a new stock with the same name as a previous product then it you can't select that new stock from the cbProduct list.
 package views;
 
 

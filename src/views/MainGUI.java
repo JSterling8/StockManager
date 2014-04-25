@@ -16,6 +16,7 @@ import controllers.ReminderController;
 import controllers.StockController;
 import controllers.SupplierController;
 import controllers.TransactionController;
+import controllers.UnitController;
 
 @SuppressWarnings("serial")
 public class MainGUI extends javax.swing.JFrame {
@@ -57,7 +58,6 @@ public class MainGUI extends javax.swing.JFrame {
 				}
 			}
 		});
-
 	}
 
 	/**
@@ -77,6 +77,7 @@ public class MainGUI extends javax.swing.JFrame {
 		TransactionController tc = new TransactionController();
 		ProductController pc = new ProductController();
 		ReminderController rc = new ReminderController();
+		UnitController uc = new UnitController();
 		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

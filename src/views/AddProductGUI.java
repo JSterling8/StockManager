@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,16 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import controllers.ProductController;
-import javax.swing.JComboBox;
+import controllers.UnitController;
 
 public class AddProductGUI extends JFrame {
 
+
+	private static final long serialVersionUID = 7369638800895464113L;
 	private JPanel contentPane;
 	private JTextField tfProductName;
 	private JButton btnSubmit;
 	private JButton btnCancel;
-	private JComboBox cbUnits;
+	private JComboBox<String> cbUnits;
 
 	private AddStockGUI addStockGUI;
 	private JLabel lblUnits;
@@ -88,11 +90,17 @@ public class AddProductGUI extends JFrame {
 		lblUnits.setBounds(10, 57, 150, 35);
 		contentPane.add(lblUnits);
 		
-		cbUnits = new JComboBox();
+		cbUnits = new JComboBox<String>();
 		cbUnits.setBounds(169, 67, 195, 35);
 		contentPane.add(cbUnits);
+		updateUnits();
 		
 		JButton btnAddUnits = new JButton("+");
+		btnAddUnits.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddUnitsGUI au = new AddUnitsGUI(AddProductGUI.this);
+			}
+		});
 		btnAddUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAddUnits.setBounds(374, 66, 50, 35);
 		contentPane.add(btnAddUnits);
@@ -101,6 +109,7 @@ public class AddProductGUI extends JFrame {
 	private void openConfirmation(){
 		//TODO should check that it contains at least one letter or number.
 		if (!tfProductName.getText().equals("") && !tfProductName.getText().equals("  ")){
+			@SuppressWarnings("unused")
 			ConfirmationGUI cg = new ConfirmationGUI(AddProductGUI.this);
 			setVisible(false);
 		}
@@ -122,5 +131,12 @@ public class AddProductGUI extends JFrame {
 
 	public AddStockGUI getAddStockGUI(){
 		return addStockGUI;
+	}
+	
+	public void updateUnits(){
+		cbUnits.removeAllItems();
+		for (int i = 0; i < UnitController.unitList.size(); i++){
+			cbUnits.addItem(UnitController.unitList.get(i));
+		}
 	}
 }
