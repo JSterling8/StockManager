@@ -41,7 +41,7 @@ public class StockGUI extends JPanel {
 		add(btnSell);
 		
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.setForeground(Color.RED);
+		btnRemove.setForeground(Color.BLACK);
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO Get the string to pass from what's selected in the JTable.
