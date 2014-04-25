@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 
+import models.Product;
 import models.Stock;
 import models.Supplier;
 
@@ -18,7 +19,9 @@ public class StockController {
 		// Adds mock data to the stockList.
 		// TODO Get this information from a database.
 		for (int i = 1; i < 5; i ++){
-			Stock stock = new Stock ("prod" + i, new Supplier("Supp" + i, "phone" + i, "email" + i, "addr" + i, i), i, i, i*2, i);
+			Product product = new Product("prod" + i, "units" + i);
+			Supplier supplier = new Supplier("Supp" + i, "phone" + i, "email" + i, "addr" + i, i);
+			Stock stock = new Stock (product, supplier, i, i, i*2, i);
 			stockList.add(stock);
 		}
 	}
