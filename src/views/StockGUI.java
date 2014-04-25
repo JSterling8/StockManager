@@ -17,10 +17,13 @@ import models.Stock;
 import models.Supplier;
 
 import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class StockGUI extends JPanel {
 	private static JTable table;
+	private JTextField tfTotalStockValue;
 
 	/**
 	 * Create the panel.
@@ -63,11 +66,23 @@ public class StockGUI extends JPanel {
 		add(btnBuy);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 57, 640, 407);
+		scrollPane.setBounds(10, 57, 640, 350);
 		add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		tfTotalStockValue = new JTextField();
+		tfTotalStockValue.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfTotalStockValue.setEditable(false);
+		tfTotalStockValue.setColumns(10);
+		tfTotalStockValue.setBounds(493, 429, 157, 35);
+		add(tfTotalStockValue);
+		
+		JLabel lblStockValue = new JLabel("Total Stock Value:");
+		lblStockValue.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblStockValue.setBounds(293, 429, 223, 35);
+		add(lblStockValue);
 		
 		updateStock();
 	}

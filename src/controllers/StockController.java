@@ -55,7 +55,16 @@ public class StockController {
 	}
 	
 	public static void removeById(ArrayList<Long> idList) {
-		
+		// Loop through the stocks to remove.
+				for (int i = 0; i < idList.size(); i++){
+					// Loop through the master stockList.
+					for (int j = stockList.size()-1; j >= 0; j--){
+						// If the stock to remove's ID matches a stock ID in the list.
+						if (idList.get(i) == stockList.get(j).getId()){
+							stockList.remove(j);
+						}
+					}
+				}
 		
 		
 	}
