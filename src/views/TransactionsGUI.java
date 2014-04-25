@@ -240,7 +240,7 @@ public class TransactionsGUI extends JPanel {
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JLabel lblProfitLoss = new JLabel("Profit/Loss");
 		lblProfitLoss.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -258,8 +258,17 @@ public class TransactionsGUI extends JPanel {
 		btnDeleteTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				 removeTransaction(table.getSelectedRow());
+				if(rdbtnSelling.isSelected()) {
+					
+					removeSellTransaction(table.getSelectedRow());
+					
+				}
 				
+				if(rdbtnBuying.isSelected()) {
+					
+					removeBuyTransaction(table.getSelectedRow());
+				 
+				}
 			}
 		});
 		btnDeleteTransaction.setBounds(497, 5, 157, 29);
@@ -300,9 +309,57 @@ public class TransactionsGUI extends JPanel {
 		
 	}
 	
-	public void removeTransaction(int index){		
-
+	public void removeBuyTransaction(int index){		
 		
+		long transactionId = TransactionController.buyTransactionList.get(index).getId();
+		long stockId = TransactionController.buyTransactionList.get(index).getStockId();
+		long reminderId = TransactionController.buyTransactionList.get(index).getReminderId();
+		
+		// Delete transaction object
+		
+		for(int i = 0; i < TransactionController.buyTransactionList.size(); i++) {
+			
+			if(TransactionController.buyTransactionList.get(i).getId() == transactionId) {
+				
+				TransactionController.buyTransactionList.remove(i);
+				
+			}
+			
+		}
+		
+		// Delete stock object
+		
+		for(int k = 0; k < StockController.stockList.size(); k++) {
+			
+			if(StockController.stockList.get(k).getId() == stockId) {
+				
+				StockController.stockList.remove(k);
+				
+			}
+			
+		}
+		
+		// Delete reminder object
+		
+		for(int j = 0; j < ReminderController.reminderList.size(); j++) {
+			
+			if(ReminderController.reminderList.get(j).getId() == reminderId) {
+				
+				ReminderController.reminderList.remove(j);
+				
+			}	
+		}
+		
+		// Update displays
+		
+		TransactionsGUI.updateTransaction();
+		RemindersGUI.updateReminder();
+		StockGUI.updateStock();
+		
+	}
+	
+	public void removeSellTransaction(int index){		
+
 		
 	}
 }
