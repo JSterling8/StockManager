@@ -2,16 +2,16 @@ package models;
 
 public class Stock {
 	
-	private String productName;
+	private Product product;
 	private Supplier supplier;
 	private double quantity;
 	private double price;
 	private double rrp;
 	private long id;
 	
-	public Stock(String productName, Supplier supplier, double quantity, double price, double rrp, long id) {
+	public Stock(Product product, Supplier supplier, double quantity, double price, double rrp, long id) {
 		
-		this.productName = productName;
+		this.product = product;
 		this.supplier = supplier;
 		this.quantity = quantity;
 		this.price = price;
@@ -36,8 +36,8 @@ public class Stock {
 	/**
 	 * @return the productName
 	 */
-	public String getProductName() {
-		return productName;
+	public Product getProduct() {
+		return product;
 	}
 
 	/**

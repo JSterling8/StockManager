@@ -33,7 +33,7 @@ public class AddStockGUI extends JFrame {
 	private JComboBox cbMonth;
 	private JComboBox cbYear;
 	private JPanel contentPane;
-	private JTextField tfUnits;
+	private JTextField tfQuantity;
 	private JTable table;
 	private JComboBox<String> cbProductName;
 	private static JComboBox<Supplier> cbSupplier = new JComboBox<Supplier>();
@@ -45,6 +45,7 @@ public class AddStockGUI extends JFrame {
 	private ArrayList<Double> pricePerUnitList;
 	private ArrayList<Double> priceList;
 	private static ArrayList<Double> rrpList;
+	private JTextField tfUnits;
 
 	/**
 	 * Create the frame.
@@ -76,14 +77,14 @@ public class AddStockGUI extends JFrame {
 		lblSupplier.setBounds(10, 11, 177, 35);
 		contentPane.add(lblSupplier);
 
-		JLabel lblUnits = new JLabel("Units");
-		lblUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblUnits.setBounds(10, 104, 115, 35);
-		contentPane.add(lblUnits);
+		JLabel lblQuantity = new JLabel("Quantity");
+		lblQuantity.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblQuantity.setBounds(10, 104, 100, 35);
+		contentPane.add(lblQuantity);
 
 		JLabel lblPricePerUnit = new JLabel("Price/Unit");
 		lblPricePerUnit.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPricePerUnit.setBounds(114, 104, 115, 35);
+		lblPricePerUnit.setBounds(218, 104, 100, 35);
 		contentPane.add(lblPricePerUnit);
 
 		JLabel lblAttachInvoice = new JLabel("Attach Invoice");
@@ -93,7 +94,7 @@ public class AddStockGUI extends JFrame {
 
 		JLabel lblRecommendedRetailPrice = new JLabel("RRP");
 		lblRecommendedRetailPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblRecommendedRetailPrice.setBounds(241, 104, 115, 35);
+		lblRecommendedRetailPrice.setBounds(328, 104, 73, 35);
 		contentPane.add(lblRecommendedRetailPrice);
 
 		cbProductName = new JComboBox<String>();
@@ -137,12 +138,12 @@ public class AddStockGUI extends JFrame {
 		btnAddSupplier.setBounds(476, 11, 50, 35);
 		contentPane.add(btnAddSupplier);
 
-		tfUnits = new JTextField();
-		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfUnits.setBounds(10, 149, 73, 35);
-		contentPane.add(tfUnits);
-		tfUnits.setColumns(10);
-		tfUnits.addKeyListener(new KeyAdapter() {
+		tfQuantity = new JTextField();
+		tfQuantity.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfQuantity.setBounds(10, 149, 100, 35);
+		contentPane.add(tfQuantity);
+		tfQuantity.setColumns(10);
+		tfQuantity.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char character = e.getKeyChar();
 				if (((character < '0') || (character > '9'))
@@ -155,7 +156,7 @@ public class AddStockGUI extends JFrame {
 		tfPricePerUnit = new JTextField();
 		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfPricePerUnit.setColumns(10);
-		tfPricePerUnit.setBounds(114, 149, 73, 35);
+		tfPricePerUnit.setBounds(218, 150, 100, 35);
 		contentPane.add(tfPricePerUnit);
 		tfPricePerUnit.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -175,7 +176,7 @@ public class AddStockGUI extends JFrame {
 		tfRRP = new JTextField();
 		tfRRP.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfRRP.setColumns(10);
-		tfRRP.setBounds(241, 149, 73, 35);
+		tfRRP.setBounds(328, 150, 73, 35);
 		contentPane.add(tfRRP);
 		tfRRP.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -225,7 +226,7 @@ public class AddStockGUI extends JFrame {
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(validateInput()) {
-					double price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
+					double price = Double.parseDouble(tfQuantity.getText()) * Double.parseDouble(tfPricePerUnit.getText());
 
 					rrpList.add(Double.parseDouble(tfRRP.getText()));
 					priceList.add(price);
@@ -233,11 +234,11 @@ public class AddStockGUI extends JFrame {
 
 					tableModel.addRow(new String[]{
 							(String) cbProductName.getSelectedItem(),
-							tfUnits.getText(),
+							tfQuantity.getText(),
 							NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
 							NumberFormat.getCurrencyInstance().format(price)});
 
-					totalPrice = totalPrice + (Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText()));
+					totalPrice = totalPrice + (Double.parseDouble(tfQuantity.getText()) * Double.parseDouble(tfPricePerUnit.getText()));
 					tfTotalPrice.setText("" + totalPrice);
 					
 					// Disable the supplier combobox because you only buy from one supplier at a time.
@@ -247,7 +248,7 @@ public class AddStockGUI extends JFrame {
 			}
 		});
 		btnInsert.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnInsert.setBounds(372, 150, 154, 35);
+		btnInsert.setBounds(411, 150, 115, 35);
 		contentPane.add(btnInsert);
 
 		JLabel lblTotalPrice = new JLabel("Total Price");
@@ -300,6 +301,17 @@ public class AddStockGUI extends JFrame {
 		lblYear.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblYear.setBounds(10, 443, 63, 35);
 		contentPane.add(lblYear);
+		
+		JLabel lblUnits = new JLabel("Units");
+		lblUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblUnits.setBounds(128, 104, 73, 35);
+		contentPane.add(lblUnits);
+		
+		tfUnits = new JTextField();
+		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfUnits.setColumns(10);
+		tfUnits.setBounds(128, 149, 73, 35);
+		contentPane.add(tfUnits);
 
 		setVisible(true);
 		
@@ -323,7 +335,7 @@ public class AddStockGUI extends JFrame {
 			JOptionPane.showMessageDialog(new JFrame(), "Please select a supplier name.");
 			isValid = false;
 		}
-		else if(tfUnits.getText() != null && tfUnits.getText().equals("")){
+		else if(tfQuantity.getText() != null && tfQuantity.getText().equals("")){
 			JOptionPane.showMessageDialog(new JFrame(), "Please enter a number of units.");
 			isValid = false;
 		}

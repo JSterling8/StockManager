@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controllers.ProductController;
+import javax.swing.JComboBox;
 
 public class AddProductGUI extends JFrame {
 
@@ -24,6 +25,7 @@ public class AddProductGUI extends JFrame {
 	private JButton btnCancel;
 
 	private AddStockGUI addStockGUI;
+	private JLabel lblUnits;
 
 
 	/**
@@ -36,7 +38,7 @@ public class AddProductGUI extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add Product");
-		setBounds(100, 100, 450, 135);
+		setBounds(100, 100, 450, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,7 +70,7 @@ public class AddProductGUI extends JFrame {
 				openConfirmation();
 			}
 		});
-		btnSubmit.setBounds(314, 57, 100, 35);
+		btnSubmit.setBounds(250, 126, 100, 35);
 		contentPane.add(btnSubmit);
 
 		btnCancel = new JButton("Cancel");
@@ -77,8 +79,22 @@ public class AddProductGUI extends JFrame {
 				dispose();
 			}
 		});
-		btnCancel.setBounds(179, 57, 100, 35);
+		btnCancel.setBounds(110, 126, 100, 35);
 		contentPane.add(btnCancel);
+		
+		lblUnits = new JLabel("Units:");
+		lblUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblUnits.setBounds(10, 57, 150, 35);
+		contentPane.add(lblUnits);
+		
+		JComboBox tbUnits = new JComboBox();
+		tbUnits.setBounds(169, 67, 195, 35);
+		contentPane.add(tbUnits);
+		
+		JButton btnAddUnits = new JButton("+");
+		btnAddUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnAddUnits.setBounds(374, 66, 50, 35);
+		contentPane.add(btnAddUnits);
 	}
 
 	private void openConfirmation(){
