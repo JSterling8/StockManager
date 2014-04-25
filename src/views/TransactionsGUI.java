@@ -3,19 +3,25 @@ package views;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import javax.swing.ListSelectionModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Date;
+import java.util.Arrays;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
 
+import controllers.ReminderController;
+import controllers.StockController;
+import controllers.SupplierController;
 import controllers.TransactionController;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -234,6 +240,7 @@ public class TransactionsGUI extends JPanel {
 		table.setModel(tableModel);
 		table.setShowGrid(true);
 		table.setGridColor(Color.black);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		JLabel lblProfitLoss = new JLabel("Profit/Loss");
 		lblProfitLoss.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -247,6 +254,17 @@ public class TransactionsGUI extends JPanel {
 		tfProfitLoss.setBounds(497, 430, 157, 35);
 		add(tfProfitLoss);
 		
+		JButton btnDeleteTransaction = new JButton("Delete Transaction");
+		btnDeleteTransaction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 removeTransaction(table.getSelectedRow());
+				
+			}
+		});
+		btnDeleteTransaction.setBounds(497, 5, 157, 29);
+		add(btnDeleteTransaction);
+		
 	}
 	
 	public static void updateTransaction(){
@@ -258,7 +276,7 @@ public class TransactionsGUI extends JPanel {
 		
 		// Update buy transaction list
 		
-		for (int i = 0; i < TransactionController.buyTransactionList.size(); i++){
+		for (int i = 0; i < TransactionController.transactionList.size(); i++){
 			tableModel.addRow(new String[] {"Buy" , 
 					TransactionController.buyTransactionList.get(i).getSupplier().toString(),
 										"" + TransactionController.buyTransactionList.get(i).getTotalPrice(),
@@ -279,6 +297,12 @@ public class TransactionsGUI extends JPanel {
 		// TODO the update bit for removal transactions
 		
 		table.setModel(tableModel);
+		
+	}
+	
+	public void removeTransaction(int index){		
+
+		
 		
 	}
 }
