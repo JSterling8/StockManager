@@ -63,5 +63,13 @@ public class BuyTransaction extends Transaction {
 	public Date getDate() {
 		return date;
 	}
+	
+	public long getStockId() {
+		return stockId;
+		}
+	
+	public long getReminderId() {
+		return reminderId;
+	}
 
 }
