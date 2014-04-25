@@ -43,7 +43,7 @@ public class SellStockGUI extends JFrame {
 	private static final long serialVersionUID = -1802942040864294457L;
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField tfUnits;
+	private JTextField tfQuantity;
 	private JTextField tfPricePerUnit;
 	private JTextField tfTotalAmount;
 	private JTextField tfProfitLoss;
@@ -68,6 +68,7 @@ public class SellStockGUI extends JFrame {
 	 *  indefinitely because it pops up again and again.
 	 */
 	private boolean justPressed;
+	private JTextField tfUnits;
 
 
 	/**
@@ -147,7 +148,7 @@ public class SellStockGUI extends JFrame {
 						try{
 							@SuppressWarnings("unused")
 							double test = Double.parseDouble(tfPricePerUnit.getText());
-							test = Double.parseDouble(tfUnits.getText());
+							test = Double.parseDouble(tfQuantity.getText());
 						}
 						catch(NumberFormatException error){
 							JOptionPane.showMessageDialog(new JFrame(), "You can only enter valid numbers.");
@@ -158,18 +159,18 @@ public class SellStockGUI extends JFrame {
 						// If the input doesn't throw an error.
 						if (isValid){
 							// If the input isn't empty.
-							if ( !tfPricePerUnit.getText().equals("") && !tfUnits.getText().equals("")){
+							if ( !tfPricePerUnit.getText().equals("") && !tfQuantity.getText().equals("")){
 								// If they're not entering more product than they have.
-								if (!(Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))){
+								if (!(Double.parseDouble(tfQuantity.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))){
 									insert();
 								}
 							}
 
 							// Else if they're entering too much product so enter is disabled, let them know:
 							else if ( !justPressed && 
-									tfUnits.getText() != null &&
-									!tfUnits.getText().equals("") && 
-									Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
+									tfQuantity.getText() != null &&
+									!tfQuantity.getText().equals("") && 
+									Double.parseDouble(tfQuantity.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
 								JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
 								justPressed = true;
 							}
@@ -196,16 +197,22 @@ public class SellStockGUI extends JFrame {
 		});
 		
 		tfPricePerUnit.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfPricePerUnit.setBounds(459, 147, 134, 35);
+		tfPricePerUnit.setBounds(479, 147, 114, 35);
 		contentPane.add(tfPricePerUnit);
 		tfPricePerUnit.setColumns(10);
 
+		// Had to initialize this here to avoid a null pointer exception from the cbProduct ActionListener.
+		tfUnits = new JTextField();
+		
 		cbProduct = new JComboBox<String>();
 		cbProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Shows the amount of that stock available.
 				tfQuantityLeft.setText("" + quantityLeftList.get(cbProduct.getSelectedIndex()));
 
+				// Shows the unit type.
+				tfUnits.setText("" + ProductController.productList.get(cbProduct.getSelectedIndex()).getUnitType());
+				
 				// Shows the recommended price.
 				tfPricePerUnit.setText("" + StockController.stockList.get(cbProduct.getSelectedIndex()).getRRP());
 			}
@@ -232,19 +239,19 @@ public class SellStockGUI extends JFrame {
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
 
-		JLabel lblUnits = new JLabel("Units");
-		lblUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblUnits.setBounds(313, 106, 91, 35);
-		contentPane.add(lblUnits);
+		JLabel lblQuantity = new JLabel("Qty");
+		lblQuantity.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblQuantity.setBounds(313, 106, 73, 35);
+		contentPane.add(lblQuantity);
 
 		JLabel lblPrice = new JLabel("Price/Unit");
 		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPrice.setBounds(459, 106, 134, 35);
+		lblPrice.setBounds(482, 106, 111, 35);
 		contentPane.add(lblPrice);
 
 		// TODO format output to 4 or 5 decimal points.
-		tfUnits = new JTextField();
-		tfUnits.addKeyListener(new KeyAdapter() {
+		tfQuantity = new JTextField();
+		tfQuantity.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				boolean isValid = true;
@@ -258,7 +265,7 @@ public class SellStockGUI extends JFrame {
 						try{
 							@SuppressWarnings("unused")
 							double test = Double.parseDouble(tfPricePerUnit.getText());
-							test = Double.parseDouble(tfUnits.getText());
+							test = Double.parseDouble(tfQuantity.getText());
 						}
 						catch(NumberFormatException error){
 							JOptionPane.showMessageDialog(new JFrame(), "You can only enter valid numbers.");
@@ -270,18 +277,18 @@ public class SellStockGUI extends JFrame {
 						// If the input doesn't throw an error.
 						if (isValid){
 							// If the input isn't empty.
-							if ( !tfPricePerUnit.getText().equals("") && !tfUnits.getText().equals("")){
+							if ( !tfPricePerUnit.getText().equals("") && !tfQuantity.getText().equals("")){
 								// If they're not entering more product than they have.
-								if (!(Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))){
+								if (!(Double.parseDouble(tfQuantity.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex()))){
 									insert();
 								}
 							}
 
 							// Else if they're entering too much product so enter is disabled, let them know:
 							else if ( !justPressed && 
-									tfUnits.getText() != null &&
-									!tfUnits.getText().equals("") && 
-									Double.parseDouble(tfUnits.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
+									tfQuantity.getText() != null &&
+									!tfQuantity.getText().equals("") && 
+									Double.parseDouble(tfQuantity.getText()) > quantityLeftList.get(cbProduct.getSelectedIndex())){
 								JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
 								justPressed = true;
 							}
@@ -307,10 +314,10 @@ public class SellStockGUI extends JFrame {
 			}
 		});
 
-		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tfUnits.setBounds(313, 147, 134, 35);
-		contentPane.add(tfUnits);
-		tfUnits.setColumns(10);
+		tfQuantity.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfQuantity.setBounds(313, 147, 73, 35);
+		contentPane.add(tfQuantity);
+		tfQuantity.setColumns(10);
 
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.addActionListener(new ActionListener() {
@@ -427,6 +434,21 @@ public class SellStockGUI extends JFrame {
 		cbYear.setBounds(605, 431, 100, 35);
 		cbYear.setModel(new DefaultComboBoxModel(new Integer[] {2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026,2027, 2028, 2029, 2030}));
 		contentPane.add(cbYear);
+		
+		
+		tfUnits.setEditable(false);
+		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tfUnits.setColumns(10);
+		tfUnits.setBounds(396, 147, 73, 35);
+		if (cbProduct.getSelectedIndex() != -1){
+			tfUnits.setText(ProductController.productList.get(cbProduct.getSelectedIndex()).getUnitType());
+		}
+		contentPane.add(tfUnits);
+		
+		JLabel lblUnits = new JLabel("Units");
+		lblUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblUnits.setBounds(396, 106, 73, 35);
+		contentPane.add(lblUnits);
 
 		setVisible(true);
 	}
@@ -442,11 +464,11 @@ public class SellStockGUI extends JFrame {
 			JOptionPane.showMessageDialog(new JFrame(), "Please select a supplier name.");
 			isValid = false;
 		}
-		else if(tfUnits.getText() != null && tfUnits.getText().equals("")){
+		else if(tfQuantity.getText() != null && tfQuantity.getText().equals("")){
 			JOptionPane.showMessageDialog(new JFrame(), "Please enter a number of units.");
 			isValid = false;
 		}
-		else if (Double.parseDouble(tfUnits.getText()) <= 0 ){
+		else if (Double.parseDouble(tfQuantity.getText()) <= 0 ){
 			JOptionPane.showMessageDialog(new JFrame(), "Number of units must be greater than 0.");
 			isValid = false;
 		}
@@ -458,7 +480,7 @@ public class SellStockGUI extends JFrame {
 			JOptionPane.showMessageDialog(new JFrame(), "Price per unit must be greater than 0.");
 			isValid = false;
 		}
-		else if (Double.parseDouble(tfQuantityLeft.getText()) < Double.parseDouble(tfUnits.getText())){
+		else if (Double.parseDouble(tfQuantityLeft.getText()) < Double.parseDouble(tfQuantity.getText())){
 			JOptionPane.showMessageDialog(new JFrame(), "You don't have that much of this product available.");
 			isValid = false;
 		}
@@ -472,13 +494,13 @@ public class SellStockGUI extends JFrame {
 		if (validateInput()){
 			customer = CustomerController.customerList.get(cbCompanyName.getSelectedIndex());
 
-			price = Double.parseDouble(tfUnits.getText()) * Double.parseDouble(tfPricePerUnit.getText());
+			price = Double.parseDouble(tfQuantity.getText()) * Double.parseDouble(tfPricePerUnit.getText());
 			pricePerUnitList.add(Double.parseDouble(tfPricePerUnit.getText()));
 			priceList.add(price);
 			idList.add(StockController.stockList.get(cbProduct.getSelectedIndex()).getId());
 			tableModel.addRow(new String[]{
 					(String) cbProduct.getSelectedItem(),
-					tfUnits.getText(),
+					tfQuantity.getText(),
 					ProductController.productList.get(cbProduct.getSelectedIndex()).getUnitType(),
 					NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
 					NumberFormat.getCurrencyInstance().format(price)});
@@ -486,14 +508,14 @@ public class SellStockGUI extends JFrame {
 			tfTotalAmount.setText(NumberFormat.getCurrencyInstance().format(totalAmount));
 
 			// profit = (sellingPrice * numOfUnits) - (purchasePrice * numOfUnits)
-			profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfUnits.getText());
+			profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfQuantity.getText());
 			profit += price;
 			tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
 
 			// Subtract the amount they wish to remove from the quantity left.
 			// Update the quantity left ArrayList
 			// Update tfQuantityLeft
-			double quantity = quantityLeftList.get(cbProduct.getSelectedIndex()) - Double.parseDouble(tfUnits.getText());
+			double quantity = quantityLeftList.get(cbProduct.getSelectedIndex()) - Double.parseDouble(tfQuantity.getText());
 			quantityLeftList.set(cbProduct.getSelectedIndex(), quantity);
 			tfQuantityLeft.setText("" + quantity);
 		}
