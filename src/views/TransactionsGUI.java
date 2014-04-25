@@ -46,29 +46,9 @@ public class TransactionsGUI extends JPanel {
 		rdbtnBuying.setSelected(false);
 		rdbtnBuying.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				// Create a new table model
-				
-				DefaultTableModel tableModel = 
-						new DefaultTableModel( new String[] { "Buy/Sell", 
-								"Company Name", 
-								"Cost/Profit"}, 
-								0);
-				
-				// Update buy transaction list
-				
-				for (int i = 0; i < TransactionController.buyTransactionList.size(); i++){
-					tableModel.addRow(new String[] {"Buy" , 
-							TransactionController.buyTransactionList.get(i).getSupplier().toString(),
-												"" + TransactionController.buyTransactionList.get(i).getTotalPrice(),
-												} );
-				}
-				
-				table.setModel(tableModel);
-				
-				System.out.println("Buy");
-				rdbtnSelling.setSelected(false);
-				
+
+				updateBuyTransactions();
+			
 			}
 		});
 		rdbtnBuying.setBounds(385, 6, 161, 23);
@@ -79,27 +59,7 @@ public class TransactionsGUI extends JPanel {
 		rdbtnSelling.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				// Create a new table model
-				
-				DefaultTableModel tableModel = 
-						new DefaultTableModel( new String[] { "Buy/Sell", 
-								"Company Name", 
-								"Cost/Profit"}, 
-								0);
-				
-				// Update sell transaction list
-				
-				for (int i = 0; i < TransactionController.sellTransactionList.size(); i++){
-					tableModel.addRow(new String[] {"Sell" , 
-							TransactionController.sellTransactionList.get(i).getCustomer().toString(),
-												"" + TransactionController.sellTransactionList.get(i).getProfit(),
-												} );
-				}
-				
-				table.setModel(tableModel);
-				
-				System.out.println("Sell");
-				rdbtnBuying.setSelected(false);
+				updateSellTransactions();
 				
 			}
 		});
@@ -355,11 +315,64 @@ public class TransactionsGUI extends JPanel {
 		TransactionsGUI.updateTransaction();
 		RemindersGUI.updateReminder();
 		StockGUI.updateStock();
+		updateBuyTransactions();
 		
 	}
 	
 	public void removeSellTransaction(int index){		
 
+		
+	}
+	
+	public void updateSellTransactions() {
+		
+		// Create a new table model
+		
+		DefaultTableModel tableModel = 
+				new DefaultTableModel( new String[] { "Buy/Sell", 
+						"Company Name", 
+						"Cost/Profit"}, 
+						0);
+		
+		// Update sell transaction list
+		
+		for (int i = 0; i < TransactionController.sellTransactionList.size(); i++){
+			tableModel.addRow(new String[] {"Sell" , 
+					TransactionController.sellTransactionList.get(i).getCustomer().toString(),
+										"" + TransactionController.sellTransactionList.get(i).getProfit(),
+										} );
+		}
+		
+		table.setModel(tableModel);
+		
+		System.out.println("Sell");
+		rdbtnBuying.setSelected(false);
+		
+	}
+	
+	public void updateBuyTransactions() {
+		
+		// Create a new table model
+		
+		DefaultTableModel tableModel = 
+				new DefaultTableModel( new String[] { "Buy/Sell", 
+						"Company Name", 
+						"Cost/Profit"}, 
+						0);
+		
+		// Update buy transaction list
+		
+		for (int i = 0; i < TransactionController.buyTransactionList.size(); i++){
+			tableModel.addRow(new String[] {"Buy" , 
+					TransactionController.buyTransactionList.get(i).getSupplier().toString(),
+										"" + TransactionController.buyTransactionList.get(i).getTotalPrice(),
+										} );
+		}
+		
+		table.setModel(tableModel);
+		
+		System.out.println("Buy");
+		rdbtnSelling.setSelected(false);
 		
 	}
 }
