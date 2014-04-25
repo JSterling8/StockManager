@@ -53,4 +53,10 @@ public class StockController {
 			}
 		}
 	}
+	
+	public static void removeById(ArrayList<Long> idList) {
+		
+		
+		
+	}
 }

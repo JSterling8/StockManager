@@ -41,6 +41,7 @@ public class ConfirmationGUI extends JFrame {
 	private RemoveStockGUI removeStockGUI;
 	private SellStockGUI sellStockGUI;
 	private AddStockGUI addStockGUI;
+	private ArrayList<Long> idForStockList;
 
 
 	public ConfirmationGUI(AddStockGUI addStockGUI) {
@@ -112,20 +113,6 @@ public class ConfirmationGUI extends JFrame {
 					id = 0;
 				}
 				
-				// Creating id for stock object
-				
-				long idForStock = 0;
-
-				if (StockController.stockList.size() > 0){
-					idForStock = StockController.
-							stockList.
-							get(StockController.stockList.size()-1).
-							getId() + 1;
-				}
-				else {
-					idForStock = 0;
-				}
-				
 				// Creating Id for reminder
 				
 				long idForReminder;
@@ -159,25 +146,29 @@ public class ConfirmationGUI extends JFrame {
 
 				Date date = new Date(System.currentTimeMillis());
 				
-				BuyTransaction transaction = new BuyTransaction(supplier, 
-						productList, 
-						unitList,
-						pricePerUnitList,
-						priceList,
-						totalPrice,
-						date,
-						id,
-						idForStock,
-						idForReminder);
-				
-				// Add transaction object to the ArrayList
 
-				TransactionController.buyTransactionList.add(transaction);
 
 				// Creating Stock objects
 
 				for (int i = 0; i < productList.size(); i++) {
 
+					// Creating a list of ids for stock objects
+					
+					long idForStock = 0;
+					idForStockList = new ArrayList<Long>();
+
+					if (StockController.stockList.size() > 0){
+						idForStock = StockController.
+								stockList.
+								get(StockController.stockList.size()-1).
+								getId() + 1;
+								idForStockList.add(idForStock);
+					}
+					else {
+						idForStock = 0;
+						idForStockList.add(idForStock);
+					}
+					
 					Product product = productList.get(i);
 					Double units = unitList.get(i);
 					Double price = priceList.get(i);
@@ -209,6 +200,23 @@ public class ConfirmationGUI extends JFrame {
 				// Adding the reminder object to the ArrayList
 				
 				ReminderController.addReminder(idForReminder, buy, sell, amountToPay, dueDate, supplier);
+				
+				// Create Buy transaction object
+				
+				BuyTransaction transaction = new BuyTransaction(supplier, 
+						productList, 
+						unitList,
+						pricePerUnitList,
+						priceList,
+						totalPrice,
+						date,
+						id,
+						idForStockList,
+						idForReminder);
+				
+				// Add transaction object to the ArrayList
+
+				TransactionController.buyTransactionList.add(transaction);
 				
 				// Update displays
 				

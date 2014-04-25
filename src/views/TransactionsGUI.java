@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JTable;
@@ -278,7 +279,7 @@ public class TransactionsGUI extends JPanel {
 	public void removeBuyTransaction(int index){		
 		
 		long transactionId = TransactionController.buyTransactionList.get(index).getId();
-		long stockId = TransactionController.buyTransactionList.get(index).getStockId();
+		ArrayList<Long> stockIds = TransactionController.buyTransactionList.get(index).getIdForStockList();
 		long reminderId = TransactionController.buyTransactionList.get(index).getReminderId();
 		
 		// Delete transaction object
@@ -295,13 +296,9 @@ public class TransactionsGUI extends JPanel {
 		
 		// Delete stock object
 		
-		for(int k = 0; k < StockController.stockList.size(); k++) {
+		for(int k = 0; k < stockIds.size(); k++) {
 			
-			if(StockController.stockList.get(k).getId() == stockId) {
-				
-				StockController.stockList.remove(k);
-				
-			}
+			
 			
 		}
 		
