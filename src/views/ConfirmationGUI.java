@@ -100,9 +100,9 @@ public class ConfirmationGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// Creating  id for transaction object
-				
+
 				long id = 0;
-				
+
 				if (TransactionController.buyTransactionList.size() > 0){
 					id = TransactionController.
 							buyTransactionList.
@@ -112,9 +112,9 @@ public class ConfirmationGUI extends JFrame {
 				else {
 					id = 0;
 				}
-				
+
 				// Creating Id for reminder
-				
+
 				long idForReminder;
 
 				if(ReminderController.reminderList.size() == 0) {
@@ -124,7 +124,7 @@ public class ConfirmationGUI extends JFrame {
 				}
 
 				// Creating a transaction object
-				
+
 				Supplier supplier = getAddStockGUI().getSupplier();
 				ArrayList<Product> productList = new ArrayList<Product>();
 
@@ -145,30 +145,29 @@ public class ConfirmationGUI extends JFrame {
 				Double totalPrice = Double.parseDouble(getAddStockGUI().getTotalPrice());
 
 				Date date = new Date(System.currentTimeMillis());
-				
+
 
 
 				// Creating Stock objects
+				idForStockList = new ArrayList<Long>();
 
 				for (int i = 0; i < productList.size(); i++) {
 
 					// Creating a list of ids for stock objects
-					
+
 					long idForStock = 0;
-					idForStockList = new ArrayList<Long>();
 
 					if (StockController.stockList.size() > 0){
 						idForStock = StockController.
 								stockList.
 								get(StockController.stockList.size()-1).
 								getId() + 1;
-								idForStockList.add(idForStock);
-					}
-					else {
-						idForStock = 0;
 						idForStockList.add(idForStock);
 					}
-					
+					else {
+						idForStockList.add(idForStock);
+					}
+
 					Product product = productList.get(i);
 					Double units = unitList.get(i);
 					Double price = priceList.get(i);
@@ -184,11 +183,11 @@ public class ConfirmationGUI extends JFrame {
 					// Add stock object to the ArrayList
 
 					StockController.stockList.add(stock);
-					
+
 				}
-				
+
 				// Creating Reminder object
-				
+
 				boolean buy = true;
 				boolean sell = false;
 				double amountToPay = Double.parseDouble(getAddStockGUI().getTotalPrice());
@@ -196,13 +195,13 @@ public class ConfirmationGUI extends JFrame {
 				int month = getAddStockGUI().getMonth() - 1;
 				int day = getAddStockGUI().getDay();
 				Date dueDate = new Date(year, month, day);
-				
+
 				// Adding the reminder object to the ArrayList
-				
+
 				ReminderController.addReminder(idForReminder, buy, sell, amountToPay, dueDate, supplier);
-				
+
 				// Create Buy transaction object
-				
+
 				BuyTransaction transaction = new BuyTransaction(supplier, 
 						productList, 
 						unitList,
@@ -213,13 +212,13 @@ public class ConfirmationGUI extends JFrame {
 						id,
 						idForStockList,
 						idForReminder);
-				
+
 				// Add transaction object to the ArrayList
 
 				TransactionController.buyTransactionList.add(transaction);
-				
+
 				// Update displays
-				
+
 				StockGUI.updateStock();
 				RemindersGUI.updateReminder();
 				TransactionsGUI.updateTransaction();
@@ -279,12 +278,12 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Save info to database.
-				
+
 				// --------- Start of Transaction creation/addition --------
 				Customer customer = getSellStockGUI().getCustomer();
 
 				// Creating Id for reminder
-				
+
 				long idForReminder;
 
 				if(ReminderController.reminderList.size() == 0) {
@@ -292,9 +291,9 @@ public class ConfirmationGUI extends JFrame {
 				} else {
 					idForReminder = ReminderController.reminderList.get(ReminderController.reminderList.size()-1).getId() + 1;
 				}
-				
-				
-				
+
+
+
 				ArrayList<Product> productList = new ArrayList<Product>();
 				for (int i = 0; i < getSellStockGUI().getTable().getRowCount(); i++){
 					Product productToAdd = new Product((String) getSellStockGUI().getTable().getModel().getValueAt(i, 0), (String) getSellStockGUI().getTable().getModel().getValueAt(i, 2));
@@ -335,13 +334,13 @@ public class ConfirmationGUI extends JFrame {
 						date,
 						transactionId);
 				TransactionController.sellTransactionList.add(transaction);
-				
+
 				// --------- End of Transaction creation/addition --------
-				
+
 				// TODO placeholder.
 				// --------- Start of stock removal --------
 				ArrayList<Stock> stockToRemove = new ArrayList<Stock>();
-				
+
 				ArrayList<Long> idList = new ArrayList<Long>();
 				idList = getSellStockGUI().getIdList();
 				//String productName, Supplier supplier, double quantity, double price, double rrp, long id
@@ -350,9 +349,9 @@ public class ConfirmationGUI extends JFrame {
 					stockToRemove.add(stock);
 				}
 				StockController.removeStock(stockToRemove);
-				
+
 				// Creating Reminder object
-				
+
 				boolean buy = false;
 				boolean sell = true;
 				double amountToPay = getSellStockGUI().getTotalAmount();
@@ -360,18 +359,18 @@ public class ConfirmationGUI extends JFrame {
 				int month = getSellStockGUI().getMonth() - 1;
 				int day = getSellStockGUI().getDay();
 				Date dateToAdd = new Date(year, month, day);
-				
+
 				// Adding the reminder object to the ArrayList
-				
+
 				ReminderController.addReminder(idForReminder, buy, sell, amountToPay, dateToAdd, customer);
-				
+
 				// Update displays
-				
+
 				StockGUI.updateStock();
 				RemindersGUI.updateReminder();
 				TransactionsGUI.updateTransaction();
 
-				
+
 				getSellStockGUI().dispose();
 				dispose();
 			}
@@ -445,19 +444,19 @@ public class ConfirmationGUI extends JFrame {
 				// TODO Save info to database.
 				if(getAddCompanyGUI().getTitle().equals("Add Supplier")){
 					JOptionPane.showMessageDialog(new JFrame(), 
-												SupplierController.addSupplier(getAddCompanyGUI().getName(),
-																				getAddCompanyGUI().getPhone(),
-																				getAddCompanyGUI().getEmail(),
-																				getAddCompanyGUI().getAddress()));
+							SupplierController.addSupplier(getAddCompanyGUI().getName(),
+									getAddCompanyGUI().getPhone(),
+									getAddCompanyGUI().getEmail(),
+									getAddCompanyGUI().getAddress()));
 					AddStockGUI.updateSupplierList();
 					SuppliersGUI.updateTable();
 				}
 				else if (getAddCompanyGUI().getTitle().equals("Add Customer")){
 					JOptionPane.showMessageDialog(new JFrame(), 
 							CustomerController.addCustomer(getAddCompanyGUI().getName(),
-															getAddCompanyGUI().getPhone(),
-															getAddCompanyGUI().getEmail(),
-															getAddCompanyGUI().getAddress()));					
+									getAddCompanyGUI().getPhone(),
+									getAddCompanyGUI().getEmail(),
+									getAddCompanyGUI().getAddress()));					
 					SellStockGUI.updateCompanyList();
 					CustomersGUI.updateTable();
 				}

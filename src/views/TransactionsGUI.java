@@ -265,7 +265,6 @@ public class TransactionsGUI extends JPanel {
 		// Update removal transaction list
 		
 		// TODO the update bit for removal transactions
-		
 		table.setModel(tableModel);
 		
 	}
@@ -283,33 +282,20 @@ public class TransactionsGUI extends JPanel {
 		long reminderId = TransactionController.buyTransactionList.get(index).getReminderId();
 		
 		// Delete transaction object
-		
 		for(int i = 0; i < TransactionController.buyTransactionList.size(); i++) {
 			
 			if(TransactionController.buyTransactionList.get(i).getId() == transactionId) {
-				
 				TransactionController.buyTransactionList.remove(i);
-				
 			}
-			
 		}
 		
 		// Delete stock object
-		
-		for(int k = 0; k < stockIds.size(); k++) {
-			
-			
-			
-		}
+		StockController.removeById(stockIds);
 		
 		// Delete reminder object
-		
 		for(int j = 0; j < ReminderController.reminderList.size(); j++) {
-			
 			if(ReminderController.reminderList.get(j).getId() == reminderId) {
-				
 				ReminderController.reminderList.remove(j);
-				
 			}	
 		}
 		
