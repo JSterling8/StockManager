@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 
 import models.BuyTransaction;
 import models.Customer;
+import models.Product;
 import models.SellTransaction;
 import models.Stock;
 import models.Supplier;
@@ -101,10 +101,11 @@ public class ConfirmationGUI extends JFrame {
 				// Creating a transaction object
 
 				Supplier supplier = getAddStockGUI().getSupplier();
-				ArrayList<String> productList = new ArrayList<String>();
+				ArrayList<Product> productList = new ArrayList<Product>();
 
 				for (int i = 0; i < getAddStockGUI().getTable().getRowCount(); i++){
-					productList.add((String) getAddStockGUI().getTable().getModel().getValueAt(i, 0));
+					Product productToAdd = new Product((String) getAddStockGUI().getTable().getModel().getValueAt(i, 0), (String) getAddStockGUI().getTable().getModel().getValueAt(i, 2));
+					productList.add(productToAdd);
 				}
 
 				ArrayList<Double> unitList = new ArrayList<Double>();
@@ -149,7 +150,7 @@ public class ConfirmationGUI extends JFrame {
 
 				for (int i = 0; i < productList.size(); i++) {
 
-					String productName = productList.get(i);
+					Product product = productList.get(i);
 					Double units = unitList.get(i);
 					Double price = priceList.get(i);
 					Double rrp = AddStockGUI.getRrpList().get(i);
@@ -165,7 +166,7 @@ public class ConfirmationGUI extends JFrame {
 						idForStock = 0;
 					}
 
-					Stock stock = new Stock(productName, 
+					Stock stock = new Stock(product, 
 							supplier, 
 							units, 
 							price, 
@@ -256,9 +257,10 @@ public class ConfirmationGUI extends JFrame {
 				// --------- Start of Transaction creation/addition --------
 				Customer customer = getSellStockGUI().getCustomer();
 
-				ArrayList<String> productList = new ArrayList<String>();
+				ArrayList<Product> productList = new ArrayList<Product>();
 				for (int i = 0; i < getSellStockGUI().getTable().getRowCount(); i++){
-					productList.add((String) getSellStockGUI().getTable().getModel().getValueAt(i, 0));
+					Product productToAdd = new Product((String) getSellStockGUI().getTable().getModel().getValueAt(i, 0), (String) getSellStockGUI().getTable().getModel().getValueAt(i, 2));
+					productList.add(productToAdd);
 				}
 
 				ArrayList<Double> unitList = new ArrayList<Double>();
@@ -471,7 +473,8 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Attempts to add the product and pops up with either success or failure message.
-				JOptionPane.showMessageDialog(new JFrame(), ProductController.addProduct(getAddProductGUI().getName()));
+				Product productToAdd = new Product(getAddProductGUI().getName(), getAddProductGUI().getUnits());
+				JOptionPane.showMessageDialog(new JFrame(), ProductController.addProduct(productToAdd));
 				getAddProductGUI().getAddStockGUI().updateProductList();
 
 				dispose();

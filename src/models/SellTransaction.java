@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class SellTransaction extends Transaction {
 
 	private Customer customer;
-	private ArrayList<String> productNames;
+	private ArrayList<Product> products;
 	private ArrayList<Double> units;
 	private ArrayList<Double> pricePerUnit;
 	private ArrayList<Double> price;
@@ -14,12 +14,12 @@ public class SellTransaction extends Transaction {
 	private Date date;
 	private long id;
 	
-	public SellTransaction (Customer customer, ArrayList<String> productNames, 
+	public SellTransaction (Customer customer, ArrayList<Product> products, 
 							ArrayList<Double> units, ArrayList<Double> pricePerUnit, 
 							ArrayList<Double> price, double profit, Date date,
 							long id){
 		this.customer = customer;
-		this.productNames = productNames;
+		this.products = products;
 		this.units = units;
 		this.pricePerUnit = pricePerUnit;
 		this.price = price;
@@ -32,8 +32,8 @@ public class SellTransaction extends Transaction {
 		return customer;
 	}
 
-	public ArrayList<String> getProductNames() {
-		return productNames;
+	public ArrayList<Product> getProductNames() {
+		return products;
 	}
 
 	public ArrayList<Double> getUnits() {

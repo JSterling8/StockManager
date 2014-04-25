@@ -103,7 +103,7 @@ public class AddStockGUI extends JFrame {
 		cbProductName.setBounds(197, 58, 250, 35);
 		contentPane.add(cbProductName);
 		for(int i = 0; i < ProductController.productList.size(); i++) {
-			cbProductName.addItem(ProductController.productList.get(i));
+			cbProductName.addItem(ProductController.productList.get(i).getName());
 		}
 
 		JButton btnAddProduct = new JButton("+");
@@ -213,7 +213,8 @@ public class AddStockGUI extends JFrame {
 
 		tableModel = 
 				new DefaultTableModel( new String[] { "Product Name", 
-						"Units", 
+						"Quantity", 
+						"Units",
 						"Price Per Unit", 
 				"Price" }, 
 				0);
@@ -235,6 +236,7 @@ public class AddStockGUI extends JFrame {
 					tableModel.addRow(new String[]{
 							(String) cbProductName.getSelectedItem(),
 							tfQuantity.getText(),
+							tfUnits.getText(),
 							NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
 							NumberFormat.getCurrencyInstance().format(price)});
 
@@ -391,7 +393,7 @@ public class AddStockGUI extends JFrame {
 	public void updateProductList() {
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 		for (int i = 0; i < ProductController.productList.size(); i++){
-			model.addElement(ProductController.productList.get(i));
+			model.addElement(ProductController.productList.get(i).getName());
 		}
 		
 		cbProductName.setModel(model);

@@ -75,13 +75,14 @@ public class StockGUI extends JPanel {
 	public static void updateStock(){
 		DefaultTableModel tableModel = 
 				new DefaultTableModel(
-						new String[] { "Product Name", "Supplier" , "Quantity" , "Price"},
+						new String[] { "Product Name", "Supplier" , "Quantity" , "Units", "Price"},
 						0);
 		
 		for (int i = 0; i < StockController.stockList.size(); i++){
-			tableModel.addRow(new String[] {StockController.stockList.get(i).getProductName(), 
+			tableModel.addRow(new String[] {StockController.stockList.get(i).getProduct().getName(), 
 					StockController.stockList.get(i).getSupplier().toString(),
 										"" + StockController.stockList.get(i).getQuantity(),
+										"" + StockController.stockList.get(i).getProduct().getUnitType(),
 										"" + StockController.stockList.get(i).getPrice()} );
 		}
 		

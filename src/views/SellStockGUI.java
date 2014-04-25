@@ -211,7 +211,7 @@ public class SellStockGUI extends JFrame {
 		});
 		cbProduct.setBounds(10, 147, 172, 35);
 		for(int i = 0; i < StockController.stockList.size(); i++){
-			cbProduct.addItem(StockController.stockList.get(i).getProductName());
+			cbProduct.addItem(StockController.stockList.get(i).getProduct().getName());
 		}
 		contentPane.add(cbProduct);
 
@@ -221,7 +221,8 @@ public class SellStockGUI extends JFrame {
 
 		tableModel = 
 				new DefaultTableModel( new String[] { "Product Name", 
-						"Units", 
+						"Quantity",
+						"Units",
 						"Price Per Unit", 
 				"Price" }, 
 				0);

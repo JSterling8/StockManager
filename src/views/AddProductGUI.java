@@ -23,6 +23,7 @@ public class AddProductGUI extends JFrame {
 	private JTextField tfProductName;
 	private JButton btnSubmit;
 	private JButton btnCancel;
+	private JComboBox cbUnits;
 
 	private AddStockGUI addStockGUI;
 	private JLabel lblUnits;
@@ -87,9 +88,9 @@ public class AddProductGUI extends JFrame {
 		lblUnits.setBounds(10, 57, 150, 35);
 		contentPane.add(lblUnits);
 		
-		JComboBox tbUnits = new JComboBox();
-		tbUnits.setBounds(169, 67, 195, 35);
-		contentPane.add(tbUnits);
+		cbUnits = new JComboBox();
+		cbUnits.setBounds(169, 67, 195, 35);
+		contentPane.add(cbUnits);
 		
 		JButton btnAddUnits = new JButton("+");
 		btnAddUnits.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -113,6 +114,10 @@ public class AddProductGUI extends JFrame {
 	 */
 	public String getName() {
 		return tfProductName.getText();
+	}
+	
+	public String getUnits() {
+		return (String) cbUnits.getSelectedItem();
 	}
 
 	public AddStockGUI getAddStockGUI(){
