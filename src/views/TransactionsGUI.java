@@ -218,13 +218,13 @@ public class TransactionsGUI extends JPanel {
 		btnDeleteTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(rdbtnSelling.isSelected()) {
+				if(rdbtnSelling.isSelected() == true) {
 					
 					removeSellTransaction(table.getSelectedRow());
 					
 				}
 				
-				if(rdbtnBuying.isSelected()) {
+				if(rdbtnBuying.isSelected() == true) {
 					
 					removeBuyTransaction(table.getSelectedRow());
 				 
@@ -268,6 +268,12 @@ public class TransactionsGUI extends JPanel {
 		table.setModel(tableModel);
 		
 	}
+	
+	/**
+	 * 
+	 * @param index To remove the transaction
+	 * Remove the transaction by index and Reminder, Stock objects related to it
+	 */
 	
 	public void removeBuyTransaction(int index){		
 		
@@ -324,6 +330,10 @@ public class TransactionsGUI extends JPanel {
 		
 	}
 	
+	/**
+	 * Read buyTransaction ArrayList and update the table 
+	 */
+	
 	public void updateSellTransactions() {
 		
 		// Create a new table model
@@ -349,6 +359,10 @@ public class TransactionsGUI extends JPanel {
 		rdbtnBuying.setSelected(false);
 		
 	}
+	
+	/**
+	 * Read buyTransaction ArrayList and update the table 
+	 */
 	
 	public void updateBuyTransactions() {
 		
