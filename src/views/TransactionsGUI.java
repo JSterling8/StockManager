@@ -338,7 +338,6 @@ public class TransactionsGUI extends JPanel {
 		
 		table.setModel(tableModel);
 		
-		System.out.println("Sell");
 		rdbtnBuying.setSelected(false);
 		
 	}
@@ -368,7 +367,6 @@ public class TransactionsGUI extends JPanel {
 		
 		table.setModel(tableModel);
 		
-		System.out.println("Buy");
 		rdbtnSelling.setSelected(false);
 		
 	}

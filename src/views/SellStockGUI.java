@@ -210,6 +210,8 @@ public class SellStockGUI extends JFrame {
 				// Shows the amount of that stock available.
 				tfQuantityLeft.setText("" + quantityLeftList.get(cbProduct.getSelectedIndex()));
 
+				System.out.println("" + StockController.stockList.get(cbProduct.getSelectedIndex()));
+				
 				// Shows the unit type.
 				tfUnits.setText("" + ProductController.productList.get(cbProduct.getSelectedIndex()).getUnitType());
 				
