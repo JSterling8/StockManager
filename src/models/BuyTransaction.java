@@ -13,11 +13,13 @@ public class BuyTransaction extends Transaction {
 	private double totalPrice;
 	private Date date;
 	private long id;
+	private long stockId;
+	private long reminderId;
 	
 	public BuyTransaction (Supplier supplier, ArrayList<Product> productList, 
 			ArrayList<Double> units, ArrayList<Double> pricePerUnit, 
 			ArrayList<Double> price, double totalPrice, Date date,
-			long id){
+			long id, long stockId, long reminderId){
 				this.supplier = supplier;
 				this.products = productList;
 				this.units = units;
@@ -26,6 +28,8 @@ public class BuyTransaction extends Transaction {
 				this.totalPrice = totalPrice;
 				this.date = date;
 				this.id = id;
+				this.stockId = stockId;
+				this.reminderId = reminderId;
 }
 	
 	public long getId() {
