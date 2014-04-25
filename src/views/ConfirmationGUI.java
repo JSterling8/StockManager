@@ -275,15 +275,15 @@ public class ConfirmationGUI extends JFrame {
 
 				Date date = new Date(System.currentTimeMillis());
 
-				long id = 0;
+				long transactionId = 0;
 				if (TransactionController.sellTransactionList.size() > 0){
-					id = TransactionController.
+					transactionId = TransactionController.
 							sellTransactionList.
 							get(TransactionController.sellTransactionList.size()-1).
 							getId() + 1;
 				}
 				else {
-					id = 0;
+					transactionId = 0;
 				}
 
 				SellTransaction transaction = new SellTransaction(customer, 
@@ -293,7 +293,7 @@ public class ConfirmationGUI extends JFrame {
 						priceList,
 						profit,
 						date,
-						id);
+						transactionId);
 				TransactionController.sellTransactionList.add(transaction);
 				
 				// --------- End of Transaction creation/addition --------
