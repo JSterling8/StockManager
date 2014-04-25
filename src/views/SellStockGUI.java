@@ -508,8 +508,9 @@ public class SellStockGUI extends JFrame {
 			tfTotalAmount.setText(NumberFormat.getCurrencyInstance().format(totalAmount));
 
 			// profit = (sellingPrice * numOfUnits) - (purchasePrice * numOfUnits)
-			profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPrice() * Double.parseDouble(tfQuantity.getText());
+			//TODO placeholder
 			profit += price;
+			profit -= StockController.stockList.get(cbProduct.getSelectedIndex()).getPricePerUnit() * Double.parseDouble(tfQuantity.getText());
 			tfProfitLoss.setText(NumberFormat.getCurrencyInstance().format(profit));
 
 			// Subtract the amount they wish to remove from the quantity left.

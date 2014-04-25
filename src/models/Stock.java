@@ -7,6 +7,7 @@ public class Stock {
 	private double quantity;
 	private double price;
 	private double rrp;
+	private double pricePerUnit;
 	private long id;
 	
 	public Stock(Product product, Supplier supplier, double quantity, double price, double rrp, long id) {
@@ -17,6 +18,8 @@ public class Stock {
 		this.price = price;
 		this.rrp = rrp;
 		this.id = id;
+		
+		this.pricePerUnit = price / quantity;
 	}
 
 	/**
@@ -26,11 +29,8 @@ public class Stock {
 		return price;
 	}
 
-	/**
-	 * @param price the price to set
-	 */
-	public void setPrice(double price) {
-		this.price = price;
+	public double getPricePerUnit(){
+		return pricePerUnit;
 	}
 
 	/**
