@@ -52,14 +52,7 @@ public class ReminderController {
 	 * @param dueDate The date that the payment is due.
 	 * @param company The customer or supplier that is in debt or in credit, respectively.
 	 */
-	public static void addReminder(boolean buy, boolean sell, double amountToPay, Date dueDate, Company company) {
-		long idToAdd;
-
-		if(reminderList.size() == 0) {
-			idToAdd = 0;
-		} else {
-			idToAdd = reminderList.get(reminderList.size()-1).getId() + 1;
-		}
+	public static void addReminder(long idToAdd, boolean buy, boolean sell, double amountToPay, Date dueDate, Company company) {
 
 		Reminder reminderToAdd = new Reminder(idToAdd, buy, sell, amountToPay, dueDate, company);
 		reminderList.add(reminderToAdd);

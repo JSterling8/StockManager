@@ -98,8 +98,46 @@ public class ConfirmationGUI extends JFrame {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				// Creating a transaction object
+				// Creating  id for transaction object
+				
+				long id = 0;
+				
+				if (TransactionController.buyTransactionList.size() > 0){
+					id = TransactionController.
+							buyTransactionList.
+							get(TransactionController.buyTransactionList.size()-1).
+							getId() + 1;
+				}
+				else {
+					id = 0;
+				}
+				
+				// Creating id for stock object
+				
+				long idForStock = 0;
 
+				if (StockController.stockList.size() > 0){
+					idForStock = StockController.
+							stockList.
+							get(StockController.stockList.size()-1).
+							getId() + 1;
+				}
+				else {
+					idForStock = 0;
+				}
+				
+				// Creating Id for reminder
+				
+				long idForReminder;
+
+				if(ReminderController.reminderList.size() == 0) {
+					idForReminder = 0;
+				} else {
+					idForReminder = ReminderController.reminderList.get(ReminderController.reminderList.size()-1).getId() + 1;
+				}
+
+				// Creating a transaction object
+				
 				Supplier supplier = getAddStockGUI().getSupplier();
 				ArrayList<Product> productList = new ArrayList<Product>();
 
@@ -120,19 +158,7 @@ public class ConfirmationGUI extends JFrame {
 				Double totalPrice = Double.parseDouble(getAddStockGUI().getTotalPrice());
 
 				Date date = new Date(System.currentTimeMillis());
-
-				long id = 0;
-
-				if (TransactionController.buyTransactionList.size() > 0){
-					id = TransactionController.
-							buyTransactionList.
-							get(TransactionController.buyTransactionList.size()-1).
-							getId() + 1;
-				}
-				else {
-					id = 0;
-				}
-
+				
 				BuyTransaction transaction = new BuyTransaction(supplier, 
 						productList, 
 						unitList,
@@ -140,7 +166,9 @@ public class ConfirmationGUI extends JFrame {
 						priceList,
 						totalPrice,
 						date,
-						id);
+						id,
+						idForStock,
+						idForReminder);
 				
 				// Add transaction object to the ArrayList
 
@@ -154,17 +182,6 @@ public class ConfirmationGUI extends JFrame {
 					Double units = unitList.get(i);
 					Double price = priceList.get(i);
 					Double rrp = AddStockGUI.getRrpList().get(i);
-					long idForStock = 0;
-
-					if (StockController.stockList.size() > 0){
-						idForStock = StockController.
-								stockList.
-								get(StockController.stockList.size()-1).
-								getId() + 1;
-					}
-					else {
-						idForStock = 0;
-					}
 
 					Stock stock = new Stock(product, 
 							supplier, 
@@ -178,6 +195,7 @@ public class ConfirmationGUI extends JFrame {
 					StockController.stockList.add(stock);
 					
 				}
+				
 				// Creating Reminder object
 				
 				boolean buy = true;
@@ -186,11 +204,11 @@ public class ConfirmationGUI extends JFrame {
 				int year = getAddStockGUI().getYear() - 1900;
 				int month = getAddStockGUI().getMonth() - 1;
 				int day = getAddStockGUI().getDay();
-				Date dateToAdd = new Date(year, month, day);
+				Date dueDate = new Date(year, month, day);
 				
 				// Adding the reminder object to the ArrayList
 				
-				ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, supplier);
+				ReminderController.addReminder(idForReminder, buy, sell, amountToPay, dueDate, supplier);
 				
 				// Update displays
 				
@@ -257,6 +275,18 @@ public class ConfirmationGUI extends JFrame {
 				// --------- Start of Transaction creation/addition --------
 				Customer customer = getSellStockGUI().getCustomer();
 
+				// Creating Id for reminder
+				
+				long idForReminder;
+
+				if(ReminderController.reminderList.size() == 0) {
+					idForReminder = 0;
+				} else {
+					idForReminder = ReminderController.reminderList.get(ReminderController.reminderList.size()-1).getId() + 1;
+				}
+				
+				
+				
 				ArrayList<Product> productList = new ArrayList<Product>();
 				for (int i = 0; i < getSellStockGUI().getTable().getRowCount(); i++){
 					Product productToAdd = new Product((String) getSellStockGUI().getTable().getModel().getValueAt(i, 0), (String) getSellStockGUI().getTable().getModel().getValueAt(i, 2));
@@ -325,7 +355,7 @@ public class ConfirmationGUI extends JFrame {
 				
 				// Adding the reminder object to the ArrayList
 				
-				ReminderController.addReminder(buy, sell, amountToPay, dateToAdd, customer);
+				ReminderController.addReminder(idForReminder, buy, sell, amountToPay, dateToAdd, customer);
 				
 				// Update displays
 				
