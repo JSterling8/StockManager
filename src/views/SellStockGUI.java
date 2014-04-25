@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 import models.Company;
 import models.Customer;
 import controllers.CustomerController;
+import controllers.ProductController;
 import controllers.StockController;
 
 public class SellStockGUI extends JFrame {
@@ -478,6 +479,7 @@ public class SellStockGUI extends JFrame {
 			tableModel.addRow(new String[]{
 					(String) cbProduct.getSelectedItem(),
 					tfUnits.getText(),
+					ProductController.productList.get(cbProduct.getSelectedIndex()).getUnitType(),
 					NumberFormat.getCurrencyInstance().format(Double.parseDouble(tfPricePerUnit.getText())),
 					NumberFormat.getCurrencyInstance().format(price)});
 			totalAmount += price;
