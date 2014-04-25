@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import models.Supplier;
 import controllers.ProductController;
 import controllers.SupplierController;
+import controllers.UnitController;
 
 public class AddStockGUI extends JFrame {
 
@@ -97,7 +98,17 @@ public class AddStockGUI extends JFrame {
 		lblRecommendedRetailPrice.setBounds(328, 104, 73, 35);
 		contentPane.add(lblRecommendedRetailPrice);
 
+		// Initializing this here to avoid a null pointer exception in the cbProductName ActionListerner.
+		tfUnits = new JTextField();
+		
 		cbProductName = new JComboBox<String>();
+		cbProductName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (cbProductName.getSelectedIndex() != -1){
+					tfUnits.setText(ProductController.productList.get(cbProductName.getSelectedIndex()).getUnitType());
+				}
+			}
+		});
 		cbProductName.setModel(new DefaultComboBoxModel(new String[] {}));
 		cbProductName.setFont(new Font("Tahoma", Font.BOLD, 18));
 		cbProductName.setBounds(197, 58, 250, 35);
@@ -122,9 +133,7 @@ public class AddStockGUI extends JFrame {
 		cbSupplier.setBounds(197, 12, 250, 35);
 		contentPane.add(cbSupplier);
 		for(int i = 0; i < SupplierController.supplierList.size(); i++) {
-
 			cbSupplier.addItem(SupplierController.supplierList.get(i));
-
 		}
 
 
@@ -213,11 +222,11 @@ public class AddStockGUI extends JFrame {
 
 		tableModel = 
 				new DefaultTableModel( new String[] { "Product Name", 
-						"Quantity", 
-						"Units",
-						"Price Per Unit", 
-				"Price" }, 
-				0);
+														"Quantity", 
+														"Units",
+														"Price Per Unit", 
+														"Price" }, 
+														0);
 
 		table = new JTable();
 		table.setModel(tableModel);
@@ -309,7 +318,7 @@ public class AddStockGUI extends JFrame {
 		lblUnits.setBounds(128, 104, 73, 35);
 		contentPane.add(lblUnits);
 		
-		tfUnits = new JTextField();
+		tfUnits.setEditable(false);
 		tfUnits.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfUnits.setColumns(10);
 		tfUnits.setBounds(128, 149, 73, 35);
